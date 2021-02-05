@@ -1,4 +1,24 @@
 nav{
-    margin-left: 160px;
+    margin-left: 225px;
     transition: 0.5s;
+}
+.flex-column{
+    display: inline !important;
+    margin-left: 20px;
+}
+
+
+img.img-logo {
+    height: 55px;
+    padding-top: 10px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.flex-row .nav-link{
+display: inline-block;
+}
+
+.row{
+    max-width: 100%;
 }

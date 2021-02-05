@@ -15,9 +15,9 @@ export class MenuComponent implements OnInit {
   expandir(){
     if( document.getElementById("menu").style.marginLeft == "50px"){
       //cerrar sidebar
-      document.getElementById("menu").style.marginLeft = "160px";
-      document.getElementById("pestanya").style.marginLeft="160px";
-      document.getElementById("sidebar").style.width = "160px";
+      document.getElementById("menu").style.marginLeft = "225px";
+      document.getElementById("pestanya").style.marginLeft="225px";
+      document.getElementById("sidebar").style.width = "225px";
 
     }else{
       //abrir sidebar
