@@ -1,7 +1,27 @@
 <!-- Side navigation -->
 <div class="sidenav" id="sidebar">
-   
-    <p class="selecciones m-3"> <i class="far fa-check-square"></i>Selecciones</p>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-  </div>
+
+    <div class="text-right">
+        <i class="fas fa-bars" id="burguer" (click)="expandir()"></i>
+    </div>
+
+
+    <!-- Cuando sidebar esta cerrado -->
+    <div id="cerrado">
+        <i class="far fa-check-square m-3"></i> <br>
+        <i class="far fa-bookmark m-3"></i>
+    </div>
+
+    <!-- Cuando sidebar esta abierto -->
+    <div id="abierto">
+        <p class="seleccionesLabel m-3"> <i class="far fa-check-square m-1"></i>Selecciones</p>
+        <div id="selecciones">
+
+        </div>
+        <p class="filtrosLabel m-3"> <i class="far fa-bookmark m-1"></i>Filtros</p>
+        <div id="filtros">
+
+        </div>
+    </div>
+
+</div>

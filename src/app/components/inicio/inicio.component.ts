@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _QlikConnection: ConnectionQlikService,
+    private router:Router) { }
+  appId="93026550-480f-4bef-ad64-14aa46bc4ae2";
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  async openApp(){
+    console.log("openapp");
+    
+    await this._QlikConnection.qlikConnection(this.appId);
+    localStorage.setItem('appId', this.appId);
+    this.router.navigate(['/resumen']);
   }
 
 }

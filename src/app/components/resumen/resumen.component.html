@@ -1,1 +1,61 @@
-<p>resumen works!</p>
+<div class="contenedor">
+
+
+    <div class="row mb-3">
+        <div class="col-4">
+            <div class="form-check">
+                <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="numero" (click)="changeOption(radioNum.value)">
+                <label class="form-check-label" for="radioNumero">
+                  Número (#)
+                </label>
+              </div>
+              <div class="form-check">
+                <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="importe" (click)="changeOption(radioImp.value)">
+                <label class="form-check-label" for="radioImporte">
+                  Importe (€)
+                </label>
+              </div>
+              <div class="form-check">
+                <input #radioMarg class="form-check-input" type="radio" name="radioOption" id="radioMargen" value="margen" (click)="changeOption(radioMarg.value)">
+                <label class="form-check-label" for="radioMargen">
+                  Margen (€)
+                </label>
+              </div>
+        </div>
+        <div class="col-6">
+            <div id="calendario_escoger" style="margin-left:20px; height: 5em;width: 7em;display: inline-block;"></div>
+    
+        </div>
+        <div class="col-2">
+    
+        </div>
+    </div>
+    
+    <!-- VENTAS -->
+    <div class="row graficas text-center">
+        <div class="col-md-4">
+            <i class="fa fa-shopping-cart mr-2"></i>
+            <label>Ventas</label>
+            <div id="LB02" style="height: 1.9em; font-size: 1.18em">2</div>
+
+
+            <div id="LB01" style="height: 37em;">1</div>
+        </div>
+        <div class="col-md-4">
+            <i class="fa fa-times mr-2"></i>
+            <label>Cancelaciones</label>
+
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-chart-pie mr-2"></i>
+            <label>Neto</label>
+
+        </div>
+    </div>
+
+    
+    
+    <h3>Filtro</h3>
+    <div id="LB03" style="height: 200px; width: 200px">3</div>
+</div>
+

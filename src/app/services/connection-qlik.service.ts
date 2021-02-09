@@ -21,12 +21,12 @@ export class ConnectionQlikService {
 
  constructor() { }
 
-  qlikConnection(){
+  qlikConnection(appId){
     if(this.Qlik==null){
 
       return new Promise((resolve) => {
         import('./../../assets/js/qlik-connection.js').then(async file => {
-          this.Qlik = await file.default.qApp(this.config, this.globals);
+          this.Qlik = await file.default.qApp(this.config, this.globals, appId);
           console.log("Qlik:  ", this.Qlik);
           resolve(this.Qlik);
         }​​​​​​​);

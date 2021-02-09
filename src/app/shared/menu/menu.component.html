@@ -1,59 +1,72 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu">
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="navbar-toggler-icon"></i>
-    </button>
+    </button> 
   
+    <div class="logo-min">
+        <img class="img-logo" src="../../../assets/img/logo_caixa.png"><a id="title">Análisis de ventas</a>
+    </div>
+
     <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
-        
 
       <ul class="navbar-nav mr-auto row">
-          <li class="nav-item col-lg-4">
-            <i class="fas fa-bars" (click)="expandir()"></i>
-            <a><img class="img-logo" src="../../../assets/img/logo_caixa.png">Análisis de ventas</a>
+          <li class="nav-item col-lg-4 logo-li">
+            <img class="img-logo" src="../../../assets/img/logo_caixa.png"><a id="title">Análisis de ventas</a>
           </li>
 
-        <li class="nav-item col-lg-2">
-          <a class="nav-link" href="#">Buscador</a>
+        <li class="nav-item col-6 col-lg-2">
+            <app-search></app-search>
         </li>
         
-        <li class="nav-item col-lg-2">
-          <a class="nav-link" href="#">Ventas hasta </a>
+        <li class="nav-item col-6 col-lg-3">
+            <app-filters></app-filters>
         </li>
 
-        <li class="nav-item col-lg-4">
-            <a class="nav-link" href="#">Botonera </a>
+        <li class="nav-item col-6 col-lg-2 mt-2"> Ventas hasta: 12-12-12</li>
+
+        <li class="nav-item col-6 col-lg-1">
+            <select class="form-select">
+                <option selected>Global</option>
+                <option value="1">Territorial</option>
+                <option value="2">VidaCaixa</option>
+                <option value="3">Three</option>
+              </select>
         </li>
-      </ul>
+      </ul>            
+
+
     
-      <ul class="navbar-nav mr-auto flex-row">
+      <ul class="navbar-nav mr-auto pestanyero row"> <!-- flex-row -->
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-home"></i> <a class="nav-link" routerLink="/resumen">Resumen</a>
+                <a class="nav-link" routerLink="/resumen" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon fa fa-home"></i>Resumen</a>
             </li>
             <li class="nav-item" >
-                <i class="fas fa-chart-line"></i><a class="nav-link" routerLink="/evolucion">Evolución</a>
+                <a class="nav-link" routerLink="/evolucion" [routerLinkActive]="['active']"> <i class="topmenu-icon fas fa-chart-line"></i>Evolución</a>
             </li>
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-map"></i><a class="nav-link" routerLink="/territorial">Territorial</a>
+                <a class="nav-link" routerLink="/territorial" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon fa fa-map"></i>Territorial</a>
             </li>
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-credit-card"></i><a class="nav-link" routerLink="/productos">Productos</a>
+                <a class="nav-link" routerLink="/productos" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon far fa-credit-card"></i>Productos</a>
             </li>
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-wifi"></i><a class="nav-link" routerLink="/canales">Canales</a>
+                <a class="nav-link" routerLink="/canales" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon fa fa-wifi"></i>Canales</a>
             </li>
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-user"></i><a class="nav-link" routerLink="/cargo">Cargo</a>
+                <a class="nav-link" routerLink="/cargo" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon fa fa-user"></i>Cargo</a>
             </li>
             <li class="nav-item" >
-                <i class="topmenu-icon menu-icon fa fa-users"></i><a class="nav-link" routerLink="/ranking">Ranking Emp.</a>
+                <a class="nav-link" routerLink="/ranking" [routerLinkActive]="['active']"> <i class="topmenu-icon menu-icon fa fa-users"></i>Ranking Emp.</a>
             </li>
             <li class="nav-item" >
-                <i class="far fa-handshake"></i><a class="nav-link" routerLink="/clientes">Clientes</a>
+               <a class="nav-link" routerLink="/clientes"  [routerLinkActive]="['active']"> <i class="topmenu-icon far fa-handshake"></i> Clientes</a>
             </li>
             <li  class="nav-item">
-                <i class="topmenu-icon menu-icon fa fa-balance-scale"></i><a class="nav-link" routerLink="/comparativa">Comparativa</a>
+               <a class="nav-link" routerLink="/comparativa"  [routerLinkActive]="['active']">  <i class="topmenu-icon menu-icon fa fa-balance-scale"></i>Comparativa</a>
             </li>
+            
+            
     </ul> 
          
     </div>

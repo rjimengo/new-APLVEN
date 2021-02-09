@@ -26,9 +26,35 @@
     color: #f1f1f1;
   }
   
-  .selecciones {
+  .seleccionesLabel, .filtrosLabel {
     color: white;
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
   }
+
+  #selecciones{
+    height: 25em;
+  }
+
+  .fa-bars.active{
+    transform: rotate(90deg);
+    transition: 0.5s;
+}
+.fa-bars{
+    padding: 10px;
+    font-size: large;
+    cursor: pointer;
+    color: white;
+}
+
+.fa-bookmark, .fa-check-square{
+ color: white;
+}
+
+#cerrado{
+  display: none;
+}
+
   
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {

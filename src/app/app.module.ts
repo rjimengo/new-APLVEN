@@ -15,6 +15,9 @@ import { TerritorialComponent } from './components/territorial/territorial.compo
 import { ProductosComponent } from './components/productos/productos.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
+import { FiltersComponent } from './shared/filters/filters.component';
+import { SearchComponent } from './shared/search/search.component';
+import { CanActivateAppLoad } from './services/apploaded.guard';
 
 @NgModule({
   declarations: [
@@ -30,13 +33,15 @@ import { ClientesComponent } from './components/clientes/clientes.component';
     TerritorialComponent,
     ProductosComponent,
     RankingComponent,
-    ClientesComponent
+    ClientesComponent,
+    FiltersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CanActivateAppLoad],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

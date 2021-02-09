@@ -1,0 +1,12 @@
+.contenedor{
+    margin: 25px;
+}
+.form-check{
+    display: inline-flex;
+    margin-right: 6px;
+}
+.graficas label{
+    color: black; 
+    font-size: 1.3em; 
+    font-weight: bold;
+}

@@ -35,7 +35,7 @@ const loadCapabilityApis = async (config) => {
 };
 
 
-const qApp = async (config, globals) => {
+const qApp = async (config, globals, appId) => {
 
   try {
     await loadCapabilityApis(config);
@@ -56,7 +56,7 @@ const qApp = async (config, globals) => {
     });
     return new Promise((resolve) => {
       if (globals.qlik) {
-        const app = globals.qlik.openApp("93026550-480f-4bef-ad64-14aa46bc4ae2",  {host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
+        const app = globals.qlik.openApp(appId,  {host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
         // apply theme set in QSE
         app.theme.get().then((theme) => {
           theme.apply();
@@ -73,7 +73,7 @@ const qApp = async (config, globals) => {
             console.log(error);
           });
         //{host: "63.35.31.78",prefix: "/",port: 80,isSecure: false } reload
-          const app = q.openApp("93026550-480f-4bef-ad64-14aa46bc4ae2",  {id: "93026550-480f-4bef-ad64-14aa46bc4ae2", host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
+          const app = q.openApp(appId,  {id: appId, host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
           resolve(app);
 
           app.on("error", function(error) {

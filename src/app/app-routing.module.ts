@@ -10,11 +10,12 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 import { TerritorialComponent } from './components/territorial/territorial.component';
+import {CanActivateAppLoad} from './services/apploaded.guard';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'resumen', component: ResumenComponent },
-  { path: 'evolucion', component: EvolucionComponent },
+  { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad] },
+  { path: 'evolucion', component: EvolucionComponent, canActivate: [CanActivateAppLoad] },
   { path: 'territorial', component: TerritorialComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'canales', component: CanalesComponent },

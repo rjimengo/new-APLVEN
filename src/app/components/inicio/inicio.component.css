@@ -1,11 +1,72 @@
  .container{
     top: 0;
     left: 0;
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 10;
     background-color: white;
     width: 100%;
     height: 100%;
     max-width: 100%;
     padding: 0;
+ }
+
+ img{
+   width: 100%; 
+   height:60vh;
+ }
+ .p1{
+   font-size: 18px;
+   color: rgb(255, 255, 255); 
+   font-style: italic;
+   font-weight: bold;
+ }
+
+ .contenedor-abajo{
+   background-color: rgb(40, 122, 186 ); 
+   background-size:100% 100%; 
+   height:40vh;
+ }
+
+ select{
+   width: 70%;
+   overflow:hidden; 
+   background-color: LightGray;
+   border: 1px solid white;
+   outline: 2px solid rgb(40, 122, 186);
+   border-radius: 2px;
+ }
+ select:focus{
+  outline: 2px solid white;
+  transition: 0.3s;
+ }
+ option{
+   font-weight:bolder;
+   font-family: sans-serif;
+   color: black; 
+   font-size: 15px; 
+   padding: 5px
+ }
+ option:focus, option:hover, option:active{
+   background-color: rgb(40, 122, 186);
+ }
+
+ .btn-app{
+   margin-top: 12px;
+   background-color: rgb(40, 122, 186);
+   border-radius: 4px;
+   border: 2px solid white;
+   color: white;
+   font-weight: bold;
+   width: 250px;
+   -webkit-box-shadow: 0px 0px 22px -8px rgba(0,0,0,0.85);
+   -moz-box-shadow: 0px 0px 22px -8px rgba(0,0,0,0.85);
+   box-shadow: 0px 0px 22px -8px rgba(0,0,0,0.85);
+ }
+
+ .btn-app:hover{
+  background-color: rgb(34, 110, 168);
+  -webkit-box-shadow: 0px 0px 0px -8px rgba(0,0,0,0.85);
+  -moz-box-shadow: 0px 0px 0px -8px rgba(0,0,0,0.85);
+  box-shadow: 0px 0px 0px -8px rgba(0,0,0,0.85);
+  transition: 0.4s ease-in-out;
  }
