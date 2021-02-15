@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
+import {appIDs} from '../../../config/config';
 
 @Component({
   selector: 'app-inicio',
@@ -9,19 +10,39 @@ import { ConnectionQlikService } from 'src/app/services/connection-qlik.service'
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private _QlikConnection: ConnectionQlikService,
-    private router:Router) { }
-  appId="93026550-480f-4bef-ad64-14aa46bc4ae2";
+  constructor(
+    private _QlikConnection: ConnectionQlikService,
+    private router:Router
+  ) { }
 
   ngOnInit() {
   }
 
-  async openApp(){
-    console.log("openapp");
+  async openApp(aplicacion){
+    let IDapp;
+
+    switch(aplicacion){
+      case "ventas":
+        IDapp = appIDs.global;
+      break;
+      case "territorial":
+        IDapp = appIDs.territorial;
+      break;
+      case "vidacaixa":
+        IDapp = appIDs.vidacaixa;
+      break;
+      case "segurcaixa":
+        IDapp = appIDs.segurcaixa;
+      break;
+      default:
+        IDapp = appIDs.global;
+    }
     
-    await this._QlikConnection.qlikConnection(this.appId);
-    localStorage.setItem('appId', this.appId);
-    this.router.navigate(['/resumen']);
+    if(await this._QlikConnection.qlikConnection(IDapp)){
+    localStorage.setItem('appId', IDapp); 
+    this.router.navigate(['/resumen']);      
+    } 
+
   }
 
 }

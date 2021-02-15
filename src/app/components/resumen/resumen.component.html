@@ -1,22 +1,22 @@
 <div class="contenedor">
 
 
-    <div class="row mb-3">
+    <div class="row mb-2">
         <div class="col-4">
             <div class="form-check">
-                <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="numero" (click)="changeOption(radioNum.value)">
+                <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="Número" (click)="changeOption(radioNum.value)">
                 <label class="form-check-label" for="radioNumero">
                   Número (#)
                 </label>
               </div>
               <div class="form-check">
-                <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="importe" (click)="changeOption(radioImp.value)">
+                <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="Importe" (click)="changeOption(radioImp.value)">
                 <label class="form-check-label" for="radioImporte">
                   Importe (€)
                 </label>
               </div>
               <div class="form-check">
-                <input #radioMarg class="form-check-input" type="radio" name="radioOption" id="radioMargen" value="margen" (click)="changeOption(radioMarg.value)">
+                <input #radioMarg class="form-check-input" type="radio" name="radioOption" id="radioMargen" value="Margen" (click)="changeOption(radioMarg.value)">
                 <label class="form-check-label" for="radioMargen">
                   Margen (€)
                 </label>
@@ -31,31 +31,195 @@
         </div>
     </div>
     
-    <!-- VENTAS -->
+    <!-- VENTAS CANCELACIONES Y NETO -->
     <div class="row graficas text-center">
-        <div class="col-md-4">
+
+        <!-- VENTAS-->
+        <div class="col-lg-4">
             <i class="fa fa-shopping-cart mr-2"></i>
             <label>Ventas</label>
-            <div id="LB02" style="height: 1.9em; font-size: 1.18em">2</div>
+            <!-- KPI ventas -->
+            <div id="sales" class="cifras"></div>
 
+            <!-- KPI meses -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="sales-month-1"  class="cifras cantidades"></div>
+                    <div id="sales-per-month-1" class="cifras"></div>
+                </div>
+                
+                <div class="col-md-6">
+                        <div id="sales-month-2" class="cifras cantidades"></div>
+                    <div id="sales-per-month-2" class="cifras"></div>
+                </div>
+            </div>
 
-            <div id="LB01" style="height: 37em;">1</div>
+            <div [ngClass]="{'panel': !maxVentas,'panel-xl': maxVentas}">
+                <!-- titulo e iconos de grafica ventas -->
+                <div class="row">
+                    <div class="col-md-6 mt-2 mb-2 p-0">
+                        <span>{{metric}} Ventas</span>
+                    </div>
+                    <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                        <i class="fa fa-download p-2" (click)="exportExcell(sales)"></i>
+                        <i [ngClass]="{'fa-table': !vistaVentas,'fa-chart-pie': vistaVentas}" class="fa p-2" (click)="changeView('ventas')"></i>
+                        <i [ngClass]="{'fa-window-maximize': !maxVentas,'fa-window-restore': maxVentas}" class="far p-2" (click)="maximizar('ventas')"></i>
+                    </div>
+                </div>
+                <!-- grafica ventas -->
+                <div #sales id="sales-chart" class="grafica"></div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6 mt-2 mb-2">
+                    <span class="medias">Media Ventas por día</span>
+                </div>
+                <div class="col-md-6">
+                    <div id="avg-sales-per-day" class="cifras"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="sales-month-3" class="cantidades cifras"></div>
+                    <div id="sales-1" class="cifras"></div>
+                    <div id="sales-vs-1" class="cantidades cifras"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="sales-month-4" class="cantidades cifras"></div>
+                    <div id="sales-2" class="cifras"></div>
+                    <div id="sales-vs-2" class="cantidades cifras"></div>
+                </div>
+            </div>
+            
+            
         </div>
-        <div class="col-md-4">
+        
+        <!-- CANCELACIONES-->
+        <div class="col-lg-4">
             <i class="fa fa-times mr-2"></i>
             <label>Cancelaciones</label>
+            <!-- KPI cancelaciones -->
+            <div id="cancellations" class="cifras"></div>
 
+            <!-- KPI meses -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="cancel-month-1"  class="cifras cantidades"></div>
+                    <div id="cancel-per-month-1" class="cifras"></div>
+                </div>
+                
+                <div class="col-md-6">
+                        <div id="cancel-month-2" class="cifras cantidades"></div>
+                    <div id="cancel-per-month-2" class="cifras"></div>
+                </div>
+            </div>
+
+            <div [ngClass]="{'panel': !maxCancelaciones,'panel-xl': maxCancelaciones}">
+                <!-- titulo e iconos de grafica cancelaciones -->
+                <div class="row">
+                    <div class="col-md-6 mt-2 mb-2 p-0">
+                        <span>{{metric}} Cancelaciones</span>
+                    </div>
+                    <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                        <i class="fa fa-download p-2" (click)="exportExcell(cancelaciones)"></i>
+                        <i [ngClass]="{'fa-table': !vistaCancelaciones,'fa-chart-pie': vistaCancelaciones}" class="fa p-2" (click)="changeView('cancelaciones')"></i>
+                        <i [ngClass]="{'fa-window-maximize': !maxCancelaciones,'fa-window-restore': maxCancelaciones}" class="far p-2" (click)="maximizar('cancelaciones')"></i>
+                    </div>
+                </div>
+                <!-- grafica cancelaciones -->
+                <div #cancelaciones id="cancellations-chart" class="grafica"></div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6 mt-2 mb-2">
+                    <span class="medias">Media Cancel. por día</span>
+                </div>
+                <div class="col-md-6">
+                    <div id="avg-can-per-day" class="cifras"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="cancel-month-3" class="cantidades cifras"></div>
+                    <div id="cancellations-1" class="cifras"></div>
+                    <div id="can-vs-1" class="cantidades cifras"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="cancel-month-4" class="cantidades cifras"></div>
+                    <div id="cancellations-2" class="cifras"></div>
+                    <div id="can-vs-2" class="cantidades cifras"></div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
+
+        <!-- NETO-->
+        <div class="col-lg-4 panel">
             <i class="fas fa-chart-pie mr-2"></i>
             <label>Neto</label>
 
+            <!-- KPI neto -->
+            <div id="net" class="cifras"></div>
+
+            <!-- KPI meses -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="net-month-1"  class="cifras cantidades"></div>
+                    <div id="net-per-month-1" class="cifras"></div>
+                </div>
+                
+                <div class="col-md-6">
+                        <div id="net-month-2" class="cifras cantidades"></div>
+                    <div id="net-per-month-2" class="cifras"></div>
+                </div>
+            </div>
+
+            <div [ngClass]="{'panel': !maxNeto,'panel-xl': maxNeto}">
+                <!-- titulo e iconos de grafica Neto -->
+                <div class="row">
+                    <div class="col-md-6 mt-2 mb-2 p-0">
+                        <span>{{metric}} Neto</span>
+                    </div>
+                    <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                        <i class="fa fa-download p-2" (click)="exportExcell(neto)"></i>
+                        <i [ngClass]="{'fa-table': !vistaNeto,'fa-chart-pie': vistaNeto}" class="fa p-2" (click)="changeView('neto')"></i>
+                        <i [ngClass]="{'fa-window-maximize': !maxNeto,'fa-window-restore': maxNeto}" class="far p-2" (click)="maximizar('neto')"></i>
+                    </div>
+                </div>
+                <!-- grafica neto -->
+                <div #neto id="net-chart" class="grafica"></div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6 mt-2 mb-2">
+                    <span class="medias">Media Neto por día</span>
+                </div>
+                <div class="col-md-6">
+                    <div id="avg-net-per-day" class="cifras"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="net-month-3" class="cantidades cifras"></div>
+                    <div id="net-1" class="cifras"></div>
+                    <div id="net-vs-1" class="cantidades cifras"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="net-month-4" class="cantidades cifras"></div>
+                    <div id="net-2" class="cifras"></div>
+                    <div id="net-vs-2" class="cantidades cifras"></div>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
     
     
-    <h3>Filtro</h3>
-    <div id="LB03" style="height: 200px; width: 200px">3</div>
+<!--     <h3>Filtro</h3>
+    <div id="LB03" style="height: 200px; width: 200px">3</div> -->
 </div>
 

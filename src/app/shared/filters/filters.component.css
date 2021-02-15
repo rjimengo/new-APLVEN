@@ -7,3 +7,7 @@ i:hover{
     color:#1c82a8;
     cursor: pointer;
 }
+
+.dropdown{
+    display: inline;
+}

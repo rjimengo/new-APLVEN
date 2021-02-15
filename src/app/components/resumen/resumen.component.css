@@ -1,6 +1,8 @@
 .contenedor{
     margin: 25px;
+    margin-top: 10px;
 }
+
 .form-check{
     display: inline-flex;
     margin-right: 6px;
@@ -10,3 +12,78 @@
     font-size: 1.3em; 
     font-weight: bold;
 }
+
+.grafica{
+    height: 37em;
+}
+.cifras{
+    height: 1.9em; 
+    font-size: 1.18em !important; 
+    padding: 0; 
+    text-align: center;
+}
+
+.cantidades{
+    font-weight: bold;
+    color: black !important;
+}
+
+.graficas span{
+    color: black; 
+    font-size: 1.1em; 
+    font-weight: bold;
+    text-align: left;
+}
+
+.icons-graf i{
+    color: rgb(200, 200, 200);
+}
+.icons-graf i:hover{
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+    padding: 4px;
+}
+
+.medias{
+    font-size:1.1em !important;
+}
+
+.panel-xl{
+    top: 161px;
+    z-index: 2;
+    position:  fixed;
+    background: rgb(255, 255, 255);
+
+    width: 100% !important;
+    height: 900px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+    transition: 0.5s;
+
+/*     padding-left: 75px;
+    padding-right: 15px; */
+
+}
+/* margin: 0;
+padding-left: 75px;
+padding-right: 15px;
+top: 80px;
+left: 0;
+bottom: 0;
+right: 0;
+height: 100%;
+width: 100%;
+margin-top: 45px; */
+
+/* @media (min-width: 1260px) {
+    .panel-xl{
+        width: 82% !important;
+    } 
+  } */
+/* @media (max-width: 992px) {
+    .panel-xl{
+        width: 97%;
+    } 
+  } */

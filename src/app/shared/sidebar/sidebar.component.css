@@ -8,7 +8,7 @@
     left: 0;
     background-color: #1c82a8; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
+    padding-top: 10px;
     transition: 0.5s;
   }
   
@@ -28,8 +28,10 @@
   
   .seleccionesLabel, .filtrosLabel {
     color: white;
+    max-width: 175px;
     border-bottom: 1px solid white;
     padding-bottom: 8px;
+    margin-top: 0 !important;
   }
 
   #selecciones{
@@ -53,8 +55,14 @@
 
 #cerrado{
   display: none;
+  margin-top: 20px;
 }
 
+.burguer{
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
   
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {

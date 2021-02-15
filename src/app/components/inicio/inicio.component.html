@@ -15,17 +15,17 @@
             <div class="col-3"></div>
 
             <div class="col-9 text-left">
-                <select id="navigation" size="4">
-                    <option id="global" value="/ventas" >
-                        Ventas acceso global
+                <select #aplicacion id="navigation" size="4" value="ventas">
+                    <option id="global" value="ventas" selected>
+                    Ventas acceso global 
                     </option>
-                    <option id="territorial" value="/territorial">
+                    <option id="territorial" value="territorial">
                         Ventas territorial
                     </option>
-                    <option id="vidacaixa" value="/vidacaixa">
+                    <option id="vidacaixa" value="vidacaixa">
                         Ventas VidaCaixa
                     </option>
-                    <option id="segurcaixa" value="/segurcaixa">
+                    <option id="segurcaixa" value="segurcaixa">
                         Ventas SegurCaixa
                     </option>
                 </select>
@@ -36,7 +36,7 @@
 
          <br>
 
-        <button type="button" class="btn btn-app" (click)="openApp()"> <span> Acceder a la aplicación</span></button>
+        <button type="button" class="btn btn-app" (click)="openApp(aplicacion.value)"> <span> Acceder a la aplicación</span></button>
 
 
         

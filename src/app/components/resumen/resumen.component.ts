@@ -1,45 +1,68 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-
+import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs'
 @Component({
   selector: 'app-resumen',
   templateUrl: './resumen.component.html',
   styleUrls: ['./resumen.component.css']
 })
+
+
 export class ResumenComponent implements OnInit {
+  
+  metric:string = "Número";
+  vistaVentas:boolean = false;
+  vistaCancelaciones:boolean = false;
+  vistaNeto:boolean = false;
 
-  constructor(private _QlikConnection: ConnectionQlikService) { }
-
+  maxVentas:boolean = false;
+  maxCancelaciones:boolean = false;
+  maxNeto:boolean = false;
+  
+  constructor(
+    private _QlikConnection: ConnectionQlikService,
+    private _ComunService: ComunesService) { }
+  
+  
   async ngOnInit() {
-    this.mostrarGraficos();
+    this.cargarDatos();
     this.radioButtons();
   }
 
-  mostrarGraficos(){
-    //CAMBIAR VALOR A VARIABLE DE QLIK
-    this._QlikConnection.Qlik.variable.getContent('vL.PorcentajeSel',function ( PorcentajeSel ){
-      console.log("PorcentajeSel", PorcentajeSel);
-    });
-    this._QlikConnection.Qlik.variable.setNumValue('vL.PorcentajeSel',0);
+  cargarDatos(){
 
 
-    //Mostrar grafico
-    this._QlikConnection.Qlik.getObject("LB01", 'kmVkg');
+    /* Get Ventas objects */
+    for (var i = 0; i < sales.length; i++) {
+      this._QlikConnection.getObject(sales[i].div, sales[i].id);
+    }
+    /* Get Cancelaciones objects */
+    for (var i = 0; i < cancelaciones.length; i++) {
+      this._QlikConnection.getObject(cancelaciones[i].div, cancelaciones[i].id);
+    }
+    /* Get Netos objects */
+    for (var i = 0; i < netos.length; i++) {
+      this._QlikConnection.getObject(netos[i].div, netos[i].id);
+    }
+    
+
+/*  //Mostrar grafico
+    this._QlikConnection.getObject("sales-chart", 'kmVkg');
 
 
     //Mostrar KPI
-    this._QlikConnection.Qlik.getObject("LB02", 'mJFNV');
+    this._QlikConnection.getObject("sales", 'mJFNV');
     
     
     //Mostrar Filtro
-    this._QlikConnection.Qlik.getObject("LB03", 'nkPmQA'); 
+    this._QlikConnection.getObject("LB03", 'nkPmQA');  */
 
-
-    this._QlikConnection.Qlik.getObject('calendario_escoger', 'VrCpHn')
   }
 
   changeOption(value){
     localStorage.setItem('optionValue', value);
+    this.radioButtons();
   }
 
   radioButtons(){
@@ -47,17 +70,17 @@ export class ResumenComponent implements OnInit {
     if(radio){
       this.setMetrica(radio);
       switch(radio) { 
-        case "numero": { 
+        case "Número": { 
           let elem = document.getElementById("radioNumero") as HTMLInputElement;
           elem.checked = true;
            break; 
         } 
-        case "importe": { 
+        case "Importe": { 
           let elem = document.getElementById("radioImporte") as HTMLInputElement;
           elem.checked = true;
            break; 
         } 
-        case "margen": { 
+        case "Margen": { 
           let elem = document.getElementById("radioMargen") as HTMLInputElement;
           elem.checked = true;
            break; 
@@ -67,19 +90,20 @@ export class ResumenComponent implements OnInit {
   }
 
   setMetrica(metric){
-
     let id=1;
     let abr = 'Num';
+    this.metric = metric;
+    
     switch (metric) {
-      case 'numero':
+      case 'Número':
         id = 1;
         abr = 'Num';
         break;
-      case 'importe':
+      case 'Importe':
         id = 2;
         abr = 'Imp';
         break;
-      case 'margen':
+      case 'Margen':
         id = 3;
         abr = 'Mar';
         break;
@@ -87,19 +111,80 @@ export class ResumenComponent implements OnInit {
 
     var unit = metric === 'Número' ? '#' : '€';
      
-    this._QlikConnection.Qlik.variable.setNumValue('vL.IndicadorSel', id);
-    this._QlikConnection.Qlik.variable.setStringValue('vL.IndicadorSelDesc', metric + ' (' + unit + ')');
-    this._QlikConnection.Qlik.variable.setStringValue('vL.IndicadorSelAbr', abr);
-    this._QlikConnection.Qlik.variable.setStringValue('vL.FormatoIndicador', '#.##0 ' + unit);
+    this._QlikConnection.setNumValue('vL.IndicadorSel', id);
+    this._QlikConnection.setStringValue('vL.IndicadorSelDesc', metric + ' (' + unit + ')');
+    this._QlikConnection.setStringValue('vL.IndicadorSelAbr', abr);
+    this._QlikConnection.setStringValue('vL.FormatoIndicador', '#.##0 ' + unit);
 
 
     // Disable % when metric = Margen
     if (metric === 'margen') {
       /* Reset % */
-/*       $scope.percentage = commonFactory.initPercentage($rootScope.metric, $rootScope.operation, $rootScope.dimension, $rootScope.employee, null, true);
+      /*$scope.percentage = commonFactory.initPercentage($rootScope.metric, $rootScope.operation, $rootScope.dimension, $rootScope.employee, null, true);
       $rootScope.percentage = $scope.percentage;
       $('#percentage').prop('checked', false); */
+   }
   }
+
+    /* Switch between chart and table view */
+  changeView(apartado){
+
+    switch(apartado){
+      case "ventas":
+        this.vistaVentas = this._ComunService.changeView(apartado, this.vistaVentas, 5, 6);
+      break;
+      case "cancelaciones":
+        this.vistaCancelaciones = this._ComunService.changeView(apartado, this.vistaCancelaciones, 5, 6);
+      break;
+      case "neto":
+        this.vistaNeto = this._ComunService.changeView(apartado, this.vistaNeto, 5, 6);
+      break;
+    }
+    
+  }
+
+  exportExcell(grafica){
+    let graf = grafica as HTMLInputElement;
+    this._QlikConnection.exportExcell(graf.getAttribute('qlikid'));
+  }
+
+  maximizar(apartado){
+
+    switch(apartado){
+      case "ventas":
+        this.maxVentas = this._ComunService.maximizar(apartado, this.maxVentas);
+      break;
+      case "cancelaciones":
+        this.maxCancelaciones = this._ComunService.maximizar(apartado, this.maxCancelaciones);
+      break;
+      case "neto":
+        this.maxNeto = this._ComunService.maximizar(apartado, this.maxNeto);
+      break;
+    }
+
+    setTimeout(()=>{
+      let sidebar = document.getElementById("sidebar").style.width;
+      var panelxl = document.getElementsByClassName("panel-xl")[0] as HTMLInputElement;
+  
+      if((sidebar  == "225px" || sidebar  == "") && panelxl){
+        panelxl.style.marginLeft = "225px";
+        panelxl.style.width = "80%";
+      }else if(panelxl){
+        panelxl.style.marginLeft = "50px";
+        panelxl.style.width = "90%";
+      }else{
+        var paneles = document.getElementsByClassName("panel");
+        for (let i = 0; i < paneles.length; i++) {
+          let panel = paneles[i]  as HTMLInputElement;
+          panel.style.marginLeft = "0px";
+          panel.style.width = "100%";
+        }
+      }
+      this._QlikConnection.resize();
+    },100);
+
+
+
   }
 
 }

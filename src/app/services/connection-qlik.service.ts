@@ -1,40 +1,76 @@
 import { Injectable } from '@angular/core';
+import {configQlik} from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionQlikService {
 
-  config = {
-    host: "63.35.31.78", //the address of your Qlik Engine Instance
-    prefix: "", //or the virtual proxy to be used. for example "/anonymous/"
-    port: 80, //or the port to be used if different from the default port  
-    isSecure: false, //should be true if connecting over HTTPS
-    //webIntegrationId: 'web-integration-id-here' //only needed in SaaS editions and QSEoK
-  };
   globals = {
     qlik: null,
     resize: null
   };
 
-  Qlik=null;
+  qApp=null;
+  static globals= {
+    qlik: null,
+    resize: null
+  };
 
  constructor() { }
 
   qlikConnection(appId){
-    if(this.Qlik==null){
+    if(appId){
+      if(this.qApp==null){
 
-      return new Promise((resolve) => {
-        import('./../../assets/js/qlik-connection.js').then(async file => {
-          this.Qlik = await file.default.qApp(this.config, this.globals, appId);
-          console.log("Qlik:  ", this.Qlik);
-          resolve(this.Qlik);
-        }​​​​​​​);
-      });
-
+        return new Promise((resolve) => {
+          import('./../../assets/js/qlik-connection.js').then(async file => {
+            this.qApp = await file.default.qApp(configQlik, this.globals, appId);
+            this.globals = await file.default.q;
+            ConnectionQlikService.globals =  this.globals;
+            console.log("Qlik:  ", this.qApp);
+            resolve(this.qApp);
+          }​​​​​​​);
+        });
+  
+      }else{
+        return this.qApp;
+      }
     }else{
-      return this.Qlik;
+      return false;
     }
+
+  }
+
+  getObject(id, value){
+    this.qApp.getObject(id, value);
+    let elem = document.getElementById(id) as HTMLInputElement;   
+    if(elem)
+      elem.setAttribute("qlikid", value);
+  }
+  setNumValue(value, id){
+    this.qApp.variable.setNumValue(value, id);
+  }
+  setStringValue(value, id){
+    this.qApp.variable.setStringValue(value, id);
+  }
+  exportExcell(qlikid){
+    this.qApp.getObjectProperties(qlikid).then(function(model) {
+      var table = ConnectionQlikService.globals.qlik.table(model);
+
+      var exportOpts = {
+          download: false
+      };
+
+      table.exportData(exportOpts, function(link) { 
+        window.open(link, '_blank');
+        console.log(link);                     
+      });
+    });
+  }
+
+  resize(){
+    this.globals.qlik.resize();
   }
 
 }

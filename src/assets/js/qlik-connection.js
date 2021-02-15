@@ -1,4 +1,7 @@
-
+const globalsJS = {
+  qlik: null,
+  resize: null,
+};
 
 /* var appId= "93026550-480f-4bef-ad64-14aa46bc4ae2"; */
 
@@ -36,7 +39,6 @@ const loadCapabilityApis = async (config) => {
 
 
 const qApp = async (config, globals, appId) => {
-
   try {
     await loadCapabilityApis(config);
     const prefix = (config.prefix !== '') ? `/${config.prefix}/` : '/';
@@ -64,8 +66,8 @@ const qApp = async (config, globals, appId) => {
         resolve(app);
       } else {
         window.require(['js/qlik'], (q) => {
-          globals.qlik = q;
-          globals.resize = () => {
+          globalsJS.qlik = q;
+          globalsJS.resize = () => {
             q.resize();
           }; 
 
@@ -74,7 +76,7 @@ const qApp = async (config, globals, appId) => {
           });
         //{host: "63.35.31.78",prefix: "/",port: 80,isSecure: false } reload
           const app = q.openApp(appId,  {id: appId, host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
-          resolve(app);
+          resolve(app, q);
 
           app.on("error", function(error) {
             console.log(error);
@@ -98,6 +100,7 @@ const qApp = async (config, globals, appId) => {
 
 //qApp();
 const prueba={
-  qApp: qApp
+  qApp: qApp,
+  q: globalsJS
 };
 export default prueba;

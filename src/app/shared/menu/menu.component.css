@@ -2,7 +2,11 @@ nav{
     margin-left: 225px;
     transition: 0.5s;
     padding-bottom: 0;
+    padding-top: 0;
+    padding-right: 6px;
+    max-height: 154px;
 }
+
 
 .logo-min{
     display: block;
@@ -42,6 +46,9 @@ img.img-logo {
     max-width: 100%;
 }
 
+.pestanyero{
+    margin-top: 0 !important;
+}
 .pestanyero .nav-link{
 display: inline-block;
 margin-bottom: 0px;
@@ -84,4 +91,12 @@ font-weight: bold;
     border-radius: 2px;
     color: white;
     background-color: #1c83a8;
+}
+
+.hasta{
+    border-left: 1px solid rgba(99, 99, 99, 0.7);
+    border-right: 1px solid rgba(99, 99, 99, 0.7);
+}
+.lihasta{
+    padding: 0;
 }
