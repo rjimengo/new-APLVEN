@@ -164,20 +164,26 @@ export class ResumenComponent implements OnInit {
 
     setTimeout(()=>{
       let sidebar = document.getElementById("sidebar").style.width;
-      var panelxl = document.getElementsByClassName("panel-xl")[0] as HTMLInputElement;
-  
+      var panelxl = document.getElementsByClassName("panel-xl")[0] as HTMLInputElement;     
+      
+      //se esconden todos los paneles 
+      var paneles = document.getElementsByClassName("panel");
+      for (let i = 0; i < paneles.length; i++) {
+        let panel = paneles[i]  as HTMLInputElement;
+        panel.style.display = "none";
+      }
+
+
       if((sidebar  == "225px" || sidebar  == "") && panelxl){
-        panelxl.style.marginLeft = "225px";
-        panelxl.style.width = "80%";
+        panelxl.style.paddingLeft = "225px";
       }else if(panelxl){
-        panelxl.style.marginLeft = "50px";
-        panelxl.style.width = "90%";
+        panelxl.style.paddingLeft = "50px";
       }else{
         var paneles = document.getElementsByClassName("panel");
         for (let i = 0; i < paneles.length; i++) {
           let panel = paneles[i]  as HTMLInputElement;
-          panel.style.marginLeft = "0px";
-          panel.style.width = "100%";
+          panel.style.paddingLeft = "0px";
+          panel.style.display = "block";
         }
       }
       this._QlikConnection.resize();

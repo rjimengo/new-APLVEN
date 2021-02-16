@@ -55,35 +55,21 @@
     background: rgb(255, 255, 255);
 
     width: 100% !important;
-    height: 900px;
+    height: 100%;
     left: 0;
     bottom: 0;
     right: 0;
     
     transition: 0.5s;
 
-/*     padding-left: 75px;
-    padding-right: 15px; */
+    padding-left: 225px;
+    padding-right: 15px;
+
 
 }
-/* margin: 0;
-padding-left: 75px;
-padding-right: 15px;
-top: 80px;
-left: 0;
-bottom: 0;
-right: 0;
-height: 100%;
-width: 100%;
-margin-top: 45px; */
 
-/* @media (min-width: 1260px) {
+@media (max-width: 992px) {
     .panel-xl{
-        width: 82% !important;
+        top: 46px;
     } 
-  } */
-/* @media (max-width: 992px) {
-    .panel-xl{
-        width: 97%;
-    } 
-  } */
+} 

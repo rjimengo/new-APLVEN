@@ -28,8 +28,7 @@ export class SidebarComponent implements OnInit {
       document.getElementById("abierto").style.display = "block";
 
       if(panelxl){
-        panelxl.style.marginLeft = "225px"; 
-        panelxl.style.width = "80%";
+        panelxl.style.paddingLeft = "225px"; 
       }
 
     }else{
@@ -42,8 +41,7 @@ export class SidebarComponent implements OnInit {
       document.getElementById("cerrado").style.display = "block";
       
       if(panelxl){
-        panelxl.style.marginLeft = "50px";
-        panelxl.style.width = "90%";
+        panelxl.style.paddingLeft = "50px";
       }
     }
     setTimeout(()=>{
