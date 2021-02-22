@@ -21,6 +21,145 @@
         <p class="filtrosLabel m-3"> <i class="far fa-bookmark m-1"></i>Filtros</p>
         <div id="filtros">
 
+            <div class="accordion" id="accordionFiltros">
+                <div class="card">
+                  <div class="card-header" id="headingFecha" data-toggle="collapse" data-target="#collapseFecha" aria-expanded="true" aria-controls="collapseFecha" (click)="loadFilter('fecha')">
+                    <p class="mb-0">
+                      <button class="btn text-light" type="button" >
+                        Fecha <!-- <i class="ml-5 fas fa-angle-left"></i> -->
+                      </button>
+                    </p>
+                  </div>
+              
+                  <div id="collapseFecha" class="collapse" aria-labelledby="headingFecha" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'fecha'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-header" id="headingVentas" data-toggle="collapse" data-target="#collapseVentas" aria-expanded="false" aria-controls="collapseVentas" (click)="loadFilter('ventas')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Ventas
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseVentas" class="collapse" aria-labelledby="headingVentas" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'ventas'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingCentros" data-toggle="collapse" data-target="#collapseCentros" aria-expanded="false" aria-controls="collapseCentros" (click)="loadFilter('centros')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Centros
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseCentros" class="collapse" aria-labelledby="headingCentros" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'centros'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingProductos" data-toggle="collapse" data-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos" (click)="loadFilter('productos')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Productos
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseProductos" class="collapse" aria-labelledby="headingProductos" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'productos'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingClientesdb" data-toggle="collapse" data-target="#collapseClientesdb" aria-expanded="false" aria-controls="collapseClientesdb" (click)="loadFilter('clientesdb')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Cli. - Datos Básicos
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseClientesdb" class="collapse" aria-labelledby="headingClientesdb" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'clientesdb'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-header" id="headingClientesms" data-toggle="collapse" data-target="#collapseClientesms" aria-expanded="false" aria-controls="collapseClientesms" (click)="loadFilter('clientesms')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Cli. - Marca Segment.
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseClientesms" class="collapse" aria-labelledby="headingClientesms" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'clientesms'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingClientesn" data-toggle="collapse" data-target="#collapseClientesn" aria-expanded="false" aria-controls="collapseClientesn" (click)="loadFilter('clientesn')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Cli. - Negocio
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseClientesn" class="collapse" aria-labelledby="headingClientesn" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'clientesn'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingClientess" data-toggle="collapse" data-target="#collapseClientess" aria-expanded="false" aria-controls="collapseClientess" (click)="loadFilter('clientess')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Cli. - Segmento
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseClientess" class="collapse" aria-labelledby="headingClientess" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'clientess'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingEmpleados" data-toggle="collapse" data-target="#collapseEmpleados" aria-expanded="false" aria-controls="collapseEmpleados" (click)="loadFilter('empleados')">
+                    <p class="mb-0">
+                      <button class="btn collapsed text-light" type="button" >
+                        Empleados
+                      </button>
+                    </p>
+                  </div>
+                  <div id="collapseEmpleados" class="collapse" aria-labelledby="headingEmpleados" data-parent="#accordionFiltros">
+                    <div *ngIf="filter == 'empleados'">
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
         </div>
     </div>
 

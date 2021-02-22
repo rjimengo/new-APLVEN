@@ -10,11 +10,11 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 import { TerritorialComponent } from './components/territorial/territorial.component';
-import {CanActivateAppLoad} from './services/apploaded.guard';
+import {CanActivateAppLoad} from './services/guards/apploaded.guard';
+import { ventasGuard } from './services/guards/ventasGuard.guard';
 
-const routes: Routes = [
-  { path: '', component: InicioComponent },
-  { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad] },
+const rutasHijas = [
+  { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad]},
   { path: 'evolucion', component: EvolucionComponent, canActivate: [CanActivateAppLoad] },
   { path: 'territorial', component: TerritorialComponent },
   { path: 'productos', component: ProductosComponent },
@@ -23,12 +23,67 @@ const routes: Routes = [
   { path: 'ranking', component: RankingComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'comparativa', component: ComparativaComponent },
-  { path: '', pathMatch: 'full', redirectTo: '' },
-  { path: '**', pathMatch: 'full', redirectTo: ''}
+
 ];
+
+const routes: Routes = [
+  { path: '', component: InicioComponent },
+  {
+  path: 'ventas',
+  canActivate: [ventasGuard],
+  children: rutasHijas
+},
+{
+  path: 'territorial',
+  canActivate: [ventasGuard],
+  children: rutasHijas
+},
+{
+  path: 'vidacaixa',
+  canActivate: [ventasGuard],
+  children: rutasHijas
+},
+{
+  path: 'segurcaixa',
+  canActivate: [ventasGuard],
+  children: rutasHijas
+},
+
+];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
+/* export const adminRoutes: Routes = [
+  {
+    path: 'admin',
+    component: AdminComponent, 
+    canActivate: [AdminGuardGuard],
+    children:[
+      { path: 'crud-usuario', component: CrudUsuarioComponent },
+      { path: 'crud-prof', component: CrudProfComponent },
+      { path: 'crud-alumno', component: CrudAlumnoComponent },
+      { path: 'crud-imparte', component: CrudImparteComponent },
+      { path: 'crud-reserva', component: CrudReservaComponent},
+      { path: 'crud-valoraciones', component: CrudValoracionesComponent},
+      { path: 'crud-reportes', component: CrudReportesComponent},
+      { path: 'edit-user/:id', component: EditUserComponent },
+      { path: 'crud-asignaturas', component: CrudAsignaturasComponent},
+      { path: 'edit-asig/:id', component: EditAsigComponent},
+      { path: 'crear-asig', component: CrearAsigComponent},
+      { path: 'info/:id', component:InfoComponent},
+      { path: 'panel', component:PanelComponent}
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(adminRoutes)],
+  exports: [RouterModule]
+}) */

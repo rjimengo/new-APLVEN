@@ -32,7 +32,6 @@ export class ResumenComponent implements OnInit {
 
   cargarDatos(){
 
-
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {
       this._QlikConnection.getObject(sales[i].div, sales[i].id);

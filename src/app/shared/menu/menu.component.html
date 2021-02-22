@@ -40,31 +40,31 @@
     
       <ul class="navbar-nav mr-auto pestanyero row"> <!-- flex-row -->
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/resumen" routerLinkActive="active"> <i class="topmenu-icon menu-icon fa fa-home"></i>Resumen</a>
+                <a class="nav-link" (click)="navigate('resumen')" [ngClass]="{'active': page == 'resumen'}"> <i class="topmenu-icon menu-icon fa fa-home"></i>Resumen</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/evolucion" routerLinkActive="active"> <i class="topmenu-icon fas fa-chart-line"></i>Evolución</a>
+                <a class="nav-link" (click)="navigate('evolucion')" [ngClass]="{'active': page == 'evolucion'}"> <i class="topmenu-icon fas fa-chart-line"></i>Evolución</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/territorial" routerLinkActive="active"> <i class="topmenu-icon menu-icon fa fa-map"></i>Territorial</a>
+                <a class="nav-link" (click)="navigate('territorial')" [ngClass]="{'active': page == 'territorial'}"> <i class="topmenu-icon menu-icon fa fa-map"></i>Territorial</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/productos" routerLinkActive="active"> <i class="topmenu-icon menu-icon far fa-credit-card"></i>Productos</a>
+                <a class="nav-link" (click)="navigate('productos')" [ngClass]="{'active': page == 'productos'}"> <i class="topmenu-icon menu-icon far fa-credit-card"></i>Productos</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/canales" routerLinkActive="active"> <i class="topmenu-icon menu-icon fa fa-wifi"></i>Canales</a>
+                <a class="nav-link" (click)="navigate('canales')" [ngClass]="{'active': page == 'canales'}"> <i class="topmenu-icon menu-icon fa fa-wifi"></i>Canales</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/cargo" routerLinkActive="active"> <i class="topmenu-icon menu-icon fa fa-user"></i>Cargo</a>
+                <a class="nav-link" (click)="navigate('cargo')" [ngClass]="{'active': page == 'cargo'}"> <i class="topmenu-icon menu-icon fa fa-user"></i>Cargo</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" routerLink="/ranking" routerLinkActive="active"> <i class="topmenu-icon menu-icon fa fa-users"></i>Ranking Emp.</a>
+                <a class="nav-link" (click)="navigate('ranking')" [ngClass]="{'active': page == 'ranking'}"> <i class="topmenu-icon menu-icon fa fa-users"></i>Ranking Emp.</a>
             </li>
             <li class="nav-item" >
-               <a class="nav-link" routerLink="/clientes"  routerLinkActive="active"> <i class="topmenu-icon far fa-handshake"></i> Clientes</a>
+               <a class="nav-link" (click)="navigate('clientes')" [ngClass]="{'active': page == 'clientes'}"> <i class="topmenu-icon far fa-handshake"></i> Clientes</a>
             </li>
             <li  class="nav-item">
-               <a class="nav-link" routerLink="/comparativa"  routerLinkActive="active">  <i class="topmenu-icon menu-icon fa fa-balance-scale"></i>Comparativa</a>
+               <a class="nav-link" (click)="navigate('comparativa')" [ngClass]="{'active': page == 'comparativa'}">  <i class="topmenu-icon menu-icon fa fa-balance-scale"></i>Comparativa</a>
             </li>
     </ul> 
          

@@ -6,7 +6,9 @@ nav{
     padding-right: 6px;
     z-index: 10;
 }
-
+.nav-item{
+    cursor: pointer;
+}
 
 .logo-min{
     display: block;

@@ -221,3 +221,270 @@ export var netos = [
     "id": "fgPPw",
   }
 ];
+
+
+var fecha = [ 
+  {
+    "pos": 0,
+    "div": "mes",
+    "id": "NcpHPAm"
+  },
+  {
+    "pos": 1,
+    "div": "fecha",
+    "id": "DVVQBaH"
+  }
+];
+var ventas = [ 
+  {
+    "pos": 0,
+    "div": "clase venta",
+    "id": "cLvmkfg"
+  },
+  {
+    "pos": 1,
+    "div": "tipo venta",
+    "id": "nqrRFPF"
+  },
+  {
+    "pos": 2,
+    "div": "agrupacion canal",
+    "id": "VtyTGX"
+  },
+  {
+    "pos": 3,
+    "div": "canal",
+    "id": "fYDcfBG"
+  },
+  {
+    "pos": 4,
+    "div": "centro intouch",
+    "id": "FWLHQmz"
+  },
+  {
+    "pos": 5,
+    "div": "gestor intouch",
+    "id": "HfVMWv"
+  },
+  {
+    "pos": 6,
+    "div": "ind venta intouch",
+    "id": "GMkuUUj"
+  },
+  {
+    "pos": 7,
+    "div": "señal",
+    "id": "dZfJLYh"
+  },
+  {
+    "pos": 8,
+    "div": "negocio venta",
+    "id": "cnrmG"
+  }
+];
+var centros = [ 
+  {
+    "pos": 0,
+    "div": "red",
+    "id": "Pjqtq"
+  },
+  {
+    "pos": 1,
+    "div": "dt",
+    "id": "nkPmQA"
+  },
+  {
+    "pos": 2,
+    "div": "dg",
+    "id": "vBVYC"
+  },
+  {
+    "pos": 3,
+    "div": "dan",
+    "id": "WspBCAY"
+  },
+  {
+    "pos": 4,
+    "div": "oficina",
+    "id": "JPLADdQ"
+  },
+  {
+    "pos": 5,
+    "div": "oficinas ventanilla",
+    "id": "dLZqUJ"
+  },
+  {
+    "pos": 6,
+    "div": "tipo de oficina",
+    "id": "nMK"
+  }
+];
+var productos = [ 
+  {
+    "pos": 0,
+    "div": "producto nivel 600",
+    "id": "nypzq"
+  },
+  {
+    "pos": 1,
+    "div": "producto nivel 500",
+    "id": "TDdmHE"
+  },
+  {
+    "pos": 2,
+    "div": "producto nivel 400",
+    "id": "SyTyGu"
+  },
+  {
+    "pos": 3,
+    "div": "producto nivel 300",
+    "id": "zCMhfBX"
+  },
+  {
+    "pos": 4,
+    "div": "producto nivel 200",
+    "id": "wwKxGJS"
+  },
+  {
+    "pos": 5,
+    "div": "producto nivel 100",
+    "id": "HPWRJc"
+  },
+  {
+    "pos": 6,
+    "div": "producto nivel 50",
+    "id": "FjYzB"
+  }
+];
+var clientesdb = [ 
+  {
+    "pos": 0,
+    "div": "edad",
+    "id": "pHUeeP"
+  },
+  {
+    "pos": 1,
+    "div": "sexo",
+    "id": "RQDZpJ"
+  },
+  {
+    "pos": 2,
+    "div": "tipo persona",
+    "id": "qQLK"
+  }
+];
+var clientesms = [ 
+  {
+    "pos": 0,
+    "div": "es cliente",
+    "id": "ARJfr"
+  },
+  {
+    "pos": 1,
+    "div": "es tercera edad",
+    "id": "GvwjPk"
+  },
+  {
+    "pos": 2,
+    "div": "está vinculado",
+    "id": "REGyk"
+  },
+  {
+    "pos": 3,
+    "div": "ind club ahora",
+    "id": "srVzS"
+  },
+  {
+    "pos": 4,
+    "div": "ind consolidado",
+    "id": "pyNQNjj"
+  },
+  {
+    "pos": 5,
+    "div": "ind defunción",
+    "id": "aenZBB"
+  },
+  {
+    "pos": 6,
+    "div": "ind imaginbank",
+    "id": "NAemfzE"
+  },
+  {
+    "pos": 7,
+    "div": "ind multi estrella",
+    "id": "VawDjq"
+  },
+  {
+    "pos": 8,
+    "div": "ingresos principales",
+    "id": "LnEhqC"
+  },
+  {
+    "pos": 9,
+    "div": "nivel servicio",
+    "id": "RteygF"
+  }  
+];
+var clientesn = [ 
+  {
+    "pos": 0,
+    "div": "negocio",
+    "id": "PMeH"
+  },
+  {
+    "pos": 1,
+    "div": "subnegocio",
+    "id": "LpZfFWH"
+  },
+  {
+    "pos": 2,
+    "div": "subsubnegocio",
+    "id": "sGfJe"
+  }
+];
+var clientess = [ 
+  {
+    "pos": 0,
+    "div": "segmento",
+    "id": "sQRahH"
+  },
+  {
+    "pos": 1,
+    "div": "subsegmento",
+    "id": "cBBkR"
+  }
+];
+var empleados = [ 
+  {
+    "pos": 0,
+    "div": "cargo",
+    "id": "apHEMkT"
+  },
+  {
+    "pos": 1,
+    "div": "nombre empleado",
+    "id": "uJWmSyJ"
+  },
+  {
+    "pos": 2,
+    "div": "responsabilidad",
+    "id": "RjWhak"
+  },
+  {
+    "pos": 3,
+    "div": "tipo empleado",
+    "id": "dHHYF"
+  }
+];
+
+export var filtros={
+  fecha: fecha,
+  ventas: ventas,
+  centros: centros,
+  productos: productos,
+  clientesdb: clientesdb,
+  clientesms: clientesms,
+  clientesn: clientesn,
+  clientess: clientess,
+  empleados: empleados
+}

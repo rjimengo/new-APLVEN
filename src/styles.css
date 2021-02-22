@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* FILTROS QLIK*/
+.title-wrapper{
+    color: white !important;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 16px;
+    font-size: 13px;
+    font-weight: normal;
+    border: none !important;
+}
+.qv-collapsed-listbox {
+    height: 24px;
+    background-color: #1c82a8;
+    border: none !important;
+}
+.qv-collapsed-listbox .qv-state-count-bar {
+    border: none !important;
+    display: none;
+}
+.qv-collapsed-listbox {
+    border: none;
+}

@@ -20,6 +20,7 @@ export class InicioComponent implements OnInit {
 
   async openApp(aplicacion){
     let IDapp;
+    localStorage.setItem('app', aplicacion); 
 
     switch(aplicacion){
       case "ventas":
@@ -39,8 +40,8 @@ export class InicioComponent implements OnInit {
     }
     
     if(await this._QlikConnection.qlikConnection(IDapp)){
-    localStorage.setItem('appId', IDapp); 
-    this.router.navigate(['/resumen']);      
+      localStorage.setItem('appId', IDapp); 
+      this.router.navigate([aplicacion + '/resumen']);      
     } 
 
   }

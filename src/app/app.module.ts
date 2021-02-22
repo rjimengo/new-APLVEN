@@ -17,7 +17,8 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { FiltersComponent } from './shared/filters/filters.component';
 import { SearchComponent } from './shared/search/search.component';
-import { CanActivateAppLoad } from './services/apploaded.guard';
+import { CanActivateAppLoad } from './services/guards/apploaded.guard';
+import { ventasGuard } from './services/guards/ventasGuard.guard';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,13 @@ import { CanActivateAppLoad } from './services/apploaded.guard';
     RankingComponent,
     ClientesComponent,
     FiltersComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [CanActivateAppLoad],
+  providers: [CanActivateAppLoad, ventasGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

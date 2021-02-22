@@ -10,6 +10,7 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 10px;
     transition: 0.5s;
+    overflow: visible !important;
   }
   
   /* The navigation menu links */
@@ -35,7 +36,7 @@
   }
 
   #selecciones{
-    height: 25em;
+    height: 35%;
   }
 
   .fa-bars.active{
@@ -57,13 +58,54 @@
   display: none;
   margin-top: 20px;
 }
+#abierto{
+  height: 100%;
+}
 
 .burguer{
   position: absolute;
   right: 0;
   top: 4px;
 }
+
+
+/* Filtros */
+
+#filtros{
+  overflow-y:scroll;
+  max-height: 48%;
   
+}
+
+.card-header{
+  padding: 0;
+  background-color: #2f99c0;
+  color: white;
+  border: none;
+
+}
+.card-header:hover{
+
+  background-color: #278baf;
+
+}
+.card-body{
+  padding: 0 4px 0 30px;
+  background-color: #1c82a8;
+  color: white !important;
+  height: 45px;  
+}
+.card{
+  border: none;
+  border-radius: 0;
+}
+.btn{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+
+
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}

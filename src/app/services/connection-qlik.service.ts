@@ -45,8 +45,12 @@ export class ConnectionQlikService {
   getObject(id, value){
     this.qApp.getObject(id, value);
     let elem = document.getElementById(id) as HTMLInputElement;   
-    if(elem)
+    if(elem){
+      elem.innerHTML=`<div class="spinner-grow spinner-grow-sm text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                  </div>`;      
       elem.setAttribute("qlikid", value);
+    }
   }
   setNumValue(value, id){
     this.qApp.variable.setNumValue(value, id);
