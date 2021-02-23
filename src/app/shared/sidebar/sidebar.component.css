@@ -38,7 +38,9 @@
   #selecciones{
     height: 35%;
   }
-
+.fa-caret-right{
+  transition: 0.2s;
+}
   .fa-bars.active{
     transform: rotate(90deg);
     transition: 0.5s;
@@ -57,6 +59,7 @@
 #cerrado{
   display: none;
   margin-top: 20px;
+  cursor: pointer;
 }
 #abierto{
   height: 100%;
@@ -68,7 +71,9 @@
   top: 4px;
 }
 
-
+.fa-eraser{
+  margin-left: 60px;
+}
 /* Filtros */
 
 #filtros{
@@ -79,23 +84,23 @@
 
 .card-header{
   padding: 0;
-  background-color: #2f99c0;
+  background-color: #1c82a8;
   color: white;
-  border: none;
-
+  border-left: 2px solid white;
+  margin-left: 6px;
 }
 .card-header:hover{
-
-  background-color: #278baf;
-
+  background-color: #1f7899;
 }
 .card-body{
   padding: 0 4px 0 30px;
   background-color: #1c82a8;
   color: white !important;
-  height: 45px;  
+  height: 25px;  
+  overflow: hidden;
 }
 .card{
+  background-color: #1c82a8;
   border: none;
   border-radius: 0;
 }

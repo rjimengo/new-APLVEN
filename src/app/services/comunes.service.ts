@@ -7,6 +7,7 @@ import { ConnectionQlikService } from './connection-qlik.service';
 })
 export class ComunesService {
 
+  selecciones = [];
   constructor(private _QlikConnection: ConnectionQlikService) { }
 
   changeView(apartado, vista, chart, table){

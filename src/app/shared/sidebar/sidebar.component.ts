@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { filtros } from 'src/config/ventasGlobalIDs';
 
@@ -11,9 +12,13 @@ export class SidebarComponent implements OnInit {
 
   filtrosOpen=filtros.fecha;
   filter="";
-  constructor( private _QlikConnection: ConnectionQlikService) { }
+  selecciones=[];
 
-  ngOnInit(): void {
+  constructor( private _QlikConnection: ConnectionQlikService,
+    private _ComunService: ComunesService) { }
+
+  async ngOnInit(){
+    this.getSelecciones();
   }
 
   expandir(){
@@ -54,37 +59,62 @@ export class SidebarComponent implements OnInit {
   }
 
   loadFilter(filtro){
+    let icons = document.getElementsByClassName("fa-caret-right");
+    for (let i = 0; i < icons.length; i++) {
+      let icon = icons[i] as HTMLInputElement;
+      icon.style.transform = "rotate(0deg)";
+    }
+
 
     if(this.filter!=filtro){
 
       this.filter=filtro;
+      let icon;
       switch(filtro){
         case "fecha":
           this.filtrosOpen=filtros.fecha;
+          icon = icons[0] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
         case "ventas":
           this.filtrosOpen=filtros.ventas;
+          icon = icons[1] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
         case "centros":
           this.filtrosOpen=filtros.centros;
+          icon = icons[2] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
        case "productos":
           this.filtrosOpen=filtros.productos;
+          icon = icons[3] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
         case "clientesdb":
           this.filtrosOpen=filtros.clientesdb;
+          icon = icons[4] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
           case "clientesms":
           this.filtrosOpen=filtros.clientesms;
+          icon = icons[5] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
         case "clientesn":
           this.filtrosOpen=filtros.clientesn;
+          icon = icons[6] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break;
         case "clientess":
           this.filtrosOpen=filtros.clientess;
+          icon = icons[7] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break; 
         case "empleados":
           this.filtrosOpen=filtros.empleados;
+          icon = icons[8] as HTMLInputElement;
+          icon.style.transform = "rotate(90deg)";
         break; 
       }
 
@@ -95,4 +125,20 @@ export class SidebarComponent implements OnInit {
     }
     
   }
+
+  async getSelecciones(){
+
+    //recuperar selecciones
+    this.selecciones.pop();
+     let cosas = await this._QlikConnection.getSelecciones();
+     cosas.forEach((cosa:any) => {
+     this.selecciones.push(cosa.fieldName);
+       
+     });
+    //pasar selecciones a mi array
+    console.log(this.selecciones);
+    
+/*     this._ComunService.selecciones.push(this.selecciones[0]); */
+  }
+
 }

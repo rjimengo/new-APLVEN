@@ -43,10 +43,14 @@ export class ConnectionQlikService {
   }
 
   getObject(id, value){
+    //comprobar si esta cargado en localStorage
+
+
     this.qApp.getObject(id, value);
+    
     let elem = document.getElementById(id) as HTMLInputElement;   
     if(elem){
-      elem.innerHTML=`<div class="spinner-grow spinner-grow-sm text-info" role="status">
+      elem.innerHTML=`<div class="spinner-grow spinner-grow-sm text-secondary" role="status">
                       <span class="sr-only">Loading...</span>
                   </div>`;      
       elem.setAttribute("qlikid", value);
@@ -75,6 +79,15 @@ export class ConnectionQlikService {
 
   resize(){
     this.globals.qlik.resize();
+  }
+
+  async getSelecciones(){
+    if(localStorage.getItem('appId')){
+      await this.qlikConnection(localStorage.getItem('appId'));
+      let selecciones = this.qApp.selectionState().selections;
+      console.log("selecciones", selecciones);
+      return selecciones;
+    }
   }
 
 }
