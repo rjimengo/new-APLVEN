@@ -18,7 +18,11 @@ export class SidebarComponent implements OnInit {
     private _ComunService: ComunesService) { }
 
   async ngOnInit(){
-    this.getSelecciones();
+    //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
+    setTimeout(async () => {
+      await this._QlikConnection.getSelecciones();
+      this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x); 
+    }, 5000);
   }
 
   expandir(){
@@ -124,21 +128,6 @@ export class SidebarComponent implements OnInit {
       }
     }
     
-  }
-
-  async getSelecciones(){
-
-    //recuperar selecciones
-    this.selecciones.pop();
-     let cosas = await this._QlikConnection.getSelecciones();
-     cosas.forEach((cosa:any) => {
-     this.selecciones.push(cosa.fieldName);
-       
-     });
-    //pasar selecciones a mi array
-    console.log(this.selecciones);
-    
-/*     this._ComunService.selecciones.push(this.selecciones[0]); */
   }
 
 }

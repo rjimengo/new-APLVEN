@@ -17,7 +17,9 @@
       <p class="seleccionesLabel m-3"> <i class="far fa-check-square m-1"></i>Selecciones<i class="fa fa-eraser"></i></p> 
         <div id="selecciones">
           <ul class="text-light p-2" *ngIf="selecciones">
-            <li *ngFor="let seleccion of selecciones;"> {{seleccion}}</li>
+            <li *ngFor="let seleccion of selecciones;" > 
+              <div id="sel{{seleccion.fieldName | lowercase}}" style="width: 150px !important; height: 20px;" ></div>
+            </li>
           </ul>
 
         </div>
@@ -36,7 +38,7 @@
               
                   <div id="collapseFecha" class="collapse" aria-labelledby="headingFecha" data-parent="#accordionFiltros">
                     <div *ngIf="filter == 'fecha'">
-                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body" (click)="getSelecciones()"> </div>
+                      <div *ngFor="let filtro of filtrosOpen;" id="{{filtro.div}}" class="card-body"> </div>
                     </div>
                   </div>
                 </div>

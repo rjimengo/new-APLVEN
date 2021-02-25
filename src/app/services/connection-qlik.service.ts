@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { from, fromEvent, Observable, of, Subject } from 'rxjs';
+import { filtros } from 'src/config/ventasGlobalIDs';
 import {configQlik} from '../../config/config';
 
 @Injectable({
@@ -8,18 +10,31 @@ export class ConnectionQlikService {
 
   globals = {
     qlik: null,
-    resize: null
+    resize: null,
+    selState: null
   };
 
   qApp=null;
   static globals= {
     qlik: null,
-    resize: null
+    resize: null,
+    selState: null
   };
+
+  selecciones$;
+  selecciones=[];
+  seleccionesPrevias=[];
+
+  contadorselState=0;
+  contadorseleccionesPrevias=0;
 
  constructor() { }
 
   qlikConnection(appId){
+
+
+
+
     if(appId){
       if(this.qApp==null){
 
@@ -43,9 +58,6 @@ export class ConnectionQlikService {
   }
 
   getObject(id, value){
-    //comprobar si esta cargado en localStorage
-
-
     this.qApp.getObject(id, value);
     
     let elem = document.getElementById(id) as HTMLInputElement;   
@@ -81,13 +93,66 @@ export class ConnectionQlikService {
     this.globals.qlik.resize();
   }
 
-  async getSelecciones(){
+   async getSelecciones(){
     if(localStorage.getItem('appId')){
       await this.qlikConnection(localStorage.getItem('appId'));
-      let selecciones = this.qApp.selectionState().selections;
-      console.log("selecciones", selecciones);
-      return selecciones;
+
+      this.selecciones$ = of(this.qApp.selectionState().selections);
+
+
+
+
+      setInterval(() => {
+        
+        let refresh=false;
+        let contador2=0;
+        
+
+        
+        this.globals.selState.selections.forEach(sel => {
+          let elem = document.getElementById("sel" +sel.fieldName.toLowerCase()) as HTMLInputElement;  
+          if(elem && !elem.getAttribute("qlikid")){
+            refresh=true;
+            console.log("refresh");
+          } 
+          contador2+=sel.selectedCount;
+        });
+        
+        let contador=0;
+        this.seleccionesPrevias.forEach(sel => {
+          contador+=sel.selectedCount;
+        });
+
+        if(refresh || (this.globals.selState.selections.length != this.seleccionesPrevias.length) || (contador != contador2)){
+          
+          this.seleccionesPrevias=[];
+
+          this.globals.selState.selections.forEach(sel => {
+            this.seleccionesPrevias.push(sel);
+          });
+          console.log("cambio");
+          
+          //Obtener el id del filtro teniendo el DIVid
+          Object.values(filtros).forEach(filtro => {
+            for (let i = 0; i < filtro.length; i++) {  
+    
+              this.seleccionesPrevias.forEach(seleccion => {
+                
+                if(seleccion.fieldName.toLowerCase() == filtro[i].div){
+                  this.getObject("sel" +seleccion.fieldName.toLowerCase(), filtro[i].id);
+                }
+              });
+    
+            }  
+          });
+
+        } 
+      }, 800);  
+      
     }
+    
+    return this.selecciones$;
   }
+
 
 }

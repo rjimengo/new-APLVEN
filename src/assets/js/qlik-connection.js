@@ -1,6 +1,7 @@
 const globalsJS = {
   qlik: null,
   resize: null,
+  selState: null
 };
 
 /* var appId= "93026550-480f-4bef-ad64-14aa46bc4ae2"; */
@@ -76,6 +77,19 @@ const qApp = async (config, globals, appId) => {
           });
         //{host: "63.35.31.78",prefix: "/",port: 80,isSecure: false } reload
           const app = q.openApp(appId,  {id: appId, host: config.host, prefix: prefix, port: config.port, isSecure: config.isSecure});
+
+          // create an object
+          globalsJS.selState = app.selectionState();
+          var listener = function() {
+            //alert('Back count:' + globalsJS.selState.backCount);
+            //console.log("selecciones int", globalsJS.selState);
+            //unregister the listener when no longer notification is needed.
+             //globalsJS.selState.OnData.unbind( listener );
+          };
+          //bind the listener
+          globalsJS.selState.OnData.bind( listener );
+
+
           resolve(app, q);
 
           app.on("error", function(error) {

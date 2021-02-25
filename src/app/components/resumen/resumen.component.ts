@@ -8,7 +8,6 @@ import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs'
   styleUrls: ['./resumen.component.css']
 })
 
-
 export class ResumenComponent implements OnInit {
   
   metric:string = "Número";
@@ -24,14 +23,14 @@ export class ResumenComponent implements OnInit {
     private _QlikConnection: ConnectionQlikService,
     private _ComunService: ComunesService) { }
   
-  
   async ngOnInit() {
     this.cargarDatos();
-    this.radioButtons();
+    this.radioButtons();   
+    
   }
 
   cargarDatos(){
-
+        
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {
       this._QlikConnection.getObject(sales[i].div, sales[i].id);
@@ -44,18 +43,6 @@ export class ResumenComponent implements OnInit {
     for (var i = 0; i < netos.length; i++) {
       this._QlikConnection.getObject(netos[i].div, netos[i].id);
     }
-    
-
-/*  //Mostrar grafico
-    this._QlikConnection.getObject("sales-chart", 'kmVkg');
-
-
-    //Mostrar KPI
-    this._QlikConnection.getObject("sales", 'mJFNV');
-    
-    
-    //Mostrar Filtro
-    this._QlikConnection.getObject("LB03", 'nkPmQA');  */
 
   }
 
@@ -187,8 +174,6 @@ export class ResumenComponent implements OnInit {
       }
       this._QlikConnection.resize();
     },100);
-
-
 
   }
 
