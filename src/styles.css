@@ -1,14 +1,13 @@
 /* FILTROS QLIK*/
 .title-wrapper{
     color: white !important;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: bold;
     line-height: 16px;
-    font-size: 13px;
-    font-weight: normal;
     border: none !important;
+}
+/* Fuente del filtro */
+.qv-collapsed-listbox .title-wrapper .title {
+    font-size: 12px !important;
+    font-weight: normal !important;
 }
 .qv-collapsed-listbox {
     height: 24px;

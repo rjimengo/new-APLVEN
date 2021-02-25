@@ -109,6 +109,10 @@
   padding-bottom: 0;
 }
 
+#selecciones .col-1:hover{
+  cursor: pointer;
+  color: rgb(206, 209, 0);
+}
 
 
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */

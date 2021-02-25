@@ -23,24 +23,19 @@ export class ConnectionQlikService {
   };
 
   selecciones$;
-  selecciones=[];
-  seleccionesPrevias=[];
-
-  contadorselState=0;
-  contadorseleccionesPrevias=0;
 
  constructor() { }
 
   qlikConnection(appId){
+
+    //Listener que pasaremos al iniciar qlik y, cuando se cambie algun dato de qlik, se ejecutara esta funcion
     var listener = function() {
-      console.log("escuchooo");
           //Obtener el id del filtro teniendo el DIVid
           Object.values(filtros).forEach(filtro => {
             for (let i = 0; i < filtro.length; i++) {  
               ConnectionQlikService.globals.selState.selections.forEach(seleccion => {
                  if(seleccion.fieldName.toLowerCase() == filtro[i].div){
                    setTimeout(() => {
-                     console.log("div por qlik");
                      ConnectionQlikService.qApp.getObject("sel" +seleccion.fieldName.toLowerCase(), filtro[i].id);
                    }, 500);
                 } 
@@ -109,55 +104,5 @@ export class ConnectionQlikService {
   resize(){
     this.globals.qlik.resize();
   }
-
-   async getSelecciones(){
-    /* if(localStorage.getItem('appId')){
-      await this.qlikConnection(localStorage.getItem('appId'));
-
-      this.selecciones$ = of(this.qApp.selectionState().selections);
-
-
-
-
-      setInterval(() => {
-        
-        let refresh=false;
-        let contador2=0;
-        
-
-        
-        this.globals.selState.selections.forEach(sel => {
-          let elem = document.getElementById("sel" +sel.fieldName.toLowerCase()) as HTMLInputElement;  
-          if(elem && !elem.getAttribute("qlikid")){
-            refresh=true;
-            console.log("refresh");
-          } 
-          contador2+=sel.selectedCount;
-        });
-        
-        let contador=0;
-        this.seleccionesPrevias.forEach(sel => {
-          contador+=sel.selectedCount;
-        });
-
-        if(refresh || (this.globals.selState.selections.length != this.seleccionesPrevias.length) || (contador != contador2)){
-          
-          this.seleccionesPrevias=[];
-
-          this.globals.selState.selections.forEach(sel => {
-            this.seleccionesPrevias.push(sel);
-          });
-          console.log("cambio");
-          
-
-
-        } 
-      }, 800);  
-      
-    }
-    
-    return this.selecciones$; */
-  }
-
 
 }
