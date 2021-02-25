@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { filtros } from 'src/config/ventasGlobalIDs';
@@ -19,10 +20,13 @@ export class SidebarComponent implements OnInit {
 
   async ngOnInit(){
     //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
-    setTimeout(async () => {
-      await this._QlikConnection.getSelecciones();
-      this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x); 
+    setTimeout(() => {
+      this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x);
+      
     }, 5000);
+    setInterval(() => {
+    }, 200);
+
   }
 
   expandir(){

@@ -15,6 +15,7 @@ export class ConnectionQlikService {
   };
 
   qApp=null;
+  static qApp=null;
   static globals= {
     qlik: null,
     resize: null,
@@ -31,18 +32,34 @@ export class ConnectionQlikService {
  constructor() { }
 
   qlikConnection(appId){
+    var listener = function() {
+      console.log("escuchooo");
+          //Obtener el id del filtro teniendo el DIVid
+          Object.values(filtros).forEach(filtro => {
+            for (let i = 0; i < filtro.length; i++) {  
+              ConnectionQlikService.globals.selState.selections.forEach(seleccion => {
+                 if(seleccion.fieldName.toLowerCase() == filtro[i].div){
+                   setTimeout(() => {
+                     console.log("div por qlik");
+                     ConnectionQlikService.qApp.getObject("sel" +seleccion.fieldName.toLowerCase(), filtro[i].id);
+                   }, 500);
+                } 
+              });  
+            }  
+          });
+    };
 
-
-
-
+    
     if(appId){
       if(this.qApp==null){
 
         return new Promise((resolve) => {
           import('./../../assets/js/qlik-connection.js').then(async file => {
-            this.qApp = await file.default.qApp(configQlik, this.globals, appId);
+            this.qApp = await file.default.qApp(configQlik, this.globals, appId, listener);
             this.globals = await file.default.q;
             ConnectionQlikService.globals =  this.globals;
+            ConnectionQlikService.qApp =  this.qApp;
+            this.selecciones$ = of(this.globals.selState.selections);
             console.log("Qlik:  ", this.qApp);
             resolve(this.qApp);
           }​​​​​​​);
@@ -94,7 +111,7 @@ export class ConnectionQlikService {
   }
 
    async getSelecciones(){
-    if(localStorage.getItem('appId')){
+    /* if(localStorage.getItem('appId')){
       await this.qlikConnection(localStorage.getItem('appId'));
 
       this.selecciones$ = of(this.qApp.selectionState().selections);
@@ -132,26 +149,14 @@ export class ConnectionQlikService {
           });
           console.log("cambio");
           
-          //Obtener el id del filtro teniendo el DIVid
-          Object.values(filtros).forEach(filtro => {
-            for (let i = 0; i < filtro.length; i++) {  
-    
-              this.seleccionesPrevias.forEach(seleccion => {
-                
-                if(seleccion.fieldName.toLowerCase() == filtro[i].div){
-                  this.getObject("sel" +seleccion.fieldName.toLowerCase(), filtro[i].id);
-                }
-              });
-    
-            }  
-          });
+
 
         } 
       }, 800);  
       
     }
     
-    return this.selecciones$;
+    return this.selecciones$; */
   }
 
 

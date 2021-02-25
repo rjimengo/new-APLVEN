@@ -39,7 +39,7 @@ const loadCapabilityApis = async (config) => {
 };
 
 
-const qApp = async (config, globals, appId) => {
+const qApp = async (config, globals, appId, listener) => {
   try {
     await loadCapabilityApis(config);
     const prefix = (config.prefix !== '') ? `/${config.prefix}/` : '/';
@@ -80,12 +80,6 @@ const qApp = async (config, globals, appId) => {
 
           // create an object
           globalsJS.selState = app.selectionState();
-          var listener = function() {
-            //alert('Back count:' + globalsJS.selState.backCount);
-            //console.log("selecciones int", globalsJS.selState);
-            //unregister the listener when no longer notification is needed.
-             //globalsJS.selState.OnData.unbind( listener );
-          };
           //bind the listener
           globalsJS.selState.OnData.bind( listener );
 
