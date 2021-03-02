@@ -12,3 +12,5 @@ export var configQlik = {
     vidacaixa : "93026550-480f-4bef-ad64-14aa46bc4ae2",
     segurcaixa : "93026550-480f-4bef-ad64-14aa46bc4ae2",
   }
+
+  export var urlAyuda = "http://localhost:4200/stw5/gedged/public/html/ca/2/24/111224.html";

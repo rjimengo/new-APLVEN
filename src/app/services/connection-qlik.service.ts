@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, fromEvent, Observable, of, Subject } from 'rxjs';
 import { filtros } from 'src/config/ventasGlobalIDs';
 import {configQlik} from '../../config/config';
+import { FiltersComponent } from '../shared/filters/filters.component';
 
 @Injectable({
   providedIn: 'root'

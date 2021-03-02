@@ -11,3 +11,86 @@ i:hover{
 .dropdown{
     display: inline;
 }
+
+.disabled{
+    color: grey;
+}
+.disabled:hover{
+    cursor:default;
+    color: grey;
+}
+
+.dropdown{
+    cursor: default;
+}
+.dropdown-menu{
+    left: -150px;
+}
+.dropdown-bookmark{
+    width: 270px;
+    padding-top: 5px;
+}
+.dropdown-bookmark input{
+    height: 30px;
+    display: inline-block;
+    margin: 6px;
+    font-size: 12px;
+    font-style: oblique;
+}
+.dropdown-bookmark input:focus {
+    box-shadow: none;
+    border: 2px solid #1c82a8;
+}
+.fa-check-square{
+    font-size: 28px;
+    color: #17a2b8;
+}
+
+#bookmark-create-btn{
+    width: 34px;
+    height: 30px;
+    padding: 4px;
+    margin-top: -3px;
+}
+
+
+.bookmark-header{
+    padding-left: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    display: block;
+}
+
+.labelMarcadores{
+    font-size: 12px;
+    font-weight: bold;
+    color: grey;
+}
+
+.fa-plus-square, .fa-minus-square{
+    float: right;
+    color: grey;
+    font-size: 12px;
+    cursor: pointer;
+}
+.fa-minus-square{
+    display: none;
+}
+#bookmark-add-container{
+    border-bottom: 1px solid rgb(201, 201, 201);
+    padding-left: 4px;
+    margin-bottom: 4px;
+    display: none;
+}
+
+.bookmark-names{
+    display: inline;
+    font-size: 12px;
+    color: grey;
+    margin-left: 4px;
+}
+.fa-trash-alt{
+    float: right;
+    font-size: 12px;
+    display: none;
+}

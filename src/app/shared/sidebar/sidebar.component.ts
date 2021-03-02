@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
     //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
     setTimeout(() => {
       this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x);
-    }, 5000);
+    }, 8000);
     setInterval(() => {
     }, 200);
 
@@ -136,5 +136,10 @@ export class SidebarComponent implements OnInit {
   removeFilter(filtro){
     this._QlikConnection.qApp.field(filtro).clear();
   }
+  clearSelections(){
+    this._QlikConnection.qApp.selectionState().clearAll();
+  }
+  
+  //back y forward en filters.ts
 
 }

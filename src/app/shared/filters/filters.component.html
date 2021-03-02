@@ -1,8 +1,48 @@
 <i class="fa fa-filter"></i>
-<i class="fa fa-reply"></i>
-<i class="fa fa-share"></i>
-<i class="fa fa-question-circle"></i>
-<i class="fa fa-bookmark"></i>
+<i class="fa fa-reply" (click)="backFilter()" title="Retroceder filtro" [ngClass]="{'disabled': backDisabled,'': !backDisabled}"></i>
+<i class="fa fa-share" (click)="forwardFilter()" title="Avanzar filtro" [ngClass]="{'disabled': forwardDisabled,'': !forwardDisabled}"></i>
+<i class="fa fa-question-circle" title="Abrir Manual de Ayuda" (click)="openHelp()"></i>
+
+
+<div class="dropdown">
+  <i class="fa fa-bookmark" title="Ver Mis Marcadores" (click)="openCloseBookmark()"></i>
+  <div class="dropdown-menu dropdown-bookmark" (mouseleave)="onBookmarkContainerLeave()">
+    <div class="bookmark-header">
+      <span class="labelMarcadores">Marcadores:</span>
+        <i class="far fa-plus-square" title="Crear Marcador" (click)="openAddBookmark()"></i>
+        <i class="far fa-minus-square" title="Cerrar formulario" (click)="closeAddBookmark()"></i>
+    </div>
+
+    <div id="bookmark-add-container">
+      <form>
+        <div class="form-row">
+          <div class="col-9">
+            <input class="form-control" placeholder="Nombre..." type="search" autocomplete="off" >
+          </div>
+          <div class="col-3">
+            <i class="fas fa-check-square" title="Añadir Marcador"></i>
+          </div>
+        </div>
+      </form>
+
+<!--       <input class="form-control" placeholder="Nombre..." type="search" autocomplete="off" >
+      <div class="boton-check"></div> -->
+      <!-- <i class="fas fa-check-square" title="Añadir Marcador"></i> -->
+    </div>
+
+    <div id="bookmark-list" *ngFor="let bookmark of bookmarkData; let i = index">
+      <div class="bookmarkItem" (mouseenter)="onRemoveBookmarkEnter(i)" (mouseleave)="onRemoveBookmarkLeave(i)">
+        <p class="bookmark-names" title="Cargar {{bookmark.name}}">{{bookmark.name}}</p>
+        <i class="far fa-trash-alt" (click)="removeBookmark(bookmark.id)" title="Borrar {{bookmark.name}}"></i>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
 <div class="dropdown">
     <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

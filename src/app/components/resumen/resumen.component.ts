@@ -97,7 +97,7 @@ export class ResumenComponent implements OnInit {
 
     var unit = metric === 'Número' ? '#' : '€';
      
-    this._QlikConnection.setNumValue('vL.IndicadorSel', id);
+    //this._QlikConnection.setNumValue('vL.IndicadorSel', id);
     this._QlikConnection.setStringValue('vL.IndicadorSelDesc', metric + ' (' + unit + ')');
     this._QlikConnection.setStringValue('vL.IndicadorSelAbr', abr);
     this._QlikConnection.setStringValue('vL.FormatoIndicador', '#.##0 ' + unit);
