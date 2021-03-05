@@ -21,3 +21,136 @@
 .qv-collapsed-listbox {
     border: none;
 } 
+
+
+/* PESTAÑAS*/
+
+.contenedor{
+    margin: 25px;
+    margin-top: 10px;
+}
+
+.form-check{
+    display: inline-flex;
+    margin-right: 6px;
+}
+.graficas label{
+    color: black; 
+    font-size: 1.3em; 
+    font-weight: bold;
+}
+
+.grafica{
+    height: 37em;
+}
+.cifras{
+    height: 1.9em; 
+    font-size: 1.18em !important; 
+    padding: 0; 
+    text-align: center;
+}
+
+.cantidades{
+    font-weight: bold;
+    color: black !important;
+}
+
+.graficas span{
+    font-size: 1.1em; 
+    font-weight: bold;
+    text-align: left;
+}
+
+.icons-graf i{
+    color: rgb(200, 200, 200);
+}
+.icons-graf i:hover{
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+    padding: 4px;
+}
+
+.medias{
+    font-size:1.1em !important;
+    color: black; 
+}
+
+.panel-xl{
+    top: 161px;
+    z-index: 2;
+    position:  fixed;
+    background: rgb(255, 255, 255);
+
+    width: 100% !important;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+    transition: 0.5s;
+
+    padding-left: 225px;
+    padding-right: 15px;
+
+
+}
+
+@media (max-width: 992px) {
+    .panel-xl{
+        top: 46px;
+    } 
+} 
+/* FIN PESTAÑAS*/
+
+
+
+.dimensiones{
+    padding: 8px 0 0 30px;
+}
+.btnDimension{
+    width:11.11%;
+    font-weight: bold;
+    height: 40px;
+    font-size: 13px;
+    color: black;
+    background-color: rgb(223, 223, 223);
+    border: none;
+    border-right: 2px solid white;
+    border-radius: 2px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.btnDimension:hover{
+    border-right: 2px solid white;
+    background-color: rgb(172, 172, 172);
+    color: black;
+
+}
+.btnactive, .btnactive:focus{
+    background-color: rgb(38, 144, 183);
+    box-shadow: none;
+    color: white;
+    border-right: 2px solid white;
+
+}
+.segundaLineaBtns{
+    padding-top: 12px;
+    padding-left: 15px;
+}
+
+.btnSegundaLinea{
+    min-width: 100px;
+    font-weight: bold;
+    height: 30px;
+    font-size: 13px;
+    color: black;
+    background-color: rgb(223, 223, 223);
+    border: none;
+    border-radius: 2px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.btnSegundaLinea:hover{
+    background-color: rgb(172, 172, 172);
+    color: black;
+}

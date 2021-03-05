@@ -32,7 +32,7 @@
     max-width: 175px;
     border-bottom: 1px solid white;
     padding-bottom: 8px;
-    margin-top: 0 !important;
+    margin: 0 16px 4px 16px !important;
   }
 
   #selecciones{
@@ -75,7 +75,9 @@
   margin-left: 60px;
 }
 /* Filtros */
-
+.ulsidebar{
+  padding: 0 8px 8px 8px;
+}
 #filtros{
   overflow-y:scroll;
   max-height: 48%;

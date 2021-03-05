@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { urlAyuda } from 'src/config/config';
 
@@ -12,7 +13,8 @@ export class FiltersComponent implements OnInit {
   forwardDisabled=true;
   backDisabled=true;
 
-  bookmarkData=[{name:"nombre",id:"001"},{name:"Rutas de otro",id:"002"}];
+  static bookmarkDataAux;
+  bookmarkData;
 
   constructor( private _QlikConnection: ConnectionQlikService) { }
 
@@ -20,7 +22,13 @@ export class FiltersComponent implements OnInit {
     //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
     setTimeout(() => {
       this.disabled();
+      this.updateBookmarkData();      
+
     }, 8000);
+    setInterval(() => {
+      if(this._QlikConnection.qApp)
+        this.disabled();
+    }, 1000);
   }
 
   backFilter(){
@@ -34,6 +42,8 @@ export class FiltersComponent implements OnInit {
   }
 
   forwardFilter(){
+    console.log("foward");
+    
     if(!this.forwardDisabled){
       var selState = this._QlikConnection.qApp.selectionState();
       if (selState.forwardCount > 0) {
@@ -42,6 +52,7 @@ export class FiltersComponent implements OnInit {
     }
     this.disabled();
   }
+
 
   disabled(){
     var selState = this._QlikConnection.qApp.selectionState();
@@ -66,6 +77,7 @@ export class FiltersComponent implements OnInit {
 
   /* Bookmark */
   updateBookmarkData() {
+    //Ordenar alfabeticamente           TODO
     this._QlikConnection.qApp.getList('BookmarkList', function (reply) {
         var tempBookmarkData = [];
 
@@ -75,8 +87,39 @@ export class FiltersComponent implements OnInit {
                 name: reply.qBookmarkList.qItems[i].qData.title
             });
         }
-        this.bookmarkData = tempBookmarkData;
+        FiltersComponent.bookmarkDataAux=tempBookmarkData;
+
     });
+    setTimeout(() => {
+      this.bookmarkData = FiltersComponent.bookmarkDataAux;
+    }, 400);
+
+}
+
+createBookmark(name) {
+
+  if (name && name != '') {
+      console.log('Selections before create bookmark: ', this._QlikConnection.qApp.selectionState().selections);
+      this._QlikConnection.qApp.bookmark.create(name, '').then(function (reply) {
+          
+      });
+  } 
+  this.updateBookmarkData();
+}
+
+removeBookmark(bookmarkId) {
+  this._QlikConnection.qApp.bookmark.remove(bookmarkId);
+  this.updateBookmarkData();
+}
+
+updateBookmark(bookmark){
+  this.removeBookmark(bookmark.id);
+  this.createBookmark(bookmark.name);
+}
+loadBookmark(bookmarkId) {
+  this._QlikConnection.qApp.bookmark.apply(bookmarkId);
+  this.disabled();
+
 }
 
 openAddBookmark(){
@@ -104,6 +147,8 @@ closeAddBookmark(){
 }
 
 openCloseBookmark(){
+  this.updateBookmarkData();
+  
   var element = document.getElementsByClassName("dropdown-bookmark")[0] as HTMLElement;
 
   if(element.classList.contains("show")){
@@ -111,11 +156,6 @@ openCloseBookmark(){
   }else{
     element.classList.add("show");
   }
-
-}
-
-removeBookmark(id){
-console.log("bookmark id: ", id);
 
 }
 
@@ -129,11 +169,15 @@ onBookmarkContainerLeave(){
 
 onRemoveBookmarkEnter(i){
   var btnTrash = document.getElementsByClassName("fa-trash-alt")[i] as HTMLInputElement;
+  var btnSave = document.getElementsByClassName("fa-save")[i] as HTMLInputElement;
   btnTrash.style.display="block";
+  btnSave.style.display="block";
 }
 onRemoveBookmarkLeave(i){
   var btnTrash = document.getElementsByClassName("fa-trash-alt")[i] as HTMLInputElement;
+  var btnSave = document.getElementsByClassName("fa-save")[i] as HTMLInputElement;
   btnTrash.style.display="none";
+  btnSave.style.display="none";
 
 }
 

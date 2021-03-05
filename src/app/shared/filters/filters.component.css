@@ -89,8 +89,16 @@ i:hover{
     color: grey;
     margin-left: 4px;
 }
-.fa-trash-alt{
+.fa-trash-alt, .fa-save{
     float: right;
     font-size: 12px;
     display: none;
+}
+
+.dropdown-divider{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.bookmark-names:hover{
+    cursor: pointer;
 }

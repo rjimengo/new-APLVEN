@@ -13,7 +13,10 @@ export class MenuComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(){
-    console.log("oninit");
+    let url = window.location.pathname.split("/");
+    if(url[url.length-1] != ""){
+      this.page=url[url.length-1];
+    }
     
     this.app = localStorage.getItem('app'); 
   }

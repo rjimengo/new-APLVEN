@@ -16,7 +16,7 @@
     <div id="abierto">
       <p class="seleccionesLabel m-3"> <i class="far fa-check-square m-1"></i>Selecciones<i class="fa fa-eraser" (click)="clearSelections()" title="Borrar todos los filtros"></i></p> 
         <div id="selecciones">
-          <ul class="text-light p-2" *ngIf="selecciones">
+          <ul class="text-light ulsidebar" *ngIf="selecciones.length > 0">
             <li *ngFor="let seleccion of selecciones;" > 
               <div class="row">
                 <div class="col-8 pr-0"><div id="sel{{seleccion.fieldName | lowercase}}" style="width: 150px !important; height: 20px;" ></div></div>
@@ -28,7 +28,7 @@
               
             </li>
           </ul>
-          <p *ngIf="selecciones.length == 0" class="text-light pl-3">Nada Seleccionado</p>
+          <p *ngIf="selecciones.length == 0" class="text-light pl-3 mt-3">Nada Seleccionado</p>
 
         </div>
         <p class="filtrosLabel m-3"> <i class="far fa-bookmark m-1"></i>Filtros</p>

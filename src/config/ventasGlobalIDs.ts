@@ -488,3 +488,102 @@ export var filtros={
   clientess: clientess,
   empleados: empleados
 }
+
+export var nivelesApp=[
+  {
+  Id:10,
+  Field:'',
+  },
+  {
+  Id:20,
+  Field:'DT',
+  },
+  {
+  Id:21,
+  Field:'DG',
+  },
+  {
+  Id:22,
+  Field:'DAN',
+  },
+  {
+  Id:23,
+  Field:'OFICINA',
+  },
+  {
+  Id:24,
+  Field:'OFICINAS VENTANILLA',
+  },
+  {
+  Id:30,
+  Field:'PRODUCTO NIVEL 600',
+  },
+  {
+  Id:31,
+  Field:'PRODUCTO NIVEL 500',
+  },
+  {
+  Id:32,
+  Field:'PRODUCTO NIVEL 400',
+  },
+  {
+  Id:33,
+  Field:'PRODUCTO NIVEL 300',
+  },
+  {
+  Id:34,
+  Field:'PRODUCTO NIVEL 200',
+  },
+  {
+  Id:35,
+  Field:'PRODUCTO NIVEL 100',
+  },
+  {
+  Id:36,
+  Field:'PRODUCTO NIVEL 50',
+  },
+  {
+  Id:40,
+  Field:'AGRUPACION CANAL',
+  },
+  {
+  Id:41,
+  Field:'CANAL',
+  },
+  {
+  Id:50,
+  Field:'NEGOCIO',
+  },
+  {
+  Id:51,
+  Field:'SUBNEGOCIO',
+  },
+  {
+  Id:52,
+  Field:'SUBSUBNEGOCIO',
+  },
+  {
+  Id:80,
+  Field:'SEGMENTO',
+  },
+  {
+  Id:81,
+  Field:'SUBSEGMENTO',
+  },
+  {
+  Id:60,
+  Field:'NIVEL SERVICIO',
+  },
+  {
+  Id:70,
+  Field:'AGENVEN',
+  },
+  {
+  Id:90,
+  Field:'CARGO',
+  },
+  {
+  Id:91,
+  Field:'RESPONSABILIDAD',
+  }
+];
