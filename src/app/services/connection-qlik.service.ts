@@ -78,7 +78,9 @@ export class ConnectionQlikService {
       elem.innerHTML=`<div class="spinner-grow spinner-grow-sm text-secondary" role="status">
                       <span class="sr-only">Loading...</span>
                   </div>`;      
-      elem.setAttribute("qlikid", value);
+      elem.setAttribute("qlikid", value);    
+      console.log("qlikid: " + value);
+        
     }
   }
   setNumValue(value, id){

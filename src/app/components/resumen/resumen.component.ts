@@ -25,7 +25,7 @@ export class ResumenComponent implements OnInit {
   
   async ngOnInit() {
     this.cargarDatos();
-    this._ComunService.radioButtons(null);   
+    this._ComunService.radioButtons(null, null, null, null);   
     this.metric = localStorage.getItem("metric");
     
   }
@@ -48,7 +48,7 @@ export class ResumenComponent implements OnInit {
   }
 
   changeOption(value){
-    this._ComunService.radioButtons(value);
+    this._ComunService.radioButtons(value, null, null, null);
     this.metric = value;
   }
 

@@ -29,7 +29,7 @@ export class ComunesService {
 
   topBottomOpt = ['Top 20', 'Bottom 20'];
 
-  radioButtons(value){
+  radioButtons(value, operation, dimension, employee){
     //Guardar en localStorage el radio1
     if(value)
       localStorage.setItem('optionValue', value);
@@ -57,6 +57,16 @@ export class ComunesService {
         } 
      } 
     }
+
+    let percentage;
+    // Disable % when metric = Margen
+    if (radio == 'Margen') {
+      /* Reset % y poner su checked a false*/
+      percentage = this.initPercentage(radio, operation, dimension, employee, null, true);
+      let percen = document.getElementById("percen") as HTMLInputElement;
+      percen.checked = false;
+    }
+    return percentage;
   }
 
   setMetrica(metric){
@@ -85,19 +95,10 @@ export class ComunesService {
     this._QlikConnection.setStringValue('vL.IndicadorSelDesc', metric + ' (' + unit + ')');
     this._QlikConnection.setStringValue('vL.IndicadorSelAbr', abr);
     this._QlikConnection.setStringValue('vL.FormatoIndicador', '#.##0 ' + unit);
-
-
-    // Disable % when metric = Margen
-    if (metric === 'margen') {
-      /* Reset % */
-      /*$scope.percentage = commonFactory.initPercentage($rootScope.metric, $rootScope.operation, $rootScope.dimension, $rootScope.employee, null, true);
-      $rootScope.percentage = $scope.percentage;
-      $('#percentage').prop('checked', false); */
-   }
   }
 
 
-  radioButtons2(value) {
+  radioButtons2(value, metric, dimension, employee) {
     if(value)
       localStorage.setItem('optionValue2', value);
 
@@ -123,27 +124,24 @@ export class ComunesService {
         } 
      } 
     }
+    let percentage;
+
+    // Disable % when operation = Neto
+    if (radio2 == 'Neto') {
+      /* Reset % y poner su checked a false*/
+      percentage = this.initPercentage(metric, radio2, dimension, employee, null, true);
+      let percen = document.getElementById("percen") as HTMLInputElement;
+      percen.checked = false;
+    }
+    return percentage;
 }
 
 /* Set operation */
 setOperacion (operation) {
-
-    var operationAbr = (operation == 'Cancelaciones') ? 'Cancel' : operation;
-    this._QlikConnection.setStringValue('vL.ClaseVenta', operationAbr);
-
-    // Disable % when operation = Neto
-    if (operation === 'Neto') { //TODO
-        // Reset % 
-/*         $scope.percentage = commonFactory.initPercentage($rootScope.metric, $rootScope.operation, $rootScope.dimension, $rootScope.employee, null, true);
-        $rootScope.percentage = $scope.percentage;
-        $('#percentage').prop('checked', false); */
-    }
-
+  var operationAbr = (operation == 'Cancelaciones') ? 'Cancel' : operation;
+  this._QlikConnection.setStringValue('vL.ClaseVenta', operationAbr);
 
 }
-
-
-
 
   changeView(apartado, vista, chart, table){
     switch(apartado){
@@ -177,24 +175,14 @@ setOperacion (operation) {
           this._QlikConnection.getObject(netos[chart].div, netos[table].id);
         }
       break;
-      case "resumen":
-        if(vista){
-          vista=false;
-          this._QlikConnection.getObject("chart1", resumen.chart1[0]);
-        }
-        else{
-          vista=true;
-          this._QlikConnection.getObject("chart1", resumen.table1[0]);
-        }
-      break;
     }
+
     return vista;
   }
 
   maximizar(max){
 
     max = max ? false : true;
-
 
     setTimeout(()=>{
       let sidebar = document.getElementById("sidebar").style.width;
@@ -233,21 +221,48 @@ setOperacion (operation) {
     let object = vista ? 'table1' : 'chart1';
     let id = 0;
     
-    if (dimensionSel !== 'Sin dimensión') {
-        switch (topBottom) {
-            case null:
-                id = 1;
-                break;
-            case 'Top 20':
-                id = 2;
-                break;
-            case 'Bottom 20':
-                id = 3;
-                break;
-        }
+    if (dimensionSel != 'Sin dimensión') {
+      switch (topBottom) {
+          case null || undefined:
+              id = 1;
+              break;
+          case 'Top 20':
+              id = 2;
+              break;
+          case 'Bottom 20':
+              id = 3;
+              break;
+      }
     }
     
-    this._QlikConnection.getObject(object, objetos[object][id]);
+    this._QlikConnection.getObject("chart1", objetos[object][id]);
+  }
+
+  /* Set bottom chart/table objects dynamically */
+  setObjects_2(vista, dimensionSel, topBottom, objetos, metric, operation) {
+    if (dimensionSel !== 'Sin dimensión') {
+      var object = vista ? 'table2' : 'chart2';
+      var type;
+      var id;
+      switch (topBottom) {
+          case null || undefined:
+              id = 0;
+              break;
+          case 'Top 20':
+              id = 1;
+              break;
+          case 'Bottom 20':
+              id = 2;
+              break;
+      }
+      if (metric != 'Margen' && operation != 'Neto') {
+          type = vista ? 'table2' : 'pieChart';
+      } else {
+          type = vista ? 'table3' : 'bar';
+      }
+      this._QlikConnection.getObject("chart2", objetos[type][id]);
+  }
+    
   }
 
 
@@ -295,12 +310,25 @@ setOperacion (operation) {
     top = tB === 'Top 20' ? 20 : 0;
     bottom = tB === 'Bottom 20' ? 20 : 0;
 
-		console.log('Top: ',top+', Bottom: ',bottom);
-		console.log('tB: ',tB);
-
     this._QlikConnection.setNumValue('vL.TopSel', top);
     this._QlikConnection.setNumValue('vL.BotSel', bottom);
 
     return tB;
   }
+
+  initPercentage(metric, operation, dimension, employee, percentage, reset){
+    var pct = (typeof percentage === 'undefined' || dimension === 'Sin dimensión' || operation === 'Neto' || metric === 'Margen' || employee || reset) ? false : percentage;
+    this.setPercentage(pct);
+    return pct;
+  }
+
+  /* Set the & variable */
+  setPercentage(percentage) {
+    var value = !percentage ? 0 : 1;
+    var valueDesc = !percentage ? '\'\'' : 'Porcentaje';
+    this._QlikConnection.setNumValue('vL.PorcentajeSel', value);
+    this._QlikConnection.setStringValue('vL.PorcentajeSelDesc', valueDesc);
+    return percentage;
+  }
+
 }

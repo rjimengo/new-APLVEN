@@ -131,8 +131,8 @@
         <div class="col-md-1"></div>
         <div class="col-md-3">
             <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
+                <input id="percen" type="checkbox" [disabled]="dimensionSel != ''">
+                <span class="slider round" [style]="{'cursor' : (dimensionSel == '' ? 'pointer' : 'default') }"></span>
               </label>
               <span class="porcentajeLabel">%</span>
         </div>
@@ -140,7 +140,7 @@
     </div>
 
     <div class="graficas" [ngClass]="{'panel': !maxGrafica,'panel-xl': maxGrafica}">
-        <!-- titulo e iconos de grafica cancelaciones -->
+        <!-- grafica top -->
         <div class="row">
             <div class="col-md-6 mt-2 mb-2 p-0">
                 <span></span>
@@ -151,20 +151,20 @@
                 <i [ngClass]="{'fa-window-maximize': !maxGrafica,'fa-window-restore': maxGrafica}" class="far p-2" (click)="maximizar()"></i>
             </div>
         </div>
-        <!-- grafica cancelaciones -->
+        <!-- grafica top -->
         <div #grafica id="chart1" class="grafica"></div>
     </div>
 
 
     <div *ngIf="dimensionSel != 'Sin dimensión'" class="graficas" [ngClass]="{'panel': !maxGrafica,'panel-xl': maxGrafica}">
-        <!-- titulo e iconos de grafica cancelaciones -->
+        <!--  iconos y grafica bottom -->
         <div class="row">
             <div class="col-md-6 mt-2 mb-2 p-0">
                 <span></span>
             </div>
             <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
                 <i class="fa fa-download p-2" (click)="exportExcell(grafica2)"></i>
-                <i [ngClass]="{'fa-table': !vista,'fa-chart-pie': vista}" class="fa p-2" (click)="changeView('resumen2')"></i>
+                <i [ngClass]="{'fa-table': !vistaB,'fa-chart-pie': vistaB}" class="fa p-2" (click)="changeView('resumen_B')"></i>
                 <i [ngClass]="{'fa-window-maximize': !maxGrafica,'fa-window-restore': maxGrafica}" class="far p-2" (click)="maximizar()"></i>
             </div>
         </div>

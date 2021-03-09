@@ -24,6 +24,7 @@ export class EvolucionComponent implements OnInit {
   
   maxGrafica:boolean = false;
   vista:boolean = false;
+  vistaB:boolean = false;
   
   employeeAvg = this._ComunService.employeeAvg;
   employee;
@@ -34,8 +35,8 @@ export class EvolucionComponent implements OnInit {
 
   ngOnInit() {
     this.cargarDatos();
-    this._ComunService.radioButtons(null);   
-    this._ComunService.radioButtons2(null);   
+    this._ComunService.radioButtons(null, this.option, this.dimensionSel, this.employee);   
+    this._ComunService.radioButtons2(null, this.metric, this.dimensionSel, this.employee);   
     this.metric = localStorage.getItem("metric");
 
     //Se obtienen todas las dimensiones, y se inicializa a Sin dimension
@@ -53,6 +54,9 @@ export class EvolucionComponent implements OnInit {
 
     //Se inicializa el employee
     this.employee = this._ComunService.initEmployee(this.employee, this.percentage, false, this.dimensionSel=='Centros');
+
+    //Inicializar porcentaje
+    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, null, true);
   }
 
   cargarDatos(){
@@ -66,12 +70,15 @@ export class EvolucionComponent implements OnInit {
   }
 
   changeOption(value){
-    this._ComunService.radioButtons(value);
+    this.percentage = this._ComunService.radioButtons(value, this.option, this.dimensionSel, this.employee);
     this.metric = value;
+    this.setObjects_2();
   }
+
   changeOption2(value){
-    this._ComunService.radioButtons2(value);
+    this._ComunService.radioButtons2(value, this.metric, this.dimensionSel, this.employee);
     this.option = value;
+    this.setObjects_2();
   }
 
   dimensionSelectedSinDimension(i){
@@ -84,6 +91,7 @@ export class EvolucionComponent implements OnInit {
       this.topBottom = this._ComunService.setTopBottom(null, null);
 
       this.setObjects_1();
+      this.setObjects_2();
     }
   }
 
@@ -98,8 +106,9 @@ export class EvolucionComponent implements OnInit {
       this.employee = this._ComunService.initEmployee(null, this.percentage, true, false);
   }
 
+    //Se carga la grafica top y la grafica bottom tras cambiar la dimension
     this.setObjects_1();
-    //this.setObjects_2(); TODO
+    this.setObjects_2();
   }
 
   dimPreSel(i){
@@ -118,7 +127,7 @@ export class EvolucionComponent implements OnInit {
   topBottomSelected(index) {
     this.topBottom = this._ComunService.setTopBottom(this.topBottom, this.topBottomOpt[index]);    
     this.setObjects_1();
-    /*this.setObjects_2(); */
+    this.setObjects_2(); 
 
 }
 
@@ -126,13 +135,24 @@ export class EvolucionComponent implements OnInit {
 setObjects_1() {
   this._ComunService.setObjects_1(this.vista, this.dimensionSel, this.topBottom, this.objetos);
 }
+/* Set top chart/table1 objects dynamically */
+setObjects_2() {  
+  this._ComunService.setObjects_2(this.vistaB, this.dimensionSel, this.topBottom, this.objetos, this.metric, this.option);
+}
 
   maximizar(){
     this.maxGrafica = this._ComunService.maximizar(this.maxGrafica);
   }
   /* Switch between chart and table view */
   changeView(apartado){  
-    this.vista = this._ComunService.changeView(apartado, this.vista, null, null);    
+    let esB = apartado.split("_");    
+    if(esB.length > 1){ //Si es la grafica de abajo
+      this.vistaB = !this.vistaB;
+      this.setObjects_2();
+    }else{
+      this.vista = !this.vista;
+      this.setObjects_1();
+    }
   }
   
   exportExcell(grafica){
