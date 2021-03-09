@@ -58,8 +58,8 @@ img.img-logo {
 display: inline-block;
 margin-bottom: 0px;
 padding: 10px;
-padding-left: 20px;
-padding-right: 20px;
+padding-left: 12px;
+padding-right: 12px;
 border-bottom: 2px solid #f8f9fa;  
 border-radius: 1px;
 font-size: 14px;
@@ -89,6 +89,9 @@ font-weight: bold;
     flex-direction: row;
     margin-top: 14px;
 } 
+.navbar{
+    padding-right:0;
+}
 
 .form-select{
     padding: 8px;

@@ -79,13 +79,13 @@ export class ResumenComponent implements OnInit {
 
     switch(apartado){
       case "ventas":
-        this.maxVentas = this._ComunService.maximizar(apartado, this.maxVentas);
+        this.maxVentas = this._ComunService.maximizar(this.maxVentas);
       break;
       case "cancelaciones":
-        this.maxCancelaciones = this._ComunService.maximizar(apartado, this.maxCancelaciones);
+        this.maxCancelaciones = this._ComunService.maximizar(this.maxCancelaciones);
       break;
       case "neto":
-        this.maxNeto = this._ComunService.maximizar(apartado, this.maxNeto);
+        this.maxNeto = this._ComunService.maximizar(this.maxNeto);
       break;
     }
 

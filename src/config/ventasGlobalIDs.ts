@@ -587,3 +587,20 @@ export var nivelesApp=[
   Field:'RESPONSABILIDAD',
   }
 ];
+
+/* Indicadores Ventas, Cancelaciones, Neto pestañas Resumen, Terrirorial... */
+export var indicadoresVCN = {
+  ventas: ['sales', '302f45e7-79b1-4b58-bd92-83d8ad3f3f49'],
+  cancelaciones: ['cancellations', '2a00ced0-5234-4fdd-9858-d403e8b64912'],
+  neto: ['net', '4b01b3b7-3fda-419f-af54-94d40dde2486']
+};
+
+/* Resumen  0 sin dimension 1 dimension 2 top 20 3 bottom 20*/
+export var resumen = {
+  chart1: ['00dd0139-898c-44ed-86e2-92354a99e139', 'db0464a6-8a53-4a04-a029-09800a6167ab', 'd9771d14-8db9-4956-a0b3-bfedbe97fd6d', 'aa159665-64cc-47f9-bba8-60debcb058b5'], //Gráfico líneas
+  table1: ['214a6988-57e4-448a-8bb2-5c41b1fb8bb3', '7c3ba521-25db-4199-911a-9f1fa19ab13b', '4ef09030-2b91-4cdb-8111-b390996e48a7', '26373966-7be9-4611-8dfb-e98ab26557e3'], //Tabla gráfico líneas
+  pieChart: ['0c4104f8-4cd2-47a9-9f17-fc18c75417ff', 'edbe15b2-04dd-4ae3-8412-dbc4e41a06b4', 'df302df3-3680-4d3c-83e3-1c7226ec8761'], //Gráfico pastel inferior
+  table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
+  bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
+  table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
+};

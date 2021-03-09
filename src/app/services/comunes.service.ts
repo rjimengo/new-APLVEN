@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {sales, cancelaciones, netos, nivelesApp} from '../../config/ventasGlobalIDs';
+import {sales, cancelaciones, netos, nivelesApp, resumen} from '../../config/ventasGlobalIDs';
 import { ConnectionQlikService } from './connection-qlik.service';
 
 @Injectable({
@@ -26,6 +26,8 @@ export class ComunesService {
   
   niveles = nivelesApp;
   employeeAvg = "Media Empleado";
+
+  topBottomOpt = ['Top 20', 'Bottom 20'];
 
   radioButtons(value){
     //Guardar en localStorage el radio1
@@ -79,7 +81,7 @@ export class ComunesService {
 
     var unit = metric === 'Número' ? '#' : '€';
      
-    //this._QlikConnection.setNumValue('vL.IndicadorSel', id);
+    this._QlikConnection.setNumValue('vL.IndicadorSel', id);
     this._QlikConnection.setStringValue('vL.IndicadorSelDesc', metric + ' (' + unit + ')');
     this._QlikConnection.setStringValue('vL.IndicadorSelAbr', abr);
     this._QlikConnection.setStringValue('vL.FormatoIndicador', '#.##0 ' + unit);
@@ -126,11 +128,11 @@ export class ComunesService {
 /* Set operation */
 setOperacion (operation) {
 
-    var operationAbr = (operation === 'Cancelaciones') ? 'Cancel' : operation;
+    var operationAbr = (operation == 'Cancelaciones') ? 'Cancel' : operation;
     this._QlikConnection.setStringValue('vL.ClaseVenta', operationAbr);
 
     // Disable % when operation = Neto
-    if (operation === 'Neto') {
+    if (operation === 'Neto') { //TODO
         // Reset % 
 /*         $scope.percentage = commonFactory.initPercentage($rootScope.metric, $rootScope.operation, $rootScope.dimension, $rootScope.employee, null, true);
         $rootScope.percentage = $scope.percentage;
@@ -175,24 +177,24 @@ setOperacion (operation) {
           this._QlikConnection.getObject(netos[chart].div, netos[table].id);
         }
       break;
+      case "resumen":
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject("chart1", resumen.chart1[0]);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject("chart1", resumen.table1[0]);
+        }
+      break;
     }
     return vista;
   }
 
-  maximizar(apartado, max){
+  maximizar(max){
 
+    max = max ? false : true;
 
-    switch(apartado){
-      case "ventas":
-        max = max ? false : true;
-      break;
-      case "cancelaciones":
-        max = max ? false : true;
-      break;
-      case "neto":
-        max = max ? false : true;
-      break;
-    }
 
     setTimeout(()=>{
       let sidebar = document.getElementById("sidebar").style.width;
@@ -226,6 +228,30 @@ setOperacion (operation) {
   }
 
 
+/* Set top chart/table1 objects dynamically */
+  setObjects_1(vista, dimensionSel, topBottom, objetos) {
+    let object = vista ? 'table1' : 'chart1';
+    let id = 0;
+    
+    if (dimensionSel !== 'Sin dimensión') {
+        switch (topBottom) {
+            case null:
+                id = 1;
+                break;
+            case 'Top 20':
+                id = 2;
+                break;
+            case 'Bottom 20':
+                id = 3;
+                break;
+        }
+    }
+    
+    this._QlikConnection.getObject(object, objetos[object][id]);
+  }
+
+
+
   setLevel(option){
     let index;
     for (let i = 0; i < this.nivelesDesc.length; i++) {      
@@ -234,7 +260,47 @@ setOperacion (operation) {
         break;
       }
     }
+
+		console.log('Dimension field: ' +  this.niveles[index].Id + ' - ' +  this.niveles[index].Field);
     this._QlikConnection.setNumValue('vL.DimensionSel', this.niveles[index].Id);
     this._QlikConnection.setStringValue('vL.DimensionCampo', this.niveles[index].Field);
+  }
+
+  /* Initialization of the employee's average variable */
+  initEmployee(employee, percentage, reset, centros) {    
+    var empl = (employee == null || percentage || reset || !centros) ? false : employee;    
+    this.setEmployee(empl);
+    return empl;
+  }
+
+  setEmployee(employee){
+
+    /* Set the mployee's average variable */
+    var value = !employee ? 0 : 1;
+    var valueDesc = !employee ? '\'\'' : 'MediaEmpleado';
+    this._QlikConnection.setNumValue('vL.MediaSel', value);
+    this._QlikConnection.setStringValue('vL.MediaSelDesc', valueDesc);
+    console.log("employee: ", employee);
+    
+    return employee;
+  }
+
+  /* Set the Top and Bottom fields */
+  setTopBottom(topBottom, newTopBottom) {
+    let top;
+    let bottom;
+    var tB;
+
+    tB = topBottom === newTopBottom ? null : newTopBottom;
+    top = tB === 'Top 20' ? 20 : 0;
+    bottom = tB === 'Bottom 20' ? 20 : 0;
+
+		console.log('Top: ',top+', Bottom: ',bottom);
+		console.log('tB: ',tB);
+
+    this._QlikConnection.setNumValue('vL.TopSel', top);
+    this._QlikConnection.setNumValue('vL.BotSel', bottom);
+
+    return tB;
   }
 }

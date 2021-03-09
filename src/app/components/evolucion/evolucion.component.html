@@ -25,19 +25,19 @@
             </div>
             <div>
                 <div class="form-check">
-                    <input #radioVen class="form-check-input" type="radio" name="radioOption2" id="radioVentas" checked value="Ventas" (click)="changeOption(radioVen.value)">
+                    <input #radioVen class="form-check-input" type="radio" name="radioOption2" id="radioVentas" checked value="Ventas" (click)="changeOption2(radioVen.value)">
                     <label class="form-check-label" for="radioVentas">
                         Ventas
                     </label>
                 </div>
                 <div class="form-check">
-                    <input #radioCan class="form-check-input" type="radio" name="radioOption2" id="radioCancelaciones" value="Cancelaciones" (click)="changeOption(radioCan.value)">
+                    <input #radioCan class="form-check-input" type="radio" name="radioOption2" id="radioCancelaciones" value="Cancelaciones" (click)="changeOption2(radioCan.value)">
                     <label class="form-check-label" for="radioCancelaciones">
                         Cancelaciones
                     </label>
                 </div>
                 <div class="form-check">
-                    <input #radioNet class="form-check-input" type="radio" name="radioOption2" id="radioNeto" value="Neto" (click)="changeOption(radioNet.value)">
+                    <input #radioNet class="form-check-input" type="radio" name="radioOption2" id="radioNeto" value="Neto" (click)="changeOption2(radioNet.value)">
                     <label class="form-check-label" for="radioNeto">
                         Neto
                     </label>
@@ -82,8 +82,11 @@
 
     </div>
 
-    <div class="row">
-        <!-- Dimensiones -->
+
+    <!-- Dimensiones -->
+
+<!--     <div class="row">
+        
         <div class="col-lg-9 dimensiones">
             <button class="btn btnDimension" *ngFor="let dimension of dimensions; let i = index" (click)="dimensionSelected(i)" [ngClass]="{'btnactive': dimension == dimensionSel}">
                 {{dimension}}
@@ -91,32 +94,82 @@
         </div>
         <div class="col-lg-3">
             <span *ngFor="let option of options; let i = index" (click)="setLevel(option, i)">
-                {{option}}
+                
             </span>
+        </div>
+    </div> -->
+
+    <!-- Dimensiones -->
+     <div class="row">
+        <div class="dimensiones">
+            <ng-container *ngFor="let dimension of dimensions; let i = index">
+                <span class="dropdown">
+                    <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                        {{dimension}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0">
+                        <a class="dropdown-item" *ngFor="let option of options; let y = index" (click)="dimensionSelected(i)" (click)="setLevel(option, y)" [ngClass]="{'btnactive': option == optionSel}">{{option}}</a>
+                    </div>
+                </span>
+            </ng-container>
         </div>
     </div>
 
     <!-- Segunda linea de botones -->
     <div class="row segundaLineaBtns">
         <div class="col-md-3" >
-            <button class="btn btnSegundaLinea" (click)="employeeSelected()">
+            <button class="btn btnSegundaLinea" (click)="employeeSelected()" [disabled]="dimensionSel != 'Centros'" [ngClass]="{'btnactive': employee == true}">
 				{{employeeAvg}}
 			</button>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-3">
-            <button class="btnSegundaLinea">
-				Top
-			</button>
-            <button class="btnSegundaLinea">
-				Bottom
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [disabled]="dimensionSel == 'Sin dimensión'" [ngClass]="{'btnactive': TBopt == topBottom}">
+				{{TBopt}}
 			</button>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-            Porcentaje
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+              <span class="porcentajeLabel">%</span>
         </div>
 
+    </div>
+
+    <div class="graficas" [ngClass]="{'panel': !maxGrafica,'panel-xl': maxGrafica}">
+        <!-- titulo e iconos de grafica cancelaciones -->
+        <div class="row">
+            <div class="col-md-6 mt-2 mb-2 p-0">
+                <span></span>
+            </div>
+            <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                <i class="fa fa-download p-2" (click)="exportExcell(grafica)"></i>
+                <i [ngClass]="{'fa-table': !vista,'fa-chart-pie': vista}" class="fa p-2" (click)="changeView('resumen')"></i>
+                <i [ngClass]="{'fa-window-maximize': !maxGrafica,'fa-window-restore': maxGrafica}" class="far p-2" (click)="maximizar()"></i>
+            </div>
+        </div>
+        <!-- grafica cancelaciones -->
+        <div #grafica id="chart1" class="grafica"></div>
+    </div>
+
+
+    <div *ngIf="dimensionSel != 'Sin dimensión'" class="graficas" [ngClass]="{'panel': !maxGrafica,'panel-xl': maxGrafica}">
+        <!-- titulo e iconos de grafica cancelaciones -->
+        <div class="row">
+            <div class="col-md-6 mt-2 mb-2 p-0">
+                <span></span>
+            </div>
+            <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                <i class="fa fa-download p-2" (click)="exportExcell(grafica2)"></i>
+                <i [ngClass]="{'fa-table': !vista,'fa-chart-pie': vista}" class="fa p-2" (click)="changeView('resumen2')"></i>
+                <i [ngClass]="{'fa-window-maximize': !maxGrafica,'fa-window-restore': maxGrafica}" class="far p-2" (click)="maximizar()"></i>
+            </div>
+        </div>
+        <!-- grafica cancelaciones -->
+        <div #grafica2 id="chart2" class="grafica"></div>
     </div>
 
 
