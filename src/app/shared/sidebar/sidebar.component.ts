@@ -13,15 +13,21 @@ export class SidebarComponent implements OnInit {
   filtrosOpen=filtros.fecha;
   filter="";
   selecciones=[];
+  appLoaded=false;
 
   constructor( private _QlikConnection: ConnectionQlikService,
     private _ComunService: ComunesService) { }
 
   async ngOnInit(){
-    //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
-    setTimeout(() => {
-      this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x);
-    }, 8000);
+
+    //Cuando se termine la conexion con qlik
+    this._QlikConnection.getAppLoaded().subscribe((loaded) => {
+      if(loaded){
+        this.appLoaded=true;
+        this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x);
+      }
+    });
+
     setInterval(() => {
     }, 200);
 

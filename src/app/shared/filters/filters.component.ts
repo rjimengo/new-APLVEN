@@ -19,12 +19,17 @@ export class FiltersComponent implements OnInit {
   constructor( private _QlikConnection: ConnectionQlikService) { }
 
   ngOnInit() {
-    //Cuando se cargue la aplicacion y se quite el loader se lanzara esta funcion
-    setTimeout(() => {
-      this.disabled();
-      this.updateBookmarkData();      
 
-    }, 8000);
+    //Cuando se termine la conexion con qlik
+    this._QlikConnection.getAppLoaded().subscribe((loaded) => {
+      if(loaded){//Si la conexion de la appQlik esta cargada
+        this.disabled();
+        this.updateBookmarkData();
+        console.log("FINISH");
+        
+      }
+    });
+
     setInterval(() => {
       if(this._QlikConnection.qApp)
         this.disabled();

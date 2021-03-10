@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, fromEvent, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, from, fromEvent, Observable, of, Subject } from 'rxjs';
 import { filtros } from 'src/config/ventasGlobalIDs';
 import {configQlik} from '../../config/config';
 import { FiltersComponent } from '../shared/filters/filters.component';
@@ -25,10 +25,24 @@ export class ConnectionQlikService {
 
   selecciones$;
 
- constructor() { }
+  loaded: BehaviorSubject<boolean>;
+
+
+ constructor() { 
+  this.loaded = new BehaviorSubject<boolean>(false);
+ 
+ }
+
+ getAppLoaded(): Observable<boolean> {
+  return this.loaded.asObservable();
+}
+setAppLoaded(newValue): void {
+  this.loaded.next(newValue);
+}
 
   qlikConnection(appId){
 
+    this.setLoader("block");
     //Listener que pasaremos al iniciar qlik y, cuando se cambie algun dato de qlik, se ejecutara esta funcion
     var listener = function() {
           //Obtener el id del filtro teniendo el DIVid
@@ -58,10 +72,13 @@ export class ConnectionQlikService {
             this.selecciones$ = of(this.globals.selState.selections);
             console.log("Qlik:  ", this.qApp);
             resolve(this.qApp);
+            this.setAppLoaded(true);
+            this.setLoader("none"); 
           }​​​​​​​);
         });
   
       }else{
+        this.setLoader("none");
         return this.qApp;
       }
     }else{
@@ -70,6 +87,10 @@ export class ConnectionQlikService {
 
   }
 
+  setLoader(display){
+    let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
+    loaderHTML.style.display=display; 
+  }
   getObject(id, value){
     this.qApp.getObject(id, value);
     
@@ -79,7 +100,6 @@ export class ConnectionQlikService {
                       <span class="sr-only">Loading...</span>
                   </div>`;      
       elem.setAttribute("qlikid", value);    
-      console.log("qlikid: " + value);
         
     }
   }

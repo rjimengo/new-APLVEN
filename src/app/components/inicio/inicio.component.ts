@@ -20,7 +20,7 @@ export class InicioComponent implements OnInit {
 
   async openApp(aplicacion){
     let IDapp;
-    localStorage.setItem('app', aplicacion); 
+    localStorage.setItem('app', aplicacion);  
 
     switch(aplicacion){
       case "ventas":

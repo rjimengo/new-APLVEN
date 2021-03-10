@@ -23,6 +23,7 @@ export class EvolucionComponent implements OnInit {
   level;
   
   maxGrafica:boolean = false;
+  maxGraficaBottom:boolean = false;
   vista:boolean = false;
   vistaB:boolean = false;
   
@@ -46,8 +47,6 @@ export class EvolucionComponent implements OnInit {
     //Se obtienen las opciones de y se inicializa a la primera, Sin dimension
     this.options = this._ComunService.selectors[0];
     this.optionSel = this._ComunService.selectors[0][0];
-    
-    //this.level = this._ComunService.selectors[1];
 
     //Se obtienen los valores de los textos de los botones Top y Bottom
     this.topBottomOpt =this._ComunService.topBottomOpt;
@@ -140,8 +139,15 @@ setObjects_2() {
   this._ComunService.setObjects_2(this.vistaB, this.dimensionSel, this.topBottom, this.objetos, this.metric, this.option);
 }
 
-  maximizar(){
-    this.maxGrafica = this._ComunService.maximizar(this.maxGrafica);
+  maximizar(apartado){
+    switch(apartado){
+      case "graficaTop":
+        this.maxGrafica = this._ComunService.maximizar(this.maxGrafica);
+      break;
+        case "graficaBottom":
+        this.maxGraficaBottom = this._ComunService.maximizar(this.maxGraficaBottom);
+      break;
+    }
   }
   /* Switch between chart and table view */
   changeView(apartado){  
