@@ -19,6 +19,12 @@ import { FiltersComponent } from './shared/filters/filters.component';
 import { SearchComponent } from './shared/search/search.component';
 import { CanActivateAppLoad } from './services/guards/apploaded.guard';
 import { ventasGuard } from './services/guards/ventasGuard.guard';
+import { QlikLoaderComponent } from './shared/qlik-loader/qlik-loader.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +43,15 @@ import { ventasGuard } from './services/guards/ventasGuard.guard';
     ClientesComponent,
     FiltersComponent,
     SearchComponent,
+    QlikLoaderComponent,
+    LoaderComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [CanActivateAppLoad, ventasGuard],
   bootstrap: [AppComponent]

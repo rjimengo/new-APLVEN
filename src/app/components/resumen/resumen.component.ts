@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs'
+import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs';
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-resumen',
   templateUrl: './resumen.component.html',
@@ -10,7 +12,7 @@ import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs'
 
 export class ResumenComponent implements OnInit {
   
-  metric:string = "Número";
+  metric:string = "";
   vistaVentas:boolean = false;
   vistaCancelaciones:boolean = false;
   vistaNeto:boolean = false;
@@ -19,9 +21,12 @@ export class ResumenComponent implements OnInit {
   maxCancelaciones:boolean = false;
   maxNeto:boolean = false;
   
+  promises=[];
+
   constructor(
     private _QlikConnection: ConnectionQlikService,
-    private _ComunService: ComunesService) { }
+    private _ComunService: ComunesService,
+    private spinner: NgxSpinnerService) { }
   
   async ngOnInit() {
     this.cargarDatos();
@@ -31,19 +36,54 @@ export class ResumenComponent implements OnInit {
   }
 
   cargarDatos(){
+    this.spinner.show();    
+    if(this._QlikConnection.primeraCarga){//Si es la primera carga
+      this.spinner.hide();
+    }
+
+    /* Initialization of fields and variables and Get date  ASK*/
+    if(this._QlikConnection.date == null){
+      this._ComunService.initFields();
+      let fecha = this._QlikConnection.getDate();
+      fecha.then((date) => { 
+        this._QlikConnection.date = date;
+      }) 
+      .catch((error) => { 
+        console.log(error)
+      });
+    }
+
         
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {
-      this._QlikConnection.getObject(sales[i].div, sales[i].id);
+      this.promises.push(this._QlikConnection.getObject(sales[i].div, sales[i].id));
     }
     /* Get Cancelaciones objects */
     for (var i = 0; i < cancelaciones.length; i++) {
-      this._QlikConnection.getObject(cancelaciones[i].div, cancelaciones[i].id);
+      this.promises.push(this._QlikConnection.getObject(cancelaciones[i].div, cancelaciones[i].id));
     }
     /* Get Netos objects */
     for (var i = 0; i < netos.length; i++) {
-      this._QlikConnection.getObject(netos[i].div, netos[i].id);
+      this.promises.push(this._QlikConnection.getObject(netos[i].div, netos[i].id));
     }
+
+    //Cuando todos los objetos se hayan cargado 
+    let count=0;
+    this.promises.forEach(promesa => {
+      promesa.then( (model)=>{
+        count++;
+        if(count==this.promises.length){
+          this.spinner.hide();
+          console.log("Todas las promesas hechas");
+          this._ComunService.setLoader("none"); 
+        }
+      }).catch((err)=>{
+        this.spinner.hide();
+        console.log("Se ha producido un error al cargar el objeto ", err);
+        this._ComunService.setLoader("none");
+
+      });
+    });
 
   }
 

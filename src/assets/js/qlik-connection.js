@@ -86,7 +86,7 @@ const qApp = async (config, globals, appId, listener) => {
 
           resolve(app, q);
 
-          app.on("error", function(error) {
+/*           app.on("error", function(error) {
             console.log(error);
           });
           app.on("closed", function(error) {
@@ -94,7 +94,7 @@ const qApp = async (config, globals, appId, listener) => {
           });
           app.on("warning", function ( warning ) {
             console.log("warning listener called for app", warning);
-          } );
+          } ); */
 
         });
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +11,9 @@ export class MenuComponent implements OnInit {
 
   app="";
   page="resumen";
-  constructor(private router:Router) { }
+
+  fecha;
+  constructor(private router:Router,  private _QlikConnection: ConnectionQlikService) { }
 
   ngOnInit(){
     let url = window.location.pathname.split("/");
@@ -19,6 +22,26 @@ export class MenuComponent implements OnInit {
     }
     
     this.app = localStorage.getItem('app'); 
+
+    this._QlikConnection.getAppLoaded().subscribe((loaded) => {
+      if(loaded){//Si la conexion de la appQlik esta cargada
+
+        /* Initialization of fields and variables and Get date */
+        this.fecha=this._QlikConnection.date;
+        if(this._QlikConnection.date == null){
+          let fecha = this._QlikConnection.getDate();
+          fecha.then((date) => { 
+            this._QlikConnection.date = date;
+            this.fecha=date;
+          }) 
+          .catch((error) => { 
+            console.log(error)
+          });
+        }
+
+      }
+    });
+
   }
 
   navigate(ruta){

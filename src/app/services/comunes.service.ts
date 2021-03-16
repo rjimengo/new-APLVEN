@@ -29,6 +29,31 @@ export class ComunesService {
 
   topBottomOpt = ['Top 20', 'Bottom 20'];
 
+  setLoader(display){
+    let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
+    loaderHTML.style.display=display; 
+  }
+
+  initFields(){
+    this._QlikConnection.setNumValue('vL.IndicadorSel', 1);
+		this._QlikConnection.setStringValue('vL.IndicadorSelDesc', 'Número (#)');
+		this._QlikConnection.setStringValue('vL.IndicadorSelAbr', 'Num');
+		this._QlikConnection.setStringValue('vL.FormatoIndicador', '#.##0 #');
+		this._QlikConnection.setStringValue('vL.ClaseVenta', 'Ventas');
+		
+		this._QlikConnection.setNumValue('vL.MediaSel', 0);
+		this._QlikConnection.setStringValue('vL.MediaSelDesc', '\'\'');
+		
+		this._QlikConnection.setNumValue('vL.PorcentajeSel', 0);
+		this._QlikConnection.setStringValue('vL.PorcentajeSelDesc', '\'\'');
+		
+		this._QlikConnection.setNumValue('vL.TopSel', 0);
+		this._QlikConnection.setNumValue('vL.BotSel', 0);
+		
+		this._QlikConnection.setNumValue('vL.DimensionSel', 10);
+		this._QlikConnection.setStringValue('vL.DimensionCampo', '');
+  }
+
   radioButtons(value, operation, dimension, employee){
     //Guardar en localStorage el radio1
     if(value)
@@ -38,24 +63,26 @@ export class ComunesService {
     if(radio){
       //Aplicar metrica en qlik
       this.setMetrica(radio);
-      //Poner a checked el radioButton al refrescar
-      switch(radio) { 
-        case "Número": { 
-          let elem = document.getElementById("radioNumero") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-        case "Importe": { 
-          let elem = document.getElementById("radioImporte") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-        case "Margen": { 
-          let elem = document.getElementById("radioMargen") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-     } 
+      //Poner a checked el radioButton al refrescar, setTimeout para que coja el elemento de la siguiente pestanya
+      setTimeout(() => {
+        switch(radio) { 
+          case "Número": { 
+            let elem = document.getElementById("radioNumero") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+          case "Importe": { 
+            let elem = document.getElementById("radioImporte") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+          case "Margen": { 
+            let elem = document.getElementById("radioMargen") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+       } 
+      }, 0);
     }
 
     let percentage;
@@ -64,7 +91,8 @@ export class ComunesService {
       /* Reset % y poner su checked a false*/
       percentage = this.initPercentage(radio, operation, dimension, employee, null, true);
       let percen = document.getElementById("percen") as HTMLInputElement;
-      percen.checked = false;
+      if(percen)
+        percen.checked = false;
     }
     return percentage;
   }
@@ -131,7 +159,8 @@ export class ComunesService {
       /* Reset % y poner su checked a false*/
       percentage = this.initPercentage(metric, radio2, dimension, employee, null, true);
       let percen = document.getElementById("percen") as HTMLInputElement;
-      percen.checked = false;
+      if(percen)
+        percen.checked = false;
     }
     return percentage;
 }

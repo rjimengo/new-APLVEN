@@ -42,11 +42,11 @@
 
 
 <div class="dropdown">
-    <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+    <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="getPage()"></i>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" >Global</a>
-      <a class="dropdown-item" >Territorial</a>
-      <a class="dropdown-item" >VidaCaixa</a>
-      <a class="dropdown-item" >SegurCaixa</a>
+      <a class="dropdown-item" (click)="openApp('ventas')" *ngIf="page!='ventas'">Global</a>
+      <a class="dropdown-item" (click)="openApp('territorial')" *ngIf="page!='territorial'">Territorial</a>
+      <a class="dropdown-item" (click)="openApp('vidacaixa')" *ngIf="page!='vidacaixa'">VidaCaixa</a>
+      <a class="dropdown-item" (click)="openApp('segurcaixa')" *ngIf="page!='segurcaixa'">SegurCaixa</a>
     </div>
   </div>

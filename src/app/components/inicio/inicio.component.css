@@ -71,3 +71,7 @@
   box-shadow: 0px 0px 0px -8px rgba(0,0,0,0.85);
   transition: 0.4s ease-in-out;
  }
+
+ .aler{
+  color: rgb(243, 240, 40);
+ }

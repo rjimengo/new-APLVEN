@@ -1,0 +1,132 @@
+
+#loader{
+    display: none;
+}
+
+/*RAIN LOADER... */
+
+.rain-loader {
+    background-color: white !important;
+    height: 100%;
+
+  }
+  
+  .rain-loader .progress-loader div {
+    opacity: 0 !important;
+    position: absolute;
+    width: 65%;
+    height: 65%;
+  }
+  
+  .rain {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: white !important;
+    opacity: 1;
+    z-index: 21 !important;
+    border: none !important;
+  }
+  
+  .rain.qv-transparent-background {
+    opacity: .75;
+  }
+  
+  .rain .rain-image-container {
+    display: flex;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    width: 45%;
+    height: 45%;
+    margin: auto;
+  }
+  
+  .rain .path {
+    fill: #ccc;
+  }
+  
+  .rain .progress {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .rain .rain-progress {
+    position: absolute;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .rain .progress-div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 160px;
+    max-width: 160px;
+  }
+  
+  .rain .rotating {
+    animation: rotating .8s linear infinite !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    opacity: .4 !important;
+  }
+  
+  .rain .progress-div div {
+    opacity: 0 !important;
+    position: absolute !important;
+    width: 65% !important;
+    height: 65% !important;
+  }
+  
+  .rain .one {
+    animation: drop1 2.2s linear infinite !important;
+    top: -2.5% !important;
+    left: 10% !important;
+  }
+  
+  .rain svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .rain .two {
+    animation: drop2 2.2s linear infinite !important;
+    top: 40% !important;
+    left: -10% !important;
+  }
+  
+  .rain .three {
+    animation: drop3 2.2s linear infinite !important;
+    top: 10% !important;
+    left: 45% !important;
+  }
+  
+  .rain .four {
+    animation: drop4 2.2s linear infinite !important;
+    top: 60% !important;
+    left: 35% !important;
+  }
+  
+  .rain .five {
+    animation: drop5 2.2s linear infinite !important;
+    top: 0 !important;
+    left: 13% !important;
+  }
+  
+  .rain .six {
+    animation: drop6 2.2s linear infinite !important;
+    top: 65% !important;
+    left: -12% !important;
+  }
+  
+  .rain .seven {
+    animation: drop7 2.2s linear infinite !important;
+    top: 3% !important;
+    left: -7% !important;
+  }

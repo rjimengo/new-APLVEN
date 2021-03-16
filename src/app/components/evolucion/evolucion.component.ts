@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { cancelaciones, indicadoresVCN, netos, sales, resumen } from 'src/config/ventasGlobalIDs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-evolucion',
@@ -10,8 +11,8 @@ import { cancelaciones, indicadoresVCN, netos, sales, resumen } from 'src/config
 })
 export class EvolucionComponent implements OnInit {
 
-  metric:string = "Número";
-  option:string = "Ventas";
+  metric:string = "";
+  option:string = "";
   topBottomOpt;
   topBottom;
 
@@ -32,7 +33,9 @@ export class EvolucionComponent implements OnInit {
 
   percentage;
 
-  constructor(private _QlikConnection: ConnectionQlikService, private _ComunService: ComunesService) { }
+  promises=[];
+
+  constructor(private _QlikConnection: ConnectionQlikService, private _ComunService: ComunesService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -56,16 +59,43 @@ export class EvolucionComponent implements OnInit {
 
     //Inicializar porcentaje
     this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, null, true);
+
   }
 
   cargarDatos(){
-    /* Get KPIs Ventas, Cancelaciones y Netos  */
-      this._QlikConnection.getObject(sales[0].div, sales[0].id);
-      this._QlikConnection.getObject(cancelaciones[0].div, cancelaciones[0].id);
-      this._QlikConnection.getObject(netos[0].div, netos[0].id);
+    this.spinner.show();
+    if(this._QlikConnection.primeraCarga){//Si es la primera carga
+      this.spinner.hide();
+    }
 
-      this.objetos = resumen;
-      this._QlikConnection.getObject("chart1", this.objetos.chart1[0]);
+
+    /* Get KPIs Ventas, Cancelaciones y Netos  */
+    this.promises.push(this._QlikConnection.getObject(sales[0].div, sales[0].id));
+    this.promises.push(this._QlikConnection.getObject(cancelaciones[0].div, cancelaciones[0].id));
+    this.promises.push(this._QlikConnection.getObject(netos[0].div, netos[0].id));
+
+    this.objetos = resumen;
+    this.promises.push(this._QlikConnection.getObject("chart1", this.objetos.chart1[0]));
+
+    
+    //Cuando todos los objetos se hayan cargado    
+    let count=0;
+
+    this.promises.forEach(promesa => {
+      promesa.then((model)=>{
+        count++;
+        if(count==this.promises.length){
+          this._ComunService.setLoader("none"); 
+          this.spinner.hide();
+        }
+      }).catch((err)=>{
+        console.log("Se ha producido un error al cargar el objeto ", err);
+        this._ComunService.setLoader("none"); 
+        this.spinner.hide();
+      });
+
+    });
+      
   }
 
   changeOption(value){

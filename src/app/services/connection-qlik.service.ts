@@ -25,12 +25,14 @@ export class ConnectionQlikService {
 
   selecciones$;
 
-  loaded: BehaviorSubject<boolean>;
+  loaded: BehaviorSubject<boolean>;//Variable para saber si la conexion con qlik ya se ha realizado
+  primeraCarga:boolean=true;
 
+  date;
 
  constructor() { 
   this.loaded = new BehaviorSubject<boolean>(false);
- 
+
  }
 
  getAppLoaded(): Observable<boolean> {
@@ -41,7 +43,6 @@ setAppLoaded(newValue): void {
 }
 
   qlikConnection(appId){
-
     this.setLoader("block");
     //Listener que pasaremos al iniciar qlik y, cuando se cambie algun dato de qlik, se ejecutara esta funcion
     var listener = function() {
@@ -61,7 +62,8 @@ setAppLoaded(newValue): void {
 
     
     if(appId){
-      if(this.qApp==null){
+      if(this.qApp==null || appId !=localStorage.getItem("appId")){
+        this.setLoader("block");//Para la primera carga poner qlikloader a block
 
         return new Promise((resolve) => {
           import('./../../assets/js/qlik-connection.js').then(async file => {
@@ -72,13 +74,21 @@ setAppLoaded(newValue): void {
             this.selecciones$ = of(this.globals.selState.selections);
             console.log("Qlik:  ", this.qApp);
             resolve(this.qApp);
-            this.setAppLoaded(true);
-            this.setLoader("none"); 
-          }​​​​​​​);
+            this.setAppLoaded(true);//Poner a true la variable de conexion con Qlik
+
+            //Controlar errores y timeouts de conexion con qlik
+            this.controlarErrors();
+
+          }​​​​​​​)
+          .catch(err =>{
+            console.log(err);
+            
+          });
         });
   
       }else{
-        this.setLoader("none");
+        
+        this.primeraCarga=false;
         return this.qApp;
       }
     }else{
@@ -87,12 +97,68 @@ setAppLoaded(newValue): void {
 
   }
 
-  setLoader(display){
+  controlarErrors(){
+    this.qApp.on("closed", (error)=> {
+      console.log(error);
+      var titulo = "Se ha cerrado la conexión con el servidor de Qlik.";
+      var secundario = "Por favor, recargue la aplicación.";
+      
+      let inputTitulo = document.getElementById("tituloId") as HTMLInputElement;
+      let inputSecundario = document.getElementById("secundarioId") as HTMLInputElement;
+      inputTitulo.value = titulo;
+      inputSecundario.value = secundario;
+      document.getElementById("openModalButton").click();
+    });
+    this.qApp.on("error", (error)=> {
+      console.log(error.code + ' - ' + error.message);
+      if (error.code == 16) {
+        var titulo = "Se ha cerrado la conexión con el servidor de Qlik.";
+        var secundario = "Por favor, recargue la aplicación.";
+        
+        let inputTitulo = document.getElementById("tituloId") as HTMLInputElement;
+        let inputSecundario = document.getElementById("secundarioId") as HTMLInputElement;
+        inputTitulo.value = titulo;
+        inputSecundario.value = secundario;
+        document.getElementById("openModalButton").click();
+
+      } else if (error.code == 403) {   
+        var titulo = "Acceso denegado.";
+        var secundario = "No tiene acceso a la aplicación de Ventas, contacte con el administrador.";
+        
+        let inputTitulo = document.getElementById("tituloId") as HTMLInputElement;
+        let inputSecundario = document.getElementById("secundarioId") as HTMLInputElement;
+        inputTitulo.value = titulo;
+        inputSecundario.value = secundario;
+        document.getElementById("openModalButton").click();
+
+
+      } else if (error.message.includes("timed out") || error.message.includes("TimedOut")) {   
+        var titulo = "Se ha cerrado la conexión con el servidor de Qlik.";
+        var secundario = "Por favor, recargue la aplicación.";
+        
+        let inputTitulo = document.getElementById("tituloId") as HTMLInputElement;
+        let inputSecundario = document.getElementById("secundarioId") as HTMLInputElement;
+        inputTitulo.value = titulo;
+        inputSecundario.value = secundario;
+        document.getElementById("openModalButton").click();
+
+      } else { //Otros errores, como que un objeto no cargue bien
+        console.log(error.code + ' - ' + error.message);
+        let warn = document.getElementById("warn") as HTMLInputElement;
+        warn.style.display="block";
+
+      }
+    });
+  }
+
+  
+  setLoader(display){    
     let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
     loaderHTML.style.display=display; 
   }
+  
   getObject(id, value){
-    this.qApp.getObject(id, value);
+    let promesa = this.qApp.getObject(id, value);
     
     let elem = document.getElementById(id) as HTMLInputElement;   
     if(elem){
@@ -101,7 +167,8 @@ setAppLoaded(newValue): void {
                   </div>`;      
       elem.setAttribute("qlikid", value);    
         
-    }
+    } 
+    return promesa;   
   }
   setNumValue(value, id){
     this.qApp.variable.setNumValue(value, id);
@@ -127,5 +194,21 @@ setAppLoaded(newValue): void {
   resize(){
     this.globals.qlik.resize();
   }
+
+  /* Get the date from Qlik */
+  getDate() {
+    var promise = new Promise((resolve, reject) => { 
+      this.qApp.variable.getContent('vL.FechaVentasHasta', function(reply) {
+        if (reply && reply.qContent && reply.qContent.qString) {
+            var newDate = new Date((reply.qContent.qString - (25567 + 2)) * 86400 * 1000);
+            var year = newDate.getFullYear();
+            //this.qApp.field('MES').selectMatch("*'" + year.toString().substr(2, 4));
+            resolve(newDate);
+        }
+      });
+    }) 
+    return promise;
+  }
+
 
 }

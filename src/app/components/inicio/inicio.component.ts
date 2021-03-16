@@ -10,6 +10,7 @@ import {appIDs} from '../../../config/config';
 })
 export class InicioComponent implements OnInit {
 
+  selApp:boolean=false;
   constructor(
     private _QlikConnection: ConnectionQlikService,
     private router:Router
@@ -19,6 +20,11 @@ export class InicioComponent implements OnInit {
   }
 
   async openApp(aplicacion){
+    if(!aplicacion){
+      this.selApp=true;
+      let select = document.getElementById("navigation") as HTMLInputElement;
+      aplicacion=select[0].value;
+    }
     let IDapp;
     localStorage.setItem('app', aplicacion);  
 

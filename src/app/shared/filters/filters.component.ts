@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { urlAyuda } from 'src/config/config';
+import { appIDs, urlAyuda } from 'src/config/config';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filters',
@@ -16,17 +18,17 @@ export class FiltersComponent implements OnInit {
   static bookmarkDataAux;
   bookmarkData;
 
-  constructor( private _QlikConnection: ConnectionQlikService) { }
+  page;
+
+  constructor( private _QlikConnection: ConnectionQlikService, private router:Router) { }
 
   ngOnInit() {
-
     //Cuando se termine la conexion con qlik
     this._QlikConnection.getAppLoaded().subscribe((loaded) => {
       if(loaded){//Si la conexion de la appQlik esta cargada
         this.disabled();
         this.updateBookmarkData();
-        console.log("FINISH");
-        
+        console.log("FINISH qlik conexion");
       }
     });
 
@@ -184,6 +186,56 @@ onRemoveBookmarkLeave(i){
   btnTrash.style.display="none";
   btnSave.style.display="none";
 
+}
+
+
+getPage(){
+  let url = window.location.pathname.split("/");
+  if(url[url.length-1] != ""){
+    this.page=url[url.length-2];
+  }
+}
+
+async openApp(aplicacion){        
+
+  this.page=aplicacion;
+  
+  let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
+  loaderHTML.style.display="block"; 
+  
+  if(!aplicacion){
+    let select = document.getElementById("navigation") as HTMLInputElement;
+    aplicacion=select[0].value;
+  }
+  let IDapp;
+  localStorage.setItem('app', aplicacion);  
+
+  switch(aplicacion){
+    case "ventas":
+      IDapp = appIDs.global;
+    break;
+    case "territorial":
+      IDapp = appIDs.territorial;
+    break;
+    case "vidacaixa":
+      IDapp = appIDs.vidacaixa;
+    break;
+    case "segurcaixa":
+      IDapp = appIDs.segurcaixa;
+    break;
+    default:
+      IDapp = appIDs.global;
+  }
+
+  let url = window.location.pathname.split("/");
+  let pestanya;
+  if(url[url.length-1] != ""){
+    pestanya=url[url.length-1];
+  }
+  if(await this._QlikConnection.qlikConnection(IDapp)){
+    localStorage.setItem('appId', IDapp); 
+    this.router.navigate([aplicacion + '/' + pestanya]);      
+  } 
 }
 
 }

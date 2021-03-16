@@ -6,9 +6,6 @@ nav{
     padding-right: 6px;
     z-index: 10;
 }
-.nav-item{
-    cursor: pointer;
-}
 
 .logo-min{
     display: block;
@@ -64,6 +61,7 @@ border-bottom: 2px solid #f8f9fa;
 border-radius: 1px;
 font-size: 14px;
 font-weight: bold;
+cursor: pointer;
 }
 .pestanyero .nav-item{
     margin-bottom: 0px;
@@ -107,4 +105,5 @@ font-weight: bold;
 }
 .lihasta{
     padding: 0;
+    cursor: default;
 }
