@@ -11,6 +11,10 @@ export class CanActivateAppLoad implements CanActivate {
     async canActivate() {
         
         if (localStorage.getItem('appId')) {
+            if(this._QlikConnection.inicio){//Cuando pasa por la pantalla de inicio
+                return true;
+            }
+            
             let appID= localStorage.getItem('appId');
             await this._QlikConnection.qlikConnection(appID);
             return true;

@@ -238,4 +238,13 @@ async openApp(aplicacion){
   } 
 }
 
+
+openFiltersView(){//Abrir el buscador y clickar en Selecciones
+  let buscador = document.getElementById("buscadorId") as HTMLInputElement;  
+  if(buscador)
+    buscador.click();
+  var qvGlobalSelButton = document.getElementsByClassName('qv-subtoolbar-button qv-explore-selections-btn toggle-button borderbox')[0] as HTMLInputElement;
+  if(qvGlobalSelButton)
+    qvGlobalSelButton.click();
+}
 }

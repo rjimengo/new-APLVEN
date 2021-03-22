@@ -35,25 +35,8 @@ export class ResumenComponent implements OnInit {
     
   }
 
-  cargarDatos(){
-    this.spinner.show();    
-    if(this._QlikConnection.primeraCarga){//Si es la primera carga
-      this.spinner.hide();
-    }
-
-    /* Initialization of fields and variables and Get date  ASK*/
-    if(this._QlikConnection.date == null){
-      this._ComunService.initFields();
-      let fecha = this._QlikConnection.getDate();
-      fecha.then((date) => { 
-        this._QlikConnection.date = date;
-      }) 
-      .catch((error) => { 
-        console.log(error)
-      });
-    }
-
-        
+  cargarDatos(){     
+    
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {
       this.promises.push(this._QlikConnection.getObject(sales[i].div, sales[i].id));
@@ -68,22 +51,7 @@ export class ResumenComponent implements OnInit {
     }
 
     //Cuando todos los objetos se hayan cargado 
-    let count=0;
-    this.promises.forEach(promesa => {
-      promesa.then( (model)=>{
-        count++;
-        if(count==this.promises.length){
-          this.spinner.hide();
-          console.log("Todas las promesas hechas");
-          this._ComunService.setLoader("none"); 
-        }
-      }).catch((err)=>{
-        this.spinner.hide();
-        console.log("Se ha producido un error al cargar el objeto ", err);
-        this._ComunService.setLoader("none");
-
-      });
-    });
+    this._ComunService.loadObjects(this.promises);
 
   }
 

@@ -7,10 +7,10 @@ export var configQlik = {
   };
 
   export var appIDs = {
-    global : "93026550-480f-4bef-ad64-14aa46bc4ae2",
-    territorial : "93026550-480f-4bef-ad64-14aa46bc4ae2",
-    vidacaixa : "93026550-480f-4bef-ad64-14aa46bc4ae2",
-    segurcaixa : "93026550-480f-4bef-ad64-14aa46bc4ae2",
+    global : "b310a657-9d26-431b-80df-ffe687e80a6d",
+    territorial : "b310A657-9d26-431b-80df-ffe687e80a6d",
+    vidacaixa : "b310A657-9d26-431b-80df-ffe687e80a6d",
+    segurcaixa : "b310A657-9d26-431b-80df-ffe687e80a6d",
   }
 
   export var urlAyuda = "http://localhost:4200/stw5/gedged/public/html/ca/2/24/111224.html";

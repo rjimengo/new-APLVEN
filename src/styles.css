@@ -34,6 +34,10 @@
     display: inline-flex;
     margin-right: 6px;
 }
+.form-check-input{
+    margin-top: .2rem;
+}
+
 .graficas label{
     color: black; 
     font-size: 1.3em; 
@@ -156,10 +160,14 @@
 }
 
 
-/* .disabled-button, .disabled-button:hover{
+.disabled-button, .disabled-button:hover{
     background-color: rgb(240, 240, 240);
     opacity: 50%;
-} */
+    cursor:default !important;
+} 
+.disabled-dropdown{
+    display: none !important;
+}
 .dimensiones .dropdown-item{
     cursor: pointer;
 }
@@ -319,7 +327,7 @@ input:checked+.slider:before {
 
 .alert-warning{
     position: absolute;
-    top: 90%;
+    top: 700px;
     width: 60%;
     z-index: 2000;
     margin-left: 25%;
@@ -329,4 +337,29 @@ input:checked+.slider:before {
 
 select:checked, option::selection{
     background-color:#1e90ff !important;
+}
+
+/*  BUSCADOR QLIK------------------------------ */
+
+.qv-global-search .qv-global-search-dimmer {
+    height: auto !important;
+}
+.qv-global-search {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.qv-global-selections-enabled .qv-global-selections {
+    z-index: 2;
+    width: calc(100% - 225px);
+    height: calc(100% - 145px) !important;
+    position: fixed;
+    margin-left: 225px;
+    margin-top: 110px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    
+    transition: 0.5s;
 }

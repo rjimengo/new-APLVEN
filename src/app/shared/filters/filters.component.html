@@ -1,4 +1,4 @@
-<i class="fa fa-filter"></i>
+<i class="fa fa-filter" (click)="openFiltersView()"></i>
 <i class="fa fa-reply" (click)="backFilter()" title="Retroceder filtro" [ngClass]="{'disabled': backDisabled,'': !backDisabled}"></i>
 <i class="fa fa-share" (click)="forwardFilter()" title="Avanzar filtro" [ngClass]="{'disabled': forwardDisabled,'': !forwardDisabled}"></i>
 <i class="fa fa-question-circle" title="Abrir Manual de Ayuda" (click)="openHelp()"></i>

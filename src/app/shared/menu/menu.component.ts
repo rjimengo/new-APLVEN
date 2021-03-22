@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   page="resumen";
 
   fecha;
+  clickBusca:boolean = false;
   constructor(private router:Router,  private _QlikConnection: ConnectionQlikService) { }
 
   ngOnInit(){
@@ -38,6 +39,9 @@ export class MenuComponent implements OnInit {
             console.log(error)
           });
         }
+
+        //Cargar el buscador/panel de selecciones 
+        this._QlikConnection.getObject('qso_CurrentSelections', 'CurrentSelections');
 
       }
     });

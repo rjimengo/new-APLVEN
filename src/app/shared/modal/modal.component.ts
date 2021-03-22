@@ -18,7 +18,8 @@ export class ModalComponent implements OnInit {
     
     document.getElementById("closeModalButton").click();
     let warn = document.getElementById("warn") as HTMLInputElement;
-    warn.style.display="none";
+    if(warn)
+      warn.style.display="none";
     this.router.navigate([ '/']);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'APLVEN';
 
+  @ViewChild('buscador') searchElement: ElementRef;
+  
+  focusBuscador(){
+/*     console.log(this.searchElement);
+    
+    setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      this.searchElement.nativeElement.focus();
+    },0);  
+
+    
+ */
+  }
 }
 

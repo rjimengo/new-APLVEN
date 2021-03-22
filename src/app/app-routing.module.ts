@@ -16,7 +16,7 @@ import { ventasGuard } from './services/guards/ventasGuard.guard';
 const rutasHijas = [
   { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad]},
   { path: 'evolucion', component: EvolucionComponent, canActivate: [CanActivateAppLoad] },
-  { path: 'territorial', component: TerritorialComponent },
+  { path: 'territorial', component: TerritorialComponent, canActivate: [CanActivateAppLoad] },
   { path: 'productos', component: ProductosComponent },
   { path: 'canales', component: CanalesComponent },
   { path: 'cargo', component: CargoComponent },

@@ -2,3 +2,19 @@
     transition: 0.5s;
     margin-left: 225px;
 }
+#CurrentSelections{
+    position: absolute;
+    z-index: 2;
+    width: calc(100% - 225px); 
+    transition: 0.5s;
+    display: flex;
+    margin-top: -10px;
+
+}
+#qso_CurrentSelections{
+    width: 100%; 
+    height: calc(100vh - 124px); 
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2; 
+    display: none; 
+}

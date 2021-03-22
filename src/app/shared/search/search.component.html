@@ -1,7 +1,6 @@
-<!-- <input id="searchInput" type="text" class="form-control searchInput" placeholder="Buscar"> -->
-        <!-- QlikSense Search Bar -->
+<!-- QlikSense Search Bar -->
 
-		<div class="form-group has-search">
-			<span class="fa fa-search form-control-feedback"></span>
-			<input type="text" class="form-control" placeholder="Buscar">
-		  </div>
+<div class="form-group has-search">
+	<span class="fa fa-search form-control-feedback"></span>
+	<input #buscador id="buscadorId" type="text" class="form-control" placeholder="Buscar" (click)="onSearchInputFocus(buscador)">
+</div>

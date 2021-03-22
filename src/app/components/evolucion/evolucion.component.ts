@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { cancelaciones, indicadoresVCN, netos, sales, resumen } from 'src/config/ventasGlobalIDs';
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-evolucion',
@@ -35,7 +34,7 @@ export class EvolucionComponent implements OnInit {
 
   promises=[];
 
-  constructor(private _QlikConnection: ConnectionQlikService, private _ComunService: ComunesService, private spinner: NgxSpinnerService) { }
+  constructor(private _QlikConnection: ConnectionQlikService, private _ComunService: ComunesService) { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -63,39 +62,16 @@ export class EvolucionComponent implements OnInit {
   }
 
   cargarDatos(){
-    this.spinner.show();
-    if(this._QlikConnection.primeraCarga){//Si es la primera carga
-      this.spinner.hide();
-    }
-
-
     /* Get KPIs Ventas, Cancelaciones y Netos  */
-    this.promises.push(this._QlikConnection.getObject(sales[0].div, sales[0].id));
-    this.promises.push(this._QlikConnection.getObject(cancelaciones[0].div, cancelaciones[0].id));
-    this.promises.push(this._QlikConnection.getObject(netos[0].div, netos[0].id));
+    this.promises.push(this._QlikConnection.getObject(indicadoresVCN.ventas[0], indicadoresVCN.ventas[1]));
+    this.promises.push(this._QlikConnection.getObject(indicadoresVCN.cancelaciones[0], indicadoresVCN.cancelaciones[1]));
+    this.promises.push(this._QlikConnection.getObject(indicadoresVCN.neto[0], indicadoresVCN.neto[1])); 
 
     this.objetos = resumen;
     this.promises.push(this._QlikConnection.getObject("chart1", this.objetos.chart1[0]));
 
-    
-    //Cuando todos los objetos se hayan cargado    
-    let count=0;
-
-    this.promises.forEach(promesa => {
-      promesa.then((model)=>{
-        count++;
-        if(count==this.promises.length){
-          this._ComunService.setLoader("none"); 
-          this.spinner.hide();
-        }
-      }).catch((err)=>{
-        console.log("Se ha producido un error al cargar el objeto ", err);
-        this._ComunService.setLoader("none"); 
-        this.spinner.hide();
-      });
-
-    });
-      
+    //Cuando todos los objetos se hayan cargado  
+    this._ComunService.loadObjects(this.promises);
   }
 
   changeOption(value){

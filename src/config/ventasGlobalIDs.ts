@@ -604,3 +604,15 @@ export var resumen = {
   bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
   table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
 };
+
+/* Territorial */
+export var territorial = {
+  chart1_sinDim: ['7191eec9-79ae-4a92-8727-bfbab732b816', '912ece1c-2690-48ae-a750-b9af2924c8ec', '90becbd3-be13-4067-bef0-788c25687b64'], //Gráfico líneas (Sin dimensión)
+  chart1_Dim: ['5908c1c0-c532-4645-b67f-fc8acefa22ab', '75148384-2ef9-480e-b9d8-93e8b835ca22', 'eac7bf7a-23d3-4c8a-9d19-2ace3c395873'], //Gráfico líneas (Dimensión)
+  table1_sinDim: ['b575b405-efb4-4cb4-ba00-5945891700ca', 'b73f7416-49bf-4d0e-88f3-4cb489691ab4', '8b45e22b-ba2f-4648-8106-f02f305d5460'], //Tabla gráfico líneas (Sin dimensión)
+  table1_Dim: ['53c4a67c-b8aa-48bb-9171-ef4752e85ce9', '5ffda7cf-995b-4d4c-bb72-c51d7067d15e', 'f424626a-e2f9-45ca-8024-cb599ca2e2b7'], //Tabla gráfico líneas (Dimensión)
+  pieChart: ['0c4104f8-4cd2-47a9-9f17-fc18c75417ff', 'edbe15b2-04dd-4ae3-8412-dbc4e41a06b4', 'df302df3-3680-4d3c-83e3-1c7226ec8761'], //Gráfico pastel inferior
+  table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
+  bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
+  table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
+};

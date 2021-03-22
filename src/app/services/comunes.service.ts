@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {sales, cancelaciones, netos, nivelesApp, resumen} from '../../config/ventasGlobalIDs';
 import { ConnectionQlikService } from './connection-qlik.service';
 
@@ -8,7 +9,7 @@ import { ConnectionQlikService } from './connection-qlik.service';
 export class ComunesService {
 
   selecciones = [];
-  constructor(private _QlikConnection: ConnectionQlikService) { }
+  constructor(private _QlikConnection: ConnectionQlikService, private spinner: NgxSpinnerService) { }
   dimensions= ['Sin dimensión', 'Centros', 'Productos', 'Canal', 'Negocio', 'Segmento', 'Nivel Servicio', 'Agenven', 'Cargo'];
   
   sinDimensionOpt = ['Sin dimensión'];
@@ -52,6 +53,43 @@ export class ComunesService {
 		
 		this._QlikConnection.setNumValue('vL.DimensionSel', 10);
 		this._QlikConnection.setStringValue('vL.DimensionCampo', '');
+  }
+
+  loadObjects(promises){
+    this.spinner.show();    
+    if(this._QlikConnection.primeraCarga){//Si es la primera carga
+      this.spinner.hide();
+    }
+
+    /* Initialization of fields and variables and Get date  ASK*/
+    if(this._QlikConnection.date == null){
+      this.initFields();
+      let fecha = this._QlikConnection.getDate();
+      fecha.then((date) => { 
+        this._QlikConnection.date = date;
+      }) 
+      .catch((error) => { 
+        console.log(error)
+      });
+    }
+
+
+    let count=0;
+    promises.forEach(promesa => {
+      promesa.then( (model)=>{
+        count++;
+        if(count==promises.length){
+          this.spinner.hide();
+          console.log("FINISH promesas");
+          this.setLoader("none"); 
+        }
+      }).catch((err)=>{
+        this.spinner.hide();
+        console.log("Se ha producido un error al cargar el objeto ", err);
+        this.setLoader("none");
+
+      });
+    });
   }
 
   radioButtons(value, operation, dimension, employee){
@@ -248,6 +286,8 @@ setOperacion (operation) {
 /* Set top chart/table1 objects dynamically */
   setObjects_1(vista, dimensionSel, topBottom, objetos) {
     let object = vista ? 'table1' : 'chart1';
+    var dim = dimensionSel == 'Sin dimensión' ? object + '_sinDim' : object + '_Dim';
+    
     let id = 0;
     
     if (dimensionSel != 'Sin dimensión') {
@@ -261,10 +301,22 @@ setOperacion (operation) {
           case 'Bottom 20':
               id = 3;
               break;
+          default:
+            id = 1;
+            break;
       }
     }
-    
-    this._QlikConnection.getObject("chart1", objetos[object][id]);
+
+    let url = window.location.pathname.split("/");
+    let page="";
+    if(url[url.length-1] != ""){
+      page=url[url.length-1];
+    }
+    if(page != "evolucion"){//Si no estamos en la pestanya evolucion se utilizar el _sinDim o _Dim
+      this._QlikConnection.getObject("chart1", objetos[dim][id]);
+    }else{
+      this._QlikConnection.getObject("chart1", objetos[object][id]);
+    }
   }
 
   /* Set bottom chart/table objects dynamically */
@@ -283,12 +335,16 @@ setOperacion (operation) {
           case 'Bottom 20':
               id = 2;
               break;
+          default:
+            id = 0;
+            break;
       }
       if (metric != 'Margen' && operation != 'Neto') {
           type = vista ? 'table2' : 'pieChart';
       } else {
           type = vista ? 'table3' : 'bar';
       }
+
       this._QlikConnection.getObject("chart2", objetos[type][id]);
   }
     
@@ -325,6 +381,8 @@ setOperacion (operation) {
     this._QlikConnection.setNumValue('vL.MediaSel', value);
     this._QlikConnection.setStringValue('vL.MediaSelDesc', valueDesc);
     console.log("employee: ", employee);
+    console.log("value: ", value);
+    console.log("valueDesc: ", valueDesc);
     
     return employee;
   }
@@ -338,7 +396,7 @@ setOperacion (operation) {
     tB = topBottom === newTopBottom ? null : newTopBottom;
     top = tB === 'Top 20' ? 20 : 0;
     bottom = tB === 'Bottom 20' ? 20 : 0;
-
+    
     this._QlikConnection.setNumValue('vL.TopSel', top);
     this._QlikConnection.setNumValue('vL.BotSel', bottom);
 

@@ -20,6 +20,7 @@ export class InicioComponent implements OnInit {
   }
 
   async openApp(aplicacion){
+    this._QlikConnection.inicio = true;
     if(!aplicacion){
       this.selApp=true;
       let select = document.getElementById("navigation") as HTMLInputElement;

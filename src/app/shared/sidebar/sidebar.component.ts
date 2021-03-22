@@ -38,6 +38,13 @@ export class SidebarComponent implements OnInit {
 
     var panelxl = document.getElementsByClassName("panel-xl")[0] as HTMLInputElement;
 
+    if(document.getElementsByClassName("qv-global-selections-enabled")[0]){
+      var qvSel = document.getElementsByClassName("qv-global-selections-enabled")[0].getElementsByClassName("qv-global-selections")[0] as HTMLElement; 
+      console.log(qvSel);
+
+    }
+    
+
     if( document.getElementById("menu").style.marginLeft == "50px"){
       //abrir sidebar
       element.classList.remove("active");
@@ -46,6 +53,11 @@ export class SidebarComponent implements OnInit {
       document.getElementById("sidebar").style.width = "225px";
       document.getElementById("cerrado").style.display = "none";
       document.getElementById("abierto").style.display = "block";
+      document.getElementById("CurrentSelections").style.width = "calc(100% - 225px)";//Buscador
+      if(qvSel){
+        qvSel.style.marginLeft = "225px";//Panel de selecciones
+        qvSel.style.width = "calc(100% - 225px)";//Panel de selecciones
+      }
 
       if(panelxl){
         panelxl.style.paddingLeft = "225px"; 
@@ -59,7 +71,13 @@ export class SidebarComponent implements OnInit {
       document.getElementById("sidebar").style.width = "50px";
       document.getElementById("abierto").style.display = "none";
       document.getElementById("cerrado").style.display = "block";
+      document.getElementById("CurrentSelections").style.width = "calc(100% - 50px)";
+      if(qvSel){
+        qvSel.style.marginLeft = "50px";//Panel de selecciones
+        qvSel.style.width = "calc(100% - 50px)";//Panel de selecciones        
+      }
       
+
       if(panelxl){
         panelxl.style.paddingLeft = "50px";
       }

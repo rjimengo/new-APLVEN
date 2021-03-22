@@ -29,6 +29,7 @@ export class ConnectionQlikService {
   primeraCarga:boolean=true;
 
   date;
+  inicio:boolean = false;
 
  constructor() { 
   this.loaded = new BehaviorSubject<boolean>(false);
@@ -87,8 +88,8 @@ setAppLoaded(newValue): void {
         });
   
       }else{
-        
-        this.primeraCarga=false;
+        this.setLoader("none");
+        this.primeraCarga=false; //TODO esto es mentira
         return this.qApp;
       }
     }else{
@@ -132,7 +133,7 @@ setAppLoaded(newValue): void {
         document.getElementById("openModalButton").click();
 
 
-      } else if (error.message.includes("timed out") || error.message.includes("TimedOut")) {   
+      } else if (error.message.includes("timed out")) {   
         var titulo = "Se ha cerrado la conexión con el servidor de Qlik.";
         var secundario = "Por favor, recargue la aplicación.";
         
@@ -142,7 +143,7 @@ setAppLoaded(newValue): void {
         inputSecundario.value = secundario;
         document.getElementById("openModalButton").click();
 
-      } else { //Otros errores, como que un objeto no cargue bien
+      } else if(!error.message.includes("ProxyError.OnSessionTimedOut")) { //Otros errores, como que un objeto no cargue bien
         console.log(error.code + ' - ' + error.message);
         let warn = document.getElementById("warn") as HTMLInputElement;
         warn.style.display="block";
