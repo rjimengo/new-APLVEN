@@ -8,11 +8,9 @@ import { ConnectionQlikService } from 'src/app/services/connection-qlik.service'
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private _QlikConnection: ConnectionQlikService) { }
+  constructor() { }
   listeners:boolean=false;
   async ngOnInit() {
-    this.openFiltersView();
-
   }
 
   onSearchInputFocus(buscador){    
@@ -85,15 +83,4 @@ export class SearchComponent implements OnInit {
     buscador.value="";
   }
 
-  openFiltersView(){
-/*     setTimeout(() => {
-      console.log("go");
-      
-      
-      var filterBtn = document.getElementsByClassName('qv-subtoolbar-button')[0] as HTMLInputElement;
-      console.log("filterBtn", filterBtn);
-
-      filterBtn.click();
-    }, 8000); */
-  }
 }

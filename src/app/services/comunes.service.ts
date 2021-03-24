@@ -30,6 +30,13 @@ export class ComunesService {
 
   topBottomOpt = ['Top 20', 'Bottom 20'];
 
+
+  employeeGlobal;
+  percentageGlobal;
+  topBottomGlobal;
+  dimensionGlobal;
+  optionGlobal;
+
   setLoader(display){
     let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
     loaderHTML.style.display=display; 
@@ -128,9 +135,6 @@ export class ComunesService {
     if (radio == 'Margen') {
       /* Reset % y poner su checked a false*/
       percentage = this.initPercentage(radio, operation, dimension, employee, null, true);
-      let percen = document.getElementById("percen") as HTMLInputElement;
-      if(percen)
-        percen.checked = false;
     }
     return percentage;
   }
@@ -172,23 +176,25 @@ export class ComunesService {
 
     if(radio2){
       this.setOperacion(radio2);
-      switch(radio2) { 
-        case "Ventas": { 
-          let elem = document.getElementById("radioVentas") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-        case "Cancelaciones": { 
-          let elem = document.getElementById("radioCancelaciones") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-        case "Neto": { 
-          let elem = document.getElementById("radioNeto") as HTMLInputElement;
-          elem.checked = true;
-           break; 
-        } 
-     } 
+      setTimeout(() => {
+        switch(radio2) { 
+          case "Ventas": { 
+            let elem = document.getElementById("radioVentas") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+          case "Cancelaciones": { 
+            let elem = document.getElementById("radioCancelaciones") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+          case "Neto": { 
+            let elem = document.getElementById("radioNeto") as HTMLInputElement;
+            elem.checked = true;
+             break; 
+          } 
+       } 
+      }, 0);
     }
     let percentage;
 
@@ -196,9 +202,6 @@ export class ComunesService {
     if (radio2 == 'Neto') {
       /* Reset % y poner su checked a false*/
       percentage = this.initPercentage(metric, radio2, dimension, employee, null, true);
-      let percen = document.getElementById("percen") as HTMLInputElement;
-      if(percen)
-        percen.checked = false;
     }
     return percentage;
 }
@@ -288,35 +291,47 @@ setOperacion (operation) {
     let object = vista ? 'table1' : 'chart1';
     var dim = dimensionSel == 'Sin dimensión' ? object + '_sinDim' : object + '_Dim';
     
-    let id = 0;
+    let id = 1;
     
-    if (dimensionSel != 'Sin dimensión') {
-      switch (topBottom) {
-          case null || undefined:
-              id = 1;
-              break;
-          case 'Top 20':
-              id = 2;
-              break;
-          case 'Bottom 20':
-              id = 3;
-              break;
-          default:
-            id = 1;
-            break;
-      }
-    }
-
     let url = window.location.pathname.split("/");
     let page="";
     if(url[url.length-1] != ""){
       page=url[url.length-1];
     }
-    if(page != "evolucion"){//Si no estamos en la pestanya evolucion se utilizar el _sinDim o _Dim
-      this._QlikConnection.getObject("chart1", objetos[dim][id]);
-    }else{
-      this._QlikConnection.getObject("chart1", objetos[object][id]);
+
+    
+    switch (topBottom) {
+        case null || undefined:
+            id = 1;
+            break;
+        case 'Top 20':
+            id = 2;
+            break;
+        case 'Bottom 20':
+            id = 3;
+            break;
+        case 'Top 50':
+          id = 1;
+          break;
+        case 'Bottom 50':
+          id = 2;
+          break;
+        default:
+          id = 1;
+          break;
     }
+
+    if(page == "evolucion" && dimensionSel == 'Sin dimensión'){
+      id=0;
+    }
+
+    if(page != "evolucion"){//Si no estamos en la pestanya evolucion se utilizar el _sinDim o _Dim
+      id--;
+      return this._QlikConnection.getObject("chart1", objetos[dim][id]);
+    }else{
+      return this._QlikConnection.getObject("chart1", objetos[object][id]);
+    }
+    
   }
 
   /* Set bottom chart/table objects dynamically */
@@ -345,7 +360,7 @@ setOperacion (operation) {
           type = vista ? 'table3' : 'bar';
       }
 
-      this._QlikConnection.getObject("chart2", objetos[type][id]);
+      return this._QlikConnection.getObject("chart2", objetos[type][id]);
   }
     
   }
@@ -360,8 +375,10 @@ setOperacion (operation) {
         break;
       }
     }
+    this.optionGlobal= option;
 
 		console.log('Dimension field: ' +  this.niveles[index].Id + ' - ' +  this.niveles[index].Field);
+
     this._QlikConnection.setNumValue('vL.DimensionSel', this.niveles[index].Id);
     this._QlikConnection.setStringValue('vL.DimensionCampo', this.niveles[index].Field);
   }
@@ -369,22 +386,39 @@ setOperacion (operation) {
   /* Initialization of the employee's average variable */
   initEmployee(employee, percentage, reset, centros) {    
     var empl = (employee == null || percentage || reset || !centros) ? false : employee;    
-    this.setEmployee(empl);
+    this.setEmployee(empl);    
     return empl;
   }
 
   setEmployee(employee){
-
+    this.employeeGlobal = employee;
     /* Set the mployee's average variable */
     var value = !employee ? 0 : 1;
     var valueDesc = !employee ? '\'\'' : 'MediaEmpleado';
     this._QlikConnection.setNumValue('vL.MediaSel', value);
     this._QlikConnection.setStringValue('vL.MediaSelDesc', valueDesc);
-    console.log("employee: ", employee);
-    console.log("value: ", value);
-    console.log("valueDesc: ", valueDesc);
     
     return employee;
+  }
+
+    /* Top and Bottom fields initializations */
+    initTopBottom(init, topBottom) {
+      if (init) {
+        var top;
+        switch (topBottom) {
+            case null || undefined:
+                top = 0;
+                break;
+            case 'Top 50':
+                top = 50;
+                break;
+        }
+        console.log("top: " + top);
+        console.log("topBottom: " + topBottom);
+        
+        let tb = this.setTopBottom(null, topBottom);
+        return tb;
+      }
   }
 
   /* Set the Top and Bottom fields */
@@ -400,22 +434,58 @@ setOperacion (operation) {
     this._QlikConnection.setNumValue('vL.TopSel', top);
     this._QlikConnection.setNumValue('vL.BotSel', bottom);
 
+    this.topBottomGlobal = tB;
     return tB;
   }
 
   initPercentage(metric, operation, dimension, employee, percentage, reset){
     var pct = (typeof percentage === 'undefined' || dimension === 'Sin dimensión' || operation === 'Neto' || metric === 'Margen' || employee || reset) ? false : percentage;
     this.setPercentage(pct);
+    if(!pct){
+      let percen = document.getElementById("percen") as HTMLInputElement;
+      if(percen)
+        percen.checked = false;
+    }
+    
     return pct;
   }
 
   /* Set the & variable */
   setPercentage(percentage) {
+    this.percentageGlobal= percentage;
     var value = !percentage ? 0 : 1;
     var valueDesc = !percentage ? '\'\'' : 'Porcentaje';
     this._QlikConnection.setNumValue('vL.PorcentajeSel', value);
     this._QlikConnection.setStringValue('vL.PorcentajeSelDesc', valueDesc);
     return percentage;
+  }
+
+
+  /* Dimension field initialization */
+  initDimension(dimension, idx){
+    let url = window.location.pathname.split("/");
+    let page="";
+    if(url[url.length-1] != ""){
+      page=url[url.length-1];
+    }
+    let isRankingOrClientes = (page == "ranking" || page == "clientes");
+
+    var condition = isRankingOrClientes ? (dimension == this.dimensions[1] || dimension == this.dimensions[3] || dimension == this.dimensions[8]) : dimension == this.dimensions[idx];
+    var dim = (typeof dimension == 'undefined' || condition) ? this.dimensions[0] : dimension;
+    this.dimensionGlobal = dim;
+
+    return dim;
+  }
+
+  initOption(dimension){
+    if(this.optionGlobal && dimension != "Sin dimensión"){
+      this.setLevel(this.optionGlobal);
+    }else{
+      this.optionGlobal = this.selectors[0][0];
+      this.setLevel(this.selectors[0][0]);
+    }
+
+    return this.optionGlobal;
   }
 
 }

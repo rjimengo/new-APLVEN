@@ -1,1 +1,155 @@
-<p>cargo works!</p>
+<div class="contenedor">
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <div>
+                <div class="form-check">
+                    <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="Número" (click)="changeOption(radioNum.value)">
+                    <label class="form-check-label" for="radioNumero">
+                      Número (#)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="Importe" (click)="changeOption(radioImp.value)">
+                    <label class="form-check-label" for="radioImporte">
+                      Importe (€)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioMarg class="form-check-input" type="radio" name="radioOption" id="radioMargen" value="Margen" (click)="changeOption(radioMarg.value)">
+                    <label class="form-check-label" for="radioMargen">
+                      Margen (€)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div class="form-check">
+                    <input #radioVen class="form-check-input" type="radio" name="radioOption2" id="radioVentas" checked value="Ventas" (click)="changeOption2(radioVen.value)">
+                    <label class="form-check-label" for="radioVentas">
+                        Ventas
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioCan class="form-check-input" type="radio" name="radioOption2" id="radioCancelaciones" value="Cancelaciones" (click)="changeOption2(radioCan.value)">
+                    <label class="form-check-label" for="radioCancelaciones">
+                        Cancelaciones
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioNet class="form-check-input" type="radio" name="radioOption2" id="radioNeto" value="Neto" (click)="changeOption2(radioNet.value)">
+                    <label class="form-check-label" for="radioNeto">
+                        Neto
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-6">
+    
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+
+    <!-- VENTAS CANCELACIONES Y NETO -->
+    <div class="row graficas text-center">
+
+        <!-- VENTAS-->
+        <div class="col-lg-4">
+            <i class="fa fa-shopping-cart mr-2"></i>
+            <label>Ventas</label>
+            <!-- KPI ventas -->
+            <div id="sales" class="cifras"></div>
+        </div>
+        
+        <!-- CANCELACIONES-->
+        <div class="col-lg-4">
+            <i class="fa fa-times mr-2"></i>
+            <label>Cancelaciones</label>
+            <!-- KPI cancelaciones -->
+            <div id="cancellations" class="cifras"></div>
+        </div>
+
+        <!-- NETO-->
+        <div class="col-lg-4">
+            <i class="fas fa-chart-pie mr-2"></i>
+            <label>Neto</label>
+            <!-- KPI neto -->
+            <div id="net" class="cifras"></div>
+        </div>
+    </div>
+
+    <!-- Dimensiones -->
+     <div class="row">
+        <div class="dimensiones">
+            <ng-container *ngFor="let dimension of dimensions; let i = index">
+                <span class="dropdown">
+                    <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Cargo'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                        {{dimension}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0" [ngClass]="{'disabled-dropdown' : dimension == 'Cargo'}">
+                        <a class="dropdown-item" *ngFor="let option of options; let y = index" (click)="dimensionSelected(i)" (click)="setLevel(option, y)" [ngClass]="{'btnactive': option == optionSel}">{{option}}</a>
+                    </div>
+                </span>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- Segunda linea de botones -->
+    <div class="row segundaLineaBtns">
+        <div class="col-md-3" >
+            <button class="btn btnSegundaLinea" (click)="employeeSelected()" [disabled]="dimensionSel != 'Centros' || percentage.checked" [ngClass]="{'btnactive': employee == true}">
+				{{employeeAvg}}
+			</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [ngClass]="{'btnactive': TBopt == topBottom}">
+				{{TBopt}}
+			</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <label class="switch">
+                <input id="percen" #percentage type="checkbox" [disabled]="dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee"  (click)="percentageSelected(percentage.checked)">
+                <span class="slider round" [style]="{'cursor' : ((dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee) ? 'not-allowed' : 'pointer') }"></span>
+              </label>
+              <span class="porcentajeLabel">%</span>
+        </div>
+
+    </div>
+
+    <div class="graficas" [ngClass]="{'panel': !maxGrafica,'panel-xl': maxGrafica}">
+        <!-- grafica top -->
+        <div class="row">
+            <div class="col-md-6 mt-2 mb-2 p-0">
+                <span></span>
+            </div>
+            <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                <i class="fa fa-download p-2" (click)="exportExcell(grafica)"></i>
+                <i [ngClass]="{'fa-table': !vista,'fa-chart-pie': vista}" class="fa p-2" (click)="changeView('resumen')"></i>
+                <i [ngClass]="{'fa-window-maximize': !maxGrafica,'fa-window-restore': maxGrafica}" class="far p-2" (click)="maximizar('graficaTop')"></i>
+            </div>
+        </div>
+        <!-- grafica top -->
+        <div #grafica id="chart1" class="grafica"></div>
+    </div>
+
+
+    <div *ngIf="dimensionSel != 'Sin dimensión'" class="graficas" [ngClass]="{'panel': !maxGraficaBottom,'panel-xl': maxGraficaBottom}">
+        <!--  iconos y grafica bottom -->
+        <div class="row">
+            <div class="col-md-6 mt-2 mb-2 p-0">
+                <span></span>
+            </div>
+            <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                <i class="fa fa-download p-2" (click)="exportExcell(grafica2)"></i>
+                <i [ngClass]="{'fa-table': !vistaB,'fa-chart-pie': vistaB}" class="fa p-2" (click)="changeView('resumen_B')"></i>
+                <i [ngClass]="{'fa-window-maximize': !maxGraficaBottom,'fa-window-restore': maxGraficaBottom}" class="far p-2" (click)="maximizar('graficaBottom')"></i>
+            </div>
+        </div>
+        <!-- grafica cancelaciones -->
+        <div #grafica2 id="chart2" class="grafica"></div>
+    </div>
+
+</div>

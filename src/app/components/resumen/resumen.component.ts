@@ -25,8 +25,7 @@ export class ResumenComponent implements OnInit {
 
   constructor(
     private _QlikConnection: ConnectionQlikService,
-    private _ComunService: ComunesService,
-    private spinner: NgxSpinnerService) { }
+    private _ComunService: ComunesService) { }
   
   async ngOnInit() {
     this.cargarDatos();

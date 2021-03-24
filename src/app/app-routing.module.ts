@@ -15,14 +15,14 @@ import { ventasGuard } from './services/guards/ventasGuard.guard';
 
 const rutasHijas = [
   { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad]},
-  { path: 'evolucion', component: EvolucionComponent, canActivate: [CanActivateAppLoad] },
-  { path: 'territorial', component: TerritorialComponent, canActivate: [CanActivateAppLoad] },
-  { path: 'productos', component: ProductosComponent },
-  { path: 'canales', component: CanalesComponent },
-  { path: 'cargo', component: CargoComponent },
-  { path: 'ranking', component: RankingComponent },
-  { path: 'clientes', component: ClientesComponent },
-  { path: 'comparativa', component: ComparativaComponent },
+  { path: 'evolucion', component: EvolucionComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'territorial', component: TerritorialComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'productos', component: ProductosComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'canales', component: CanalesComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'cargo', component: CargoComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'ranking', component: RankingComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'clientes', component: ClientesComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'comparativa', component: ComparativaComponent, canActivate: [CanActivateAppLoad]},
 
 ];
 

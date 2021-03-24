@@ -82,23 +82,6 @@
 
     </div>
 
-
-    <!-- Dimensiones -->
-
-<!--     <div class="row">
-        
-        <div class="col-lg-9 dimensiones">
-            <button class="btn btnDimension" *ngFor="let dimension of dimensions; let i = index" (click)="dimensionSelected(i)" [ngClass]="{'btnactive': dimension == dimensionSel}">
-                {{dimension}}
-            </button>
-        </div>
-        <div class="col-lg-3">
-            <span *ngFor="let option of options; let i = index" (click)="setLevel(option, i)">
-                
-            </span>
-        </div>
-    </div> -->
-
     <!-- Dimensiones -->
      <div class="row">
         <div class="dimensiones">
@@ -118,21 +101,21 @@
     <!-- Segunda linea de botones -->
     <div class="row segundaLineaBtns">
         <div class="col-md-3" >
-            <button class="btn btnSegundaLinea" (click)="employeeSelected()" [disabled]="dimensionSel != 'Centros'" [ngClass]="{'btnactive': employee == true}">
+            <button class="btn btnSegundaLinea" (click)="employeeSelected()" [disabled]="percentage.checked" [ngClass]="{'btnactive': employee == true}">
 				{{employeeAvg}}
 			</button>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4">
-            <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [disabled]="dimensionSel == 'Sin dimensión'" [ngClass]="{'btnactive': TBopt == topBottom}">
+            <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [ngClass]="{'btnactive': TBopt == topBottom}">
 				{{TBopt}}
 			</button>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3">
             <label class="switch">
-                <input id="percen" #percentage type="checkbox" [disabled]="dimensionSel == 'Sin dimensión' "  (click)="percentageSelected(percentage.checked)">
-                <span class="slider round" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'not-allowed') }"></span>
+                <input id="percen" #percentage type="checkbox" [disabled]="dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee"  (click)="percentageSelected(percentage.checked)">
+                <span class="slider round" [style]="{'cursor' : ((dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee) ? 'not-allowed' : 'pointer') }"></span>
               </label>
               <span class="porcentajeLabel">%</span>
         </div>
@@ -171,6 +154,5 @@
         <!-- grafica cancelaciones -->
         <div #grafica2 id="chart2" class="grafica"></div>
     </div>
-
 
 </div>

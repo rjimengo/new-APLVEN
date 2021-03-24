@@ -586,14 +586,14 @@ export var nivelesApp=[
   Id:91,
   Field:'RESPONSABILIDAD',
   }
-];
+]
 
 /* Indicadores Ventas, Cancelaciones, Neto pestañas Resumen, Terrirorial... */
 export var indicadoresVCN = {
   ventas: ['sales', '302f45e7-79b1-4b58-bd92-83d8ad3f3f49'],
   cancelaciones: ['cancellations', '2a00ced0-5234-4fdd-9858-d403e8b64912'],
   neto: ['net', '4b01b3b7-3fda-419f-af54-94d40dde2486']
-};
+}
 
 /* Resumen  0 sin dimension 1 dimension 2 top 20 3 bottom 20*/
 export var resumen = {
@@ -603,7 +603,7 @@ export var resumen = {
   table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
   bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
   table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
-};
+}
 
 /* Territorial */
 export var territorial = {
@@ -615,4 +615,40 @@ export var territorial = {
   table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
   bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
   table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
-};
+}
+
+/* Productos */
+export var productosObjs = {
+  chart1_sinDim: ['70713750-4ce6-4779-be0b-404a9ee5f157', '09779a21-2421-422f-8aa1-bbdf91a6e559', '17279111-edfd-4188-a1ef-460aba2863fc'], //Gráfico líneas (Sin dimensión)
+  chart1_Dim: ['0e4a476f-6ca9-4f9e-b87c-33a8f7ff70a3', '7f514b85-2a26-4176-a3d1-61032268c2af', 'e69220d0-d9a2-47ed-8db8-2839659301e6'], //Gráfico líneas (Dimensión)
+  table1_sinDim: ['3c4ccb4d-a1ca-41ce-86b5-09a8ec035e11', '8ad6d34a-9da7-4512-a261-e887ccb79591', '763fb62a-f9b0-4c0b-8a4a-cf087bb7ae13'], //Tabla gráfico líneas (Sin dimensión)
+  table1_Dim: ['49323238-0c0f-4fcc-8602-643967ba21e2', 'ac1cc19a-645c-4749-a800-8a0b5dde7e2f', 'd101184b-c7af-411f-81e6-a9b0509a6571'], //Tabla gráfico líneas (Dimensión)
+  pieChart: ['0c4104f8-4cd2-47a9-9f17-fc18c75417ff', 'edbe15b2-04dd-4ae3-8412-dbc4e41a06b4', 'df302df3-3680-4d3c-83e3-1c7226ec8761'], //Gráfico pastel inferior
+  table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
+  bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
+  table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
+}
+
+/* Canales */
+export var canales = {
+  chart1_sinDim: ['f12a073f-e622-429e-9081-7905a89591f8', '3699ef98-7eeb-4dcf-a246-5df9fd7e353e', '3e101a9d-64f4-4fb6-a89e-2ce1e8c51a28'], //Gráfico líneas (Sin dimensión)
+  chart1_Dim: ['d0b9be1b-4af9-4664-8a23-d2e14c9de51f', 'c585194c-c374-4ee1-bcc4-13ce779ba13a', 'e772b9a2-50e6-4dc8-b4f6-b23f4bc74848'], //Gráfico líneas (Dimensión)
+  table1_sinDim: ['d5b7d121-4716-4bd5-8e47-aae9aadf4ed4', '7412b2a8-c2c2-4958-96bf-83f4b3e73ce9', 'b82eb4ba-f5b3-4942-b3a5-064ee110628a'], //Tabla gráfico líneas (Sin dimensión)
+  table1_Dim: ['0f7353c9-d398-4365-ab15-108f8609e80a', 'df394926-8525-4c07-9296-e022378b77c8', '5050b485-d6ce-4d94-9023-bfaa91fb4d9d'], //Tabla gráfico líneas (Dimensión)
+  pieChart: ['0c4104f8-4cd2-47a9-9f17-fc18c75417ff', 'edbe15b2-04dd-4ae3-8412-dbc4e41a06b4', 'df302df3-3680-4d3c-83e3-1c7226ec8761'], //Gráfico pastel inferior
+  table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
+  bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
+  table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
+}
+
+/* Cargo */
+export var cargo = {
+  chart1_sinDim: ['bd0b53a1-fd7b-45d1-a4ef-8057fce7c09e', '113e288f-d248-4d55-aa94-275f0b737d9c', '656a8a6b-84d4-4d77-992d-184fc46f20d0'], //Gráfico líneas (Sin dimensión)
+  chart1_Dim: ['ddfa77ef-bd1d-4af7-8e1d-332b6cad3ba0', '3aa08738-5e4a-4087-9334-44228d95ffbb', 'b4779cc3-14d6-42a3-8de2-e5d5d211ca6d'], //Gráfico líneas (Dimensión)
+  table1_sinDim: ['93c78a78-6b3c-471f-8c76-ab270495e431', '769c4254-f451-4077-9a10-1959ecb6dfd4', 'd65b2704-dde0-4932-ad86-f08d629ad657'], //Tabla gráfico líneas (Sin dimensión)
+  table1_Dim: ['70827bcd-39e5-4ad7-b605-08be99df5f97', 'e7aab290-d144-4dca-b92b-1314fdedc7bc', '55b2aa11-91d6-46b9-b77b-da1634b8a993'], //Tabla gráfico líneas (Dimensión)
+  pieChart: ['0c4104f8-4cd2-47a9-9f17-fc18c75417ff', 'edbe15b2-04dd-4ae3-8412-dbc4e41a06b4', 'df302df3-3680-4d3c-83e3-1c7226ec8761'], //Gráfico pastel inferior
+  table2: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'], //Tabla gráfico pastel inferior
+  bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
+  table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
+}
