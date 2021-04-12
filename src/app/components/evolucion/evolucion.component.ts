@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { cancelaciones, indicadoresVCN, netos, sales, resumen } from 'src/config/ventasGlobalIDs';
+import { indicadoresVCN, resumen } from 'src/config/ventasGlobalIDs';
 
 @Component({
   selector: 'app-evolucion',

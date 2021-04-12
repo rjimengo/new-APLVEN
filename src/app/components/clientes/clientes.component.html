@@ -1,1 +1,177 @@
-<p>clientes works!</p>
+<div class="contenedor">
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <div>
+                <div class="form-check">
+                    <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="Número" (click)="changeOption(radioNum.value)">
+                    <label class="form-check-label" for="radioNumero">
+                      Número (#)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="Importe" (click)="changeOption(radioImp.value)">
+                    <label class="form-check-label" for="radioImporte">
+                      Importe (€)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div class="form-check">
+                    <input #radioVen class="form-check-input" type="radio" name="radioOption2" id="radioVentas" checked value="Ventas" (click)="changeOption2(radioVen.value)">
+                    <label class="form-check-label" for="radioVentas">
+                        Ventas
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioCan class="form-check-input" type="radio" name="radioOption2" id="radioCancelaciones" value="Cancelaciones" (click)="changeOption2(radioCan.value)">
+                    <label class="form-check-label" for="radioCancelaciones">
+                        Cancelaciones
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-6">
+    
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+
+    <!-- VENTAS CANCELACIONES Y NETO -->
+    <div class="row graficas text-center">
+
+        <!-- VENTAS-->
+        <div class="col-lg-4">
+            <i class="fa fa-shopping-cart mr-2"></i>
+            <label>Ventas</label>
+            <!-- KPI ventas -->
+            <div id="sales" class="cifras"></div>
+        </div>
+        
+        <!-- CANCELACIONES-->
+        <div class="col-lg-4">
+            <i class="fa fa-times mr-2"></i>
+            <label>Cancelaciones</label>
+            <!-- KPI cancelaciones -->
+            <div id="cancellations" class="cifras"></div>
+        </div>
+
+        <!-- NETO-->
+        <div class="col-lg-4">
+            <i class="fas fa-chart-pie mr-2"></i>
+            <label>Neto</label>
+            <!-- KPI neto -->
+            <div id="net" class="cifras"></div>
+        </div>
+    </div>
+
+    <!-- Dimensiones -->
+     <div class="row">
+        <div class="dimensiones">
+            <ng-container *ngFor="let dimension of dimensions; let i = index">
+                <span class="dropdown">
+                    <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Centros'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                        {{dimension}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0" [ngClass]="{'disabled-dropdown' : dimension == 'Centros'}">
+                        <a class="dropdown-item" *ngFor="let option of options; let y = index" (click)="dimensionSelected(i)" (click)="setLevel(option, y)" [ngClass]="{'btnactive': option == optionSel}">{{option}}</a>
+                    </div>
+                </span>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- Segunda linea de botones -->
+    <div class="row segundaLineaBtns">
+        <div class="col-md-3" >
+            <button class="btn btnSegundaLinea" (click)="employeeSelected()" [disabled]="true" [ngClass]="{'btnactive': employee == true}">
+				{{employeeAvg}}
+			</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <button class="btnSegundaLinea" [disabled]="true" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [ngClass]="{'btnactive': TBopt == topBottom}">
+				{{TBopt}}
+			</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <label class="switch">
+                <input id="percen" #percentage type="checkbox" [disabled]="true"  (click)="percentageSelected(percentage.checked)">
+                <span class="slider round" [style]="{'cursor' : 'not-allowed' }"></span>
+              </label>
+              <span class="porcentajeLabel">%</span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <!-- Edad -->
+        <div class="graficas col-md-6" [ngClass]="{'panel col-md-6': !maxGraficaEdad,'panel-xl col-md-12': maxGraficaEdad}">
+            <div class="row ml-2">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span>{{option}} por rango de edad</span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaEdad)"></i>
+                    <i [ngClass]="{'fa-table': !vistaEdad,'fa-chart-pie': vistaEdad}"  [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('edad')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaEdad,'fa-window-restore': maxGraficaEdad}" class="far p-2" (click)="maximizar('edad')"></i>
+                </div>
+            </div>
+            <div #graficaEdad id="chart1" class="grafica"></div>
+        </div>
+        
+        <!-- Productos y servicios -->
+        <div class="graficas col-md-6" [ngClass]="{'panel col-md-6': !maxGraficaProducServ,'panel-xl col-md-12': maxGraficaProducServ}">
+            <div class="row ml-2">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span>{{option}} por productos y servicios</span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaProducServ)"></i>
+                    <i [ngClass]="{'fa-table': !vistaProducServ,'fa-chart-pie': vistaProducServ}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('producServ')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaProducServ,'fa-window-restore': maxGraficaProducServ}" class="far p-2" (click)="maximizar('producServ')"></i>
+                </div>
+            </div>
+            <div #graficaProducServ id="chart2" class="grafica"></div>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <!-- Negocio -->
+        <div class="graficas col-md-6" [ngClass]="{'panel': !maxGraficaNegocio,'panel-xl col-md-12': maxGraficaNegocio}">
+            <div class="row ml-2">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span>{{option}} por negocio</span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaNegocio)"></i>
+                    <i [ngClass]="{'fa-table': !vistaNegocio,'fa-chart-pie': vistaNegocio}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('negocio')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaNegocio,'fa-window-restore': maxGraficaNegocio}" class="far p-2" (click)="maximizar('negocio')"></i>
+                </div>
+            </div>
+            <div #graficaNegocio id="chart3" class="grafica"></div>
+        </div>
+
+
+        <!-- Saldo -->
+        <div class="graficas col-md-6" [ngClass]="{'panel': !maxGraficaSaldo,'panel-xl col-md-12': maxGraficaSaldo}">
+            <div class="row ml-2">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span>{{option}} por saldo pasivo</span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaSaldo)"></i>
+                    <i [ngClass]="{'fa-table': !vistaSaldo,'fa-chart-pie': vistaSaldo}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('saldo')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaSaldo,'fa-window-restore': maxGraficaSaldo}" class="far p-2" (click)="maximizar('saldo')"></i>
+                </div>
+            </div>
+            <div #graficaSaldo id="chart4" class="grafica"></div>
+        </div>
+
+    </div>
+
+</div>

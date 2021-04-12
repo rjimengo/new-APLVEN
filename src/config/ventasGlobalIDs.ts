@@ -652,3 +652,191 @@ export var cargo = {
   bar: ['de5127d2-d558-4b29-833a-b211cf9894b0', '5ea10bf2-f600-4af6-b60f-739928dfa6e4', '6945b978-3d67-416a-bf99-a478bf7cb0bd'], //Gráfico barras inferior
   table3: ['42d104c4-9890-4567-8bed-6b56338530fe', '3285660a-7f7e-44a2-876f-fade6b8c0bc9', 'ce0bfebb-1b0d-4258-bc44-fca677f5d2a7'] //Tabla gráfico barras inferior
 }
+
+/* Ranking */
+/* export var rankingIds = [
+  'c1b10949-a1a8-44fd-ae66-350f598cfb7a', 'cc011788-78f7-4f1f-84e8-6c6859eb43b8', //Gráfico barras 1 (Top)
+  '829b082e-579f-438f-92aa-86567056f164', '42b339f7-a6d3-4447-a3cb-6f46e3be7d24', //Tabla gráfico barras 1 (Top)
+  '68b6d58a-a5a3-4624-91b8-800d10ba7df3', '56291399-1d32-4c88-b46f-df720f75f7aa', //Gráfico barras 1 (Bottom)
+  'ae131a05-8e7b-42ad-938e-bab995222cc3', '525837a0-4838-45e5-99bb-3d6939d98794', //Tabla gráfico barras 1 (Bottom)
+  'b0647554-b297-43e3-882e-21b57b2a219d', 'b0647554-b297-43e3-882e-21b57b2a219d', //Gráfico barras 2 (Top)
+  '29614832-3638-4f6c-9695-26678b4fd51d', '29614832-3638-4f6c-9695-26678b4fd51d', //Tabla gráfico barras 2 (Top)
+  'cda2363d-037a-47d8-b6ab-5009ae36c6c7', 'cda2363d-037a-47d8-b6ab-5009ae36c6c7', //Gráfico barras 2 (Bottom)
+  '81a2095c-db45-4966-b453-3aabf1165315', '81a2095c-db45-4966-b453-3aabf1165315' //Tabla gráfico barras 2 (Bottom)
+] */
+
+export var ranking = {
+  chart1_sinDim: ['c1b10949-a1a8-44fd-ae66-350f598cfb7a', '68b6d58a-a5a3-4624-91b8-800d10ba7df3'],
+  chart1_Dim: ['cc011788-78f7-4f1f-84e8-6c6859eb43b8', '56291399-1d32-4c88-b46f-df720f75f7aa'],
+  table1_sinDim: ['829b082e-579f-438f-92aa-86567056f164', 'ae131a05-8e7b-42ad-938e-bab995222cc3'],
+  table1_Dim: ['42b339f7-a6d3-4447-a3cb-6f46e3be7d24', '525837a0-4838-45e5-99bb-3d6939d98794'],
+  chart2_sinDim: ['b0647554-b297-43e3-882e-21b57b2a219d', 'cda2363d-037a-47d8-b6ab-5009ae36c6c7'],
+  chart2_Dim: ['b0647554-b297-43e3-882e-21b57b2a219d', 'cda2363d-037a-47d8-b6ab-5009ae36c6c7'],
+  table2_sinDim: ['29614832-3638-4f6c-9695-26678b4fd51d', '81a2095c-db45-4966-b453-3aabf1165315'],
+  table2_Dim: ['29614832-3638-4f6c-9695-26678b4fd51d', '81a2095c-db45-4966-b453-3aabf1165315']
+}
+
+/* Clientes */
+export var clientes = [{
+  "pos": 0,
+  "div": "chart1",
+  "id": "tVYSyA"
+},
+{
+  "pos": 1,
+  "div": "table1",
+  "id": "qwmxh"
+},
+{
+  "pos": 2,
+  "div": "chart2",
+  "id": "RQAamWy"
+},
+{
+  "pos": 3,
+  "div": "table2",
+  "id": "jjtPyH"
+},
+{
+  "pos": 4,
+  "div": "chart3",
+  "id": "cDUeK"
+},
+{
+  "pos": 5,
+  "div": "table3",
+  "id": "mqRpe"
+},
+{
+  "pos": 6,
+  "div": "chart4",
+  "id": "zMPjg"
+},
+{
+  "pos": 7,
+  "div": "table4",
+  "id": "MWkQXC"
+}
+]
+
+/* Comparativa */
+var comp = {
+  chart2_left: ['9937be24-3469-419a-97e8-16c55c48e613', 'aa1085ab-2c21-4552-98dd-35df06127fe9', '02876d02-4b37-4310-8a60-70cd77963637'], //Gráfico barras inferior izquierdo
+  table2_left: ['f843ab38-5f0b-47b4-947f-bd81505d17b9', '5e58526f-6929-4a7f-8fec-654e1a27285f', '1f887247-aecb-4636-afd2-e64da3b99220'], //Tabla gráfico barras inferior izquierdo
+  chart2_right: ['54edb453-093f-4d39-adf7-9e6ec63b64f1', '7f49261b-2544-45b6-a901-fd86aeaac3f0', 'e1e6dec5-5fc3-4096-ab00-6929ddf28ece'], //Gráfico barras inferior derecho
+  table2_right: ['4834042d-4f03-49b6-be5f-35e8f5ecff86', 'e732f0c7-5e32-44c8-961d-4466fd724cad', 'c24c795b-e8a8-4c3a-8005-17b4deca122f'] //Tabla gráfico barras inferior derecho																														//Tabla gráfico barras inferior
+}
+
+/* Seleccionados (Comparativa) */
+var left = [{
+  "pos": 0,
+  "div": "sales-left",
+  "id": "PDWmk"
+},{
+  "pos": 1,
+  "div": "can-left",
+  "id": "sdJTjsc"
+},{
+  "pos": 2,
+  "div": "net-left",
+  "id": "jcTBJVU"
+},{
+  "pos": 3,
+  "div": "red-left",
+  "id": "EaHmGJ"
+},{
+  "pos": 4,
+  "div": "dt-left",
+  "id": "WALFmmm"
+},{
+  "pos": 5,
+  "div": "dg-left",
+  "id": "rPjJt"
+},{
+  "pos": 6,
+  "div": "dan-left",
+  "id": "nKDgLJ"
+},{
+  "pos": 7,
+  "div": "oficina-left",
+  "id": "pmBbJmj"
+},{
+  "pos": 8,
+  "div": "ventanilla-left",
+  "id": "JCFRR"
+},{
+  "pos": 9,
+  "div": "month-left",
+  "id": "JNGxC"
+},{
+  "pos": 10,
+  "div": "date-left",
+  "id": "rKteG"
+},{
+  "pos": 11,
+  "div": "chart-left",
+  "id": "qRjkLaS"
+},{
+  "pos": 12,
+  "div": "table-left",
+  "id": "wmAwJ"
+}
+]
+
+/* Comparar con... (Comparativa) */
+var right = [{
+  "pos": 0,
+  "div": "sales-right",
+  "id": "872ae107-3671-470d-a4aa-c064038baff5"
+},{
+  "pos": 1,
+  "div": "can-right",
+  "id": "9f1a9d13-8170-4d07-a24b-67cfe838ced5"
+},{
+  "pos": 2,
+  "div": "net-right",
+  "id": "ad050504-c7f2-4e5d-b383-5e076f26c406"
+},{
+  "pos": 3,
+  "div": "red-right",
+  "id": "MSeXXpW"
+},{
+  "pos": 4,
+  "div": "dt-right",
+  "id": "mRUNT"
+},{
+  "pos": 5,
+  "div": "dg-right",
+  "id": "TmVkms"
+},{
+  "pos": 6,
+  "div": "dan-right",
+  "id": "HPDgNSJ"
+},{
+  "pos": 7,
+  "div": "oficina-right",
+  "id": "vhdLwA"
+},{
+  "pos": 8,
+  "div": "ventanilla-right",
+  "id": "pxyZPp"
+},{
+  "pos": 9,
+  "div": "month-right",
+  "id": "Pfxgpw"
+},{
+  "pos": 10,
+  "div": "date-right",
+  "id": "Ragtm"
+},{
+  "pos": 11,
+  "div": "chart-right",
+  "id": "c88f090e-4636-4d76-a1ba-9cd8f186803a"
+},{
+  "pos": 12,
+  "div": "table-right",
+  "id": "55c1108c-6b82-409a-84a1-a65633a057b2"
+}
+]
+
+export var comparativa = { comp: comp, left: left, right: right };

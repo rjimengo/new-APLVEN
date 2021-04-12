@@ -44,6 +44,8 @@ setAppLoaded(newValue): void {
 }
 
   qlikConnection(appId){
+    console.log("qlikConnection: " + appId);
+
     this.setLoader("block");
     //Listener que pasaremos al iniciar qlik y, cuando se cambie algun dato de qlik, se ejecutara esta funcion
     var listener = function() {
@@ -68,6 +70,8 @@ setAppLoaded(newValue): void {
 
         return new Promise((resolve) => {
           import('./../../assets/js/qlik-connection.js').then(async file => {
+            console.log("import qlik-connection.js");
+            
             this.qApp = await file.default.qApp(configQlik, this.globals, appId, listener);
             this.globals = await file.default.q;
             ConnectionQlikService.globals =  this.globals;

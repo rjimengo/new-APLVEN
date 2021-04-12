@@ -234,7 +234,7 @@ async openApp(aplicacion){
   }
   if(await this._QlikConnection.qlikConnection(IDapp)){
     localStorage.setItem('appId', IDapp); 
-    this.router.navigate([aplicacion + '/' + pestanya]);      
+    this.router.navigate([aplicacion + '#/' + pestanya]);      
   } 
 }
 

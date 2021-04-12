@@ -1,26 +1,30 @@
 /* FILTROS QLIK*/
-.title-wrapper{
+#sidebar .title-wrapper{
     color: white !important;
     line-height: 16px;
     border: none !important;
 }
 /* Fuente del filtro */
-.qv-collapsed-listbox .title-wrapper .title {
+#sidebar .qv-collapsed-listbox .title-wrapper .title {
     font-size: 12px !important;
     font-weight: normal !important;
 }
-.qv-collapsed-listbox {
+#sidebar .qv-collapsed-listbox {
     height: 24px;
     background-color: #1c82a8;
     border: none !important;
 }
-.qv-collapsed-listbox .qv-state-count-bar {
+#sidebar .qv-collapsed-listbox .qv-state-count-bar {
     border: none !important;
     display: none;
 }
-.qv-collapsed-listbox {
+#sidebar .qv-collapsed-listbox {
     border: none;
-} 
+}
+#sidebar .qv-filterpane.qv-filterpane-scrollable {
+    overflow: hidden !important;
+}
+
 
 
 /* PESTAÑAS*/
@@ -95,8 +99,6 @@
 
     padding-left: 225px;
     padding-right: 15px;
-
-
 }
 
 @media (max-width: 992px) {
@@ -161,8 +163,8 @@
 
 
 .disabled-button, .disabled-button:hover{
-    background-color: rgb(240, 240, 240);
-    opacity: 50%;
+    background-color: rgb(240, 240, 240) !important;
+    opacity: 0.5 !important;
     cursor:default !important;
 } 
 .disabled-dropdown{
@@ -174,6 +176,7 @@
 .dimensiones .dropdown-item:active, .dimensiones .dropdown-item:hover{
     background-color: rgb(38, 144, 183);
     color: white;
+    display: block !important;
 }
 
 .dimensiones button:active, .dimensiones button:focus{
@@ -187,7 +190,9 @@
 /* Dropdown menu dimensiones */
 .dimensiones .dropdown .dropdown-menu{ display: none; }
 .dimensiones .dropdown:hover .dropdown-menu{ display: block; margin-top: 15px;}
-
+.dropdown-menu{
+    top: 90% !important;
+}
 
 /* Slider porcentaje------------------------------- */
 .switch {
@@ -362,4 +367,22 @@ select:checked, option::selection{
     overflow-x: scroll;
     
     transition: 0.5s;
+}
+
+
+/* styles para nuevo styles-qlik */
+@media only screen and (min-device-width: 1025px){
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #b3b3b3;
+    }
+    ::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
 }

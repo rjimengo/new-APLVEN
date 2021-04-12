@@ -79,7 +79,7 @@
   padding: 0 8px 8px 8px;
 }
 #filtros{
-  overflow-y:scroll;
+  overflow-y:auto;
   max-height: 48%;
   
 }

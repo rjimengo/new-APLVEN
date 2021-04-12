@@ -29,22 +29,22 @@ const rutasHijas = [
 const routes: Routes = [
   { path: '', component: InicioComponent },
   {
-  path: 'ventas',
+  path: 'ventas#',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'territorial',
+  path: 'territorial#',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'vidacaixa',
+  path: 'vidacaixa#',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'segurcaixa',
+  path: 'segurcaixa#',
   canActivate: [ventasGuard],
   children: rutasHijas
 },

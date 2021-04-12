@@ -1,1 +1,236 @@
-<p>comparativa works!</p>
+<div class="contenedor">
+
+    <div class="row mb-2">
+        <div class="col-4">
+            <div>
+                <div class="form-check">
+                    <input #radioNum class="form-check-input" type="radio" name="radioOption" id="radioNumero" checked value="Número" (click)="changeOption(radioNum.value)">
+                    <label class="form-check-label" for="radioNumero">
+                      Número (#)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioImp class="form-check-input" type="radio" name="radioOption" id="radioImporte" value="Importe" (click)="changeOption(radioImp.value)">
+                    <label class="form-check-label" for="radioImporte">
+                      Importe (€)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioMarg class="form-check-input" type="radio" name="radioOption" id="radioMargen" value="Margen" (click)="changeOption(radioMarg.value)">
+                    <label class="form-check-label" for="radioMargen">
+                      Margen (€)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div class="form-check">
+                    <input #radioVen class="form-check-input" type="radio" name="radioOption2" id="radioVentas" checked value="Ventas" (click)="changeOption2(radioVen.value)">
+                    <label class="form-check-label" for="radioVentas">
+                        Ventas
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioCan class="form-check-input" type="radio" name="radioOption2" id="radioCancelaciones" value="Cancelaciones" (click)="changeOption2(radioCan.value)">
+                    <label class="form-check-label" for="radioCancelaciones">
+                        Cancelaciones
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #radioNet class="form-check-input" type="radio" name="radioOption2" id="radioNeto" value="Neto" (click)="changeOption2(radioNet.value)">
+                    <label class="form-check-label" for="radioNeto">
+                        Neto
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+
+    <div class="row graficas text-center">
+        <!-- Columna superior izquierda -->
+        <div class="col-md-6">
+            <label>Ventas seleccionadas</label>
+            <!-- Filtros Centros Izquierda -->
+            <div class="row">
+                <div id="red-left" class="col-md-4" style="height: 25px;padding-bottom:5px; color: black;"> red left</div>
+                <div id="dt-left" class="col-md-4"></div>
+                <div id="dg-left" class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div id="dan-left" class="col-md-4" style="height: 25px;padding-bottom:5px; color: black;"></div>
+                <div id="oficina-left" class="col-md-4"></div>
+                <div id="ventanilla-left" class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div id="month-left" class="col-md-6" style="height: 25px;padding-bottom:5px; color: black;"></div>
+                <div id="date-left" class="col-md-6"></div>
+            </div>
+            <!-- KPIs -->
+            <div class="row">
+                <!-- VENTAS-->
+                <div class="col-lg-4">
+                    <i class="fa fa-shopping-cart mr-2"></i>
+                    <label>Ventas</label>
+                    <!-- KPI ventas -->
+                    <div id="sales-left" class="cifras"></div>
+                </div>
+                
+                <!-- CANCELACIONES-->
+                <div class="col-lg-4">
+                    <i class="fa fa-times mr-2"></i>
+                    <label>Cancelaciones</label>
+                    <!-- KPI cancelaciones -->
+                    <div id="can-left" class="cifras"></div>
+                </div>
+        
+                <!-- NETO-->
+                <div class="col-lg-4">
+                    <i class="fas fa-chart-pie mr-2"></i>
+                    <label>Neto</label>
+                    <!-- KPI neto -->
+                    <div id="net-left" class="cifras"></div>
+                </div>
+            </div>
+
+            <div class="graficas" [ngClass]="{'panel': !maxGraficaTL,'panel-xl': maxGraficaTL}">
+                <!-- grafica top izquierda -->
+                <div class="row">
+                    <div class="col-md-6 mt-2 mb-2 p-0">
+                        <span></span>
+                    </div>
+                    <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                        <i class="fa fa-download p-2" (click)="exportExcell(graficaTopLeft)"></i>
+                        <i [ngClass]="{'fa-table': !vistaTopLeft,'fa-chart-pie': vistaTopLeft}" class="fa p-2" (click)="changeView('TL')"></i>
+                        <i [ngClass]="{'fa-window-maximize': !maxGraficaTL,'fa-window-restore': maxGraficaTL}" class="far p-2" (click)="maximizar('TL')"></i>
+                    </div>
+                </div>
+                <!-- grafica top izquierda -->
+                <div #graficaTopLeft id="chart-left" class="grafica"></div>
+            </div>
+
+        </div>
+
+        <!-- Columna superior derecha -->
+        <div class="col-md-6">
+            <label>Comparar con...</label>
+            <!-- Filtros Centros derecha -->
+            <div class="row">
+                <div id="red-right" class="col-md-4" style="height: 25px;padding-bottom:5px; color: black;"></div>
+                <div id="dt-right" class="col-md-4"></div>
+                <div id="dg-right" class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div id="dan-right" class="col-md-4" style="height: 25px;padding-bottom:5px; color: black;"></div>
+                <div id="oficina-right" class="col-md-4"></div>
+                <div id="ventanilla-right" class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div id="month-right" class="col-md-6" style="height: 25px;padding-bottom:5px; color: black;"></div>
+                <div id="date-right" class="col-md-6"></div>
+            </div>
+            <!-- KPIs -->
+            <div class="row">
+                <!-- VENTAS-->
+                <div class="col-lg-4">
+                    <i class="fa fa-shopping-cart mr-2"></i>
+                    <label>Ventas</label>
+                    <!-- KPI ventas -->
+                    <div id="sales-right" class="cifras"></div>
+                </div>
+                
+                <!-- CANCELACIONES-->
+                <div class="col-lg-4">
+                    <i class="fa fa-times mr-2"></i>
+                    <label>Cancelaciones</label>
+                    <!-- KPI cancelaciones -->
+                    <div id="can-right" class="cifras"></div>
+                </div>
+        
+                <!-- NETO-->
+                <div class="col-lg-4">
+                    <i class="fas fa-chart-pie mr-2"></i>
+                    <label>Neto</label>
+                    <!-- KPI neto -->
+                    <div id="net-right" class="cifras"></div>
+                </div>
+            </div>
+
+            <div class="graficas" [ngClass]="{'panel': !maxGraficaTR,'panel-xl': maxGraficaTR}">
+                <!-- grafica top derecha -->
+                <div class="row">
+                    <div class="col-md-6 mt-2 mb-2 p-0">
+                        <span></span>
+                    </div>
+                    <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                        <i class="fa fa-download p-2" (click)="exportExcell(graficaTopRight)"></i>
+                        <i [ngClass]="{'fa-table': !vistaTopRight,'fa-chart-pie': vistaTopRight}" class="fa p-2" (click)="changeView('TR')"></i>
+                        <i [ngClass]="{'fa-window-maximize': !maxGraficaTR,'fa-window-restore': maxGraficaTR}" class="far p-2" (click)="maximizar('TR')"></i>
+                    </div>
+                </div>
+                <!-- grafica top derecha -->
+                <div #graficaTopRight id="chart-right" class="grafica"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row graficas text-center">
+        <!-- Dimensiones -->
+            <div class="dimensiones col-md-10">
+                <ng-container *ngFor="let dimension of dimensions; let i = index">
+                    <span class="dropdown">
+                        <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Centros'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                            {{dimension}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0" [ngClass]="{'disabled-dropdown' : dimension == 'Centros'}">
+                            <a class="dropdown-item" *ngFor="let option of options; let y = index" (click)="dimensionSelected(i)" (click)="setLevel(option, y)" [ngClass]="{'btnactive': option == optionSel}">{{option}}</a>
+                        </div>
+                    </span>
+                </ng-container>
+            </div>
+    
+            <div class="col-md-2">
+                <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [disabled]="dimensionSel == 'Sin dimensión'" [ngClass]="{'btnactive': TBopt == topBottom}">
+                    {{TBopt}}
+                </button>
+            </div>
+        
+        <div class="col-md-6" [ngClass]="{'panel': !maxGraficaBL,'panel-xl': maxGraficaBL}">
+            <!-- grafica top derecha -->
+            <div class="row">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span></span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaBottomLeft)"></i>
+                    <i [ngClass]="{'fa-table': !vistaBottomLeft,'fa-chart-pie': vistaBottomLeft}" class="fa p-2" (click)="changeView('BL')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaBL,'fa-window-restore': maxGraficaBL}" class="far p-2" (click)="maximizar('BL')"></i>
+                </div>
+            </div>
+            <!-- grafica top derecha -->
+            <div #graficaBottomLeft id="chart2-left" class="grafica"></div>
+        </div>
+
+        <div class="col-md-6" [ngClass]="{'panel': !maxGraficaBR,'panel-xl': maxGraficaBR}">
+            <!-- grafica top derecha -->
+            <div class="row">
+                <div class="col-md-6 mt-2 mb-2 p-0">
+                    <span></span>
+                </div>
+                <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
+                    <i class="fa fa-download p-2" (click)="exportExcell(graficaBottomRight)"></i>
+                    <i [ngClass]="{'fa-table': !vistaBottomRight,'fa-chart-pie': vistaBottomRight}" class="fa p-2" (click)="changeView('BR')"></i>
+                    <i [ngClass]="{'fa-window-maximize': !maxGraficaBR,'fa-window-restore': maxGraficaBR}" class="far p-2" (click)="maximizar('BR')"></i>
+                </div>
+            </div>
+            <!-- grafica top derecha -->
+            <div #graficaBottomRight id="chart2-right" class="grafica"></div>
+        </div>
+    </div>
+
+</div>

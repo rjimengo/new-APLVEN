@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {sales, cancelaciones, netos, nivelesApp, resumen} from '../../config/ventasGlobalIDs';
+import {sales, cancelaciones, netos, nivelesApp, resumen, clientes, comparativa} from '../../config/ventasGlobalIDs';
 import { ConnectionQlikService } from './connection-qlik.service';
 
 @Injectable({
@@ -105,6 +105,12 @@ export class ComunesService {
       localStorage.setItem('optionValue', value);
 
     let radio = localStorage.getItem('optionValue');
+    //Si estamos en la pagina clientes y el radio es Margen, se inicializa a Numero
+    let page = this.getPage();
+    if(page=="clientes" && radio=="Margen"){
+      radio = "Número";
+      localStorage.setItem('optionValue', radio);
+    }
     if(radio){
       //Aplicar metrica en qlik
       this.setMetrica(radio);
@@ -174,6 +180,12 @@ export class ComunesService {
 
     let radio2 = localStorage.getItem('optionValue2');
 
+    //Si estamos en la pagina clientes y el radio2 es Neto, se inicializa a Ventas
+    let page = this.getPage();
+    if(page=="clientes" && radio2=="Neto"){
+      radio2 = "Ventas";
+      localStorage.setItem('optionValue2', radio2);
+    }
     if(radio2){
       this.setOperacion(radio2);
       setTimeout(() => {
@@ -245,6 +257,66 @@ setOperacion (operation) {
           this._QlikConnection.getObject(netos[chart].div, netos[table].id);
         }
       break;
+      case "edad"://Para la pestanya clientes: edad, producServ, negocio y saldo
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+        }
+      break;
+      case "producServ":        
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+        }
+      break;
+      case "negocio":
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+        }
+      break;
+      case "saldo":
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+        }
+      break;
+      case "TL": //Para comparativa graficas Top
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(comparativa.left[chart].div, comparativa.left[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(comparativa.left[chart].div, comparativa.left[table].id);
+        }
+      break;
+      case "TR":
+        if(vista){
+          vista=false;
+          this._QlikConnection.getObject(comparativa.right[chart].div, comparativa.right[chart].id);
+        }
+        else{
+          vista=true;
+          this._QlikConnection.getObject(comparativa.right[chart].div, comparativa.right[table].id);
+        }
+      break;
     }
 
     return vista;
@@ -292,13 +364,7 @@ setOperacion (operation) {
     var dim = dimensionSel == 'Sin dimensión' ? object + '_sinDim' : object + '_Dim';
     
     let id = 1;
-    
-    let url = window.location.pathname.split("/");
-    let page="";
-    if(url[url.length-1] != ""){
-      page=url[url.length-1];
-    }
-
+    let page = this.getPage();
     
     switch (topBottom) {
         case null || undefined:
@@ -340,6 +406,8 @@ setOperacion (operation) {
       var object = vista ? 'table2' : 'chart2';
       var type;
       var id;
+      let page = this.getPage();
+
       switch (topBottom) {
           case null || undefined:
               id = 0;
@@ -358,6 +426,21 @@ setOperacion (operation) {
           type = vista ? 'table2' : 'pieChart';
       } else {
           type = vista ? 'table3' : 'bar';
+      }
+
+      if(page == "ranking"){ //En caso de ranking
+        var object = 'chart2';
+        var dim = dimensionSel == 'Sin dimensión' ? object + '_sinDim' : object + '_Dim';
+        var id;
+        switch (topBottom) {
+            case 'Top 50':
+                id = 0;
+                break;
+            case 'Bottom 50':
+                id = 1;
+                break;
+        }
+        return this._QlikConnection.getObject("chart2", objetos[dim][id]);
       }
 
       return this._QlikConnection.getObject("chart2", objetos[type][id]);
@@ -413,8 +496,6 @@ setOperacion (operation) {
                 top = 50;
                 break;
         }
-        console.log("top: " + top);
-        console.log("topBottom: " + topBottom);
         
         let tb = this.setTopBottom(null, topBottom);
         return tb;
@@ -426,10 +507,17 @@ setOperacion (operation) {
     let top;
     let bottom;
     var tB;
+    let page = this.getPage();
 
-    tB = topBottom === newTopBottom ? null : newTopBottom;
-    top = tB === 'Top 20' ? 20 : 0;
-    bottom = tB === 'Bottom 20' ? 20 : 0;
+    if(page=="ranking"){
+      tB = newTopBottom;
+      top = tB == 'Top 50' ? 50 : 0;
+      bottom = tB == 'Bottom 50' ? 50 : 0;
+    }else{
+      tB = topBottom === newTopBottom ? null : newTopBottom;
+      top = tB === 'Top 20' ? 20 : 0;
+      bottom = tB === 'Bottom 20' ? 20 : 0;
+    }
     
     this._QlikConnection.setNumValue('vL.TopSel', top);
     this._QlikConnection.setNumValue('vL.BotSel', bottom);
@@ -463,12 +551,10 @@ setOperacion (operation) {
 
   /* Dimension field initialization */
   initDimension(dimension, idx){
-    let url = window.location.pathname.split("/");
-    let page="";
-    if(url[url.length-1] != ""){
-      page=url[url.length-1];
-    }
-    let isRankingOrClientes = (page == "ranking" || page == "clientes");
+    let page = this.getPage();
+
+    let isRankingOrClientes = (page == "ranking");
+    //let isRankingOrClientes = (page == "ranking" || page == "clientes");
 
     var condition = isRankingOrClientes ? (dimension == this.dimensions[1] || dimension == this.dimensions[3] || dimension == this.dimensions[8]) : dimension == this.dimensions[idx];
     var dim = (typeof dimension == 'undefined' || condition) ? this.dimensions[0] : dimension;
@@ -488,4 +574,12 @@ setOperacion (operation) {
     return this.optionGlobal;
   }
 
+  getPage(){//Obtener en que pestanya estamos, ranking, clientes, etc
+    let url = window.location.pathname.split("/");
+    let page="";
+    if(url[url.length-1] != ""){
+      page=url[url.length-1];
+    }
+    return page;
+  }
 }

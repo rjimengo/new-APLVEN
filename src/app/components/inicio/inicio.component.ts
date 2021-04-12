@@ -20,6 +20,8 @@ export class InicioComponent implements OnInit {
   }
 
   async openApp(aplicacion){
+    console.log("openApp: " + aplicacion);
+    
     this._QlikConnection.inicio = true;
     if(!aplicacion){
       this.selApp=true;
@@ -31,6 +33,7 @@ export class InicioComponent implements OnInit {
 
     switch(aplicacion){
       case "ventas":
+        console.log("IDapp: " + appIDs.global);
         IDapp = appIDs.global;
       break;
       case "territorial":
@@ -47,8 +50,10 @@ export class InicioComponent implements OnInit {
     }
     
     if(await this._QlikConnection.qlikConnection(IDapp)){
+      console.log("setItem IDapp: " + IDapp);
+
       localStorage.setItem('appId', IDapp); 
-      this.router.navigate([aplicacion + '/resumen']);      
+      this.router.navigate([aplicacion + "#" + '/resumen']);      
     } 
 
   }
