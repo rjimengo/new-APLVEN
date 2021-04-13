@@ -29,22 +29,22 @@ const rutasHijas = [
 const routes: Routes = [
   { path: '', component: InicioComponent },
   {
-  path: 'ventas#',
+  path: 'ventas',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'territorial#',
+  path: 'territorial',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'vidacaixa#',
+  path: 'vidacaixa',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
-  path: 'segurcaixa#',
+  path: 'segurcaixa',
   canActivate: [ventasGuard],
   children: rutasHijas
 },
@@ -57,33 +57,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
-
-/* export const adminRoutes: Routes = [
-  {
-    path: 'admin',
-    component: AdminComponent, 
-    canActivate: [AdminGuardGuard],
-    children:[
-      { path: 'crud-usuario', component: CrudUsuarioComponent },
-      { path: 'crud-prof', component: CrudProfComponent },
-      { path: 'crud-alumno', component: CrudAlumnoComponent },
-      { path: 'crud-imparte', component: CrudImparteComponent },
-      { path: 'crud-reserva', component: CrudReservaComponent},
-      { path: 'crud-valoraciones', component: CrudValoracionesComponent},
-      { path: 'crud-reportes', component: CrudReportesComponent},
-      { path: 'edit-user/:id', component: EditUserComponent },
-      { path: 'crud-asignaturas', component: CrudAsignaturasComponent},
-      { path: 'edit-asig/:id', component: EditAsigComponent},
-      { path: 'crear-asig', component: CrearAsigComponent},
-      { path: 'info/:id', component:InfoComponent},
-      { path: 'panel', component:PanelComponent}
-    ]
-  }
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(adminRoutes)],
-  exports: [RouterModule]
-}) */

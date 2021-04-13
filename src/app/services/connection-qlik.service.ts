@@ -86,7 +86,9 @@ setAppLoaded(newValue): void {
 
           }​​​​​​​)
           .catch(err =>{
-            console.log(err);
+            this.controlarErrors();
+
+            console.log("error al cargar: " + err);
             
           });
         });

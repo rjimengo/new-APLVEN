@@ -51,7 +51,7 @@ export class MenuComponent implements OnInit {
   navigate(ruta){
     this.app = localStorage.getItem('app'); 
     this.page = ruta;
-    this.router.navigate([this.app + '#/' + ruta]);
+    this.router.navigate([this.app + '/' + ruta]);
     
   }
 

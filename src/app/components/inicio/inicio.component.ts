@@ -53,7 +53,8 @@ export class InicioComponent implements OnInit {
       console.log("setItem IDapp: " + IDapp);
 
       localStorage.setItem('appId', IDapp); 
-      this.router.navigate([aplicacion + "#" + '/resumen']);      
+      this.router.navigate([aplicacion + '/resumen']); 
+
     } 
 
   }
