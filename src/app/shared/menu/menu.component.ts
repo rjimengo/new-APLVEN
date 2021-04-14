@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
+import { resumen } from 'src/config/ventasGlobalIDs';
 
 @Component({
   selector: 'app-menu',
@@ -21,8 +22,15 @@ export class MenuComponent implements OnInit {
     if(url[url.length-1] != ""){
       this.page=url[url.length-1];
     }
-    
     this.app = localStorage.getItem('app'); 
+
+    if(this.page == this.app){
+      this.router.navigate([this.app + '/resumen']);
+    }else if(this.app == null){
+      this.router.navigate(['/']);
+      
+    }
+    
 
     this._QlikConnection.getAppLoaded().subscribe((loaded) => {
       if(loaded){//Si la conexion de la appQlik esta cargada

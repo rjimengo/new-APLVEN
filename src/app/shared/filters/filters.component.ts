@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { appIDs, urlAyuda } from 'src/config/config';
+import { appIDs, configQlik, urlAyuda } from 'src/config/config';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 
@@ -246,5 +246,25 @@ openFiltersView(){//Abrir el buscador y clickar en Selecciones
   var qvGlobalSelButton = document.getElementsByClassName('qv-subtoolbar-button qv-explore-selections-btn toggle-button borderbox')[0] as HTMLInputElement;
   if(qvGlobalSelButton)
     qvGlobalSelButton.click();
+}
+
+
+openQlikApp(){
+  var config = configQlik;
+  let prefix= config.prefix;
+  if(prefix == ""){
+    prefix="/";
+  }
+  var appUrl = (config.isSecure ? 'https://' : 'http://') + config.host + (config.port ? ':' + config.port : '') +
+      prefix + 'sense/app/' + localStorage.getItem("appId");
+
+  window.open(appUrl, '_blank');
+}
+
+autoserviceEnabled(){
+  let autoserviceID = document.getElementById("autoservice") as HTMLInputElement;  
+  let autoservice = autoserviceID.value;
+
+  return (autoservice == 'enabled');
 }
 }

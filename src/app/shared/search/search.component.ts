@@ -61,7 +61,6 @@ export class SearchComponent implements OnInit {
             if(document.getElementsByClassName("qv-global-selections-enabled")[0]){
               var qvSel = document.getElementsByClassName("qv-global-selections-enabled")[0].getElementsByClassName("qv-global-selections")[0] as HTMLElement; 
               if( document.getElementById("menu").style.marginLeft == "50px"){
-                console.log("Cambio");
                 qvSel.style.marginLeft = "50px";//Panel de selecciones
                 qvSel.style.width = "calc(100% - 50px)";//Panel de selecciones  
 

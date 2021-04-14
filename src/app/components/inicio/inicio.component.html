@@ -15,22 +15,39 @@
         <div class="row">
             <div class="col-3"></div>
 
-            <div class="col-9 text-left">
-                <select #aplicacion id="navigation" size="4" value="ventas" required>
-                    <option id="global" value="ventas" >
+            <!-- LOCAL -->
+<!--             <div class="col-9 text-left">
+                <select #aplicacion id="navigation" size="5" value="ventas" required>
+                    <option id="global" value="ventas">
                     Ventas acceso global 
                     </option>
-                    <option id="territorial" value="territorial">
+                    <option id="territorial" value="territorial" >
                         Ventas territorial
                     </option>
-                    <option id="vidacaixa" value="vidacaixa">
+                    <option id="vidacaixa" value="vidacaixa" >
                         Ventas VidaCaixa
                     </option>
                     <option id="segurcaixa" value="segurcaixa">
                         Ventas SegurCaixa
                     </option>
                 </select>
-            </div>
+            </div> -->
+            <div class="col-9 text-left">
+                <select #aplicacion id="navigation" size="{{size}}" value="ventas" required>
+                    <option id="global" value="ventas" *ngIf="isAdministrador || isBiuser">
+                    Ventas acceso global 
+                    </option>
+                    <option id="territorial" value="territorial" *ngIf="isAdministrador || isJerarquico">
+                        Ventas territorial
+                    </option>
+                    <option id="vidacaixa" value="vidacaixa" *ngIf="isAdministrador || isVidacaixa">
+                        Ventas VidaCaixa
+                    </option>
+                    <option id="segurcaixa" value="segurcaixa" *ngIf="isAdministrador || isSegurcaixa">
+                        Ventas SegurCaixa
+                    </option>
+                </select>
+            </div> 
 
 
         </div>

@@ -11,16 +11,45 @@ import {appIDs} from '../../../config/config';
 export class InicioComponent implements OnInit {
 
   selApp:boolean=false;
+  size;
+  isAdministrador;
+  isBiuser;
+  isJerarquico;
+  isVidacaixa;
+  isSegurcaixa;
+
   constructor(
     private _QlikConnection: ConnectionQlikService,
     private router:Router
   ) { }
 
   ngOnInit() {
+    let sizeId = document.getElementById("size") as HTMLInputElement;
+    if(sizeId)
+      this.size = sizeId.value;
+
+    let isAdministradorId = document.getElementById("isAdministrador") as HTMLInputElement; 
+    if(isAdministradorId)
+      this.isAdministrador = isAdministradorId.value;
+    
+    let isBiuserId = document.getElementById("isBiuser") as HTMLInputElement;  
+    if(isBiuserId)
+      this.isBiuser = isBiuserId.value;
+
+    let isJerarquicoId = document.getElementById("isJerarquico") as HTMLInputElement;  
+    if(isJerarquicoId)
+      this.isJerarquico = isJerarquicoId.value;
+
+    let isVidacaixaId = document.getElementById("isVidacaixa") as HTMLInputElement;  
+    if(isVidacaixaId)
+      this.isVidacaixa = isVidacaixaId.value;
+
+    let isSegurcaixaId = document.getElementById("isSegurcaixa") as HTMLInputElement;  
+    if(isSegurcaixaId)
+      this.isSegurcaixa = isSegurcaixaId.value;
   }
 
   async openApp(aplicacion){
-    console.log("openApp: " + aplicacion);
     
     this._QlikConnection.inicio = true;
     if(!aplicacion){
@@ -33,7 +62,6 @@ export class InicioComponent implements OnInit {
 
     switch(aplicacion){
       case "ventas":
-        console.log("IDapp: " + appIDs.global);
         IDapp = appIDs.global;
       break;
       case "territorial":
@@ -50,7 +78,6 @@ export class InicioComponent implements OnInit {
     }
     
     if(await this._QlikConnection.qlikConnection(IDapp)){
-      console.log("setItem IDapp: " + IDapp);
 
       localStorage.setItem('appId', IDapp); 
       this.router.navigate([aplicacion + '/resumen']); 

@@ -70,8 +70,6 @@ setAppLoaded(newValue): void {
 
         return new Promise((resolve) => {
           import('./../../assets/js/qlik-connection.js').then(async file => {
-            console.log("import qlik-connection.js");
-            
             this.qApp = await file.default.qApp(configQlik, this.globals, appId, listener);
             this.globals = await file.default.q;
             ConnectionQlikService.globals =  this.globals;

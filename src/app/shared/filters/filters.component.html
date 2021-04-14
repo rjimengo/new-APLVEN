@@ -1,6 +1,8 @@
 <i class="fa fa-filter" (click)="openFiltersView()"></i>
 <i class="fa fa-reply" (click)="backFilter()" title="Retroceder filtro" [ngClass]="{'disabled': backDisabled,'': !backDisabled}"></i>
 <i class="fa fa-share" (click)="forwardFilter()" title="Avanzar filtro" [ngClass]="{'disabled': forwardDisabled,'': !forwardDisabled}"></i>
+<i class="fa" (click)="openQlikApp()" title="Ir a la aplicación de Ventas en QlikSense" *ngIf="autoserviceEnabled()"> <img src="static/app/images/logo_qlik.png" style="width:20px; height:20px;"> </i>
+
 <i class="fa fa-question-circle" title="Abrir Manual de Ayuda" (click)="openHelp()"></i>
 
 <!-- Bookmark -->

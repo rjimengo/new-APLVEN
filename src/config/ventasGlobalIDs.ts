@@ -423,6 +423,11 @@ var clientesms = [
     "pos": 9,
     "div": "nivel servicio",
     "id": "RteygF"
+  },
+  {
+    "pos": 10,
+    "div": "cliente bankia",
+    "id": "JgZpWH"
   }  
 ];
 var clientesn = [ 
