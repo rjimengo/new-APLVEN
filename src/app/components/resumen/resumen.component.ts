@@ -37,7 +37,7 @@ export class ResumenComponent implements OnInit {
   cargarDatos(){     
 
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
-    this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'jvJpb'));
+    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
     
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {

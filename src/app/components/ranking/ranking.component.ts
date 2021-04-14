@@ -65,6 +65,9 @@ export class RankingComponent implements OnInit {
   }
 
   cargarDatos(){
+    this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
+    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
+    
     /* Get KPIs Ventas, Cancelaciones y Netos  */
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.ventas[0], indicadoresVCN.ventas[1]));
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.cancelaciones[0], indicadoresVCN.cancelaciones[1]));
