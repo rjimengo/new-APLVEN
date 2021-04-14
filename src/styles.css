@@ -369,6 +369,24 @@ select:checked, option::selection{
     transition: 0.5s;
 }
 
+/* Estilo para los filtros calendario y meses */
+#calendario_barra{
+    height: 5em; 
+    width: 87%;
+    box-shadow: none !important;
+}
+#calendario_escoger{
+    margin-left:20px; 
+    height: 5em;
+    width: 7em;
+}
+.border{
+    border:none !important
+  }
+/* Estilo para el icono calendar del filtro calendar */
+i.fa.fa-calendar{
+    font-family: 'Font Awesome 5 Free' !important;
+}
 
 /* styles para nuevo styles-qlik */
 @media only screen and (min-device-width: 1025px){
