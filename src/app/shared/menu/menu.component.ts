@@ -25,6 +25,7 @@ export class MenuComponent implements OnInit {
     this.app = localStorage.getItem('app'); 
 
     if(this.page == this.app){
+      this.page = "resumen";
       this.router.navigate([this.app + '/resumen']);
     }else if(this.app == null){
       this.router.navigate(['/']);

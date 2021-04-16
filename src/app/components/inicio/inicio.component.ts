@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import {appIDs} from '../../../config/config';
 
 @Component({
   selector: 'app-inicio',
@@ -47,8 +46,20 @@ export class InicioComponent implements OnInit {
     let isSegurcaixaId = document.getElementById("isSegurcaixa") as HTMLInputElement;  
     if(isSegurcaixaId)
       this.isSegurcaixa = isSegurcaixaId.value;
+
+      setTimeout(() => {
+        let select = document.getElementById("navigation") as HTMLInputElement;
+        let firstOption = document.getElementById(select[0].id) as HTMLInputElement;
+        if(firstOption)
+          firstOption.style.backgroundColor= "#1e90ff";
+      }, 100);
   }
 
+  colorFirstOption(){
+    let select = document.getElementById("navigation") as HTMLInputElement;
+    let firstOption = document.getElementById(select[0].id) as HTMLInputElement;
+    firstOption.style.backgroundColor= "rgb(222, 222, 222)";
+  }
   async openApp(aplicacion){
     
     this._QlikConnection.inicio = true;
@@ -60,7 +71,7 @@ export class InicioComponent implements OnInit {
     let IDapp;
     localStorage.setItem('app', aplicacion);  
 
-    switch(aplicacion){
+/*     switch(aplicacion){
       case "ventas":
         IDapp = appIDs.global;
       break;
@@ -75,14 +86,16 @@ export class InicioComponent implements OnInit {
       break;
       default:
         IDapp = appIDs.global;
-    }
+    } */
+    //this.router.navigate([aplicacion]); 
+    window.location.href = "/" + aplicacion;
     
-    if(await this._QlikConnection.qlikConnection(IDapp)){
+/*     if(await this._QlikConnection.qlikConnection(IDapp)){
 
       localStorage.setItem('appId', IDapp); 
       this.router.navigate([aplicacion + '/resumen']); 
 
-    } 
+    }  */
 
   }
 

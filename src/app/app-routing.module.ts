@@ -30,22 +30,18 @@ const routes: Routes = [
   { path: '', component: InicioComponent },
   {
   path: 'ventas',
-  canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
   path: 'territorial',
-  canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
   path: 'vidacaixa',
-  canActivate: [ventasGuard],
   children: rutasHijas
 },
 {
   path: 'segurcaixa',
-  canActivate: [ventasGuard],
   children: rutasHijas
 },
 

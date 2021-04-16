@@ -101,7 +101,7 @@ export class ClientesComponent implements OnInit {
     this.option = value;
   }
 
-  dimensionSelectedSinDimension(i){
+  dimensionSelectedSinDimension(i, event){
     if(i==0){
       this.dimensionSel=this.dimensions[i];
       this._ComunService.dimensionGlobal = this.dimensions[i];
@@ -122,6 +122,13 @@ export class ClientesComponent implements OnInit {
       this.changeView("negocio");
       this.changeView("saldo");
 
+    }else{
+      if(event.target.classList.contains("disabled-button")){
+        return;
+      }
+      this.options = this._ComunService.selectors[i];
+      this.dimensionSelected(i);
+      this.setLevel(this.options[0]);
     }
   }
 

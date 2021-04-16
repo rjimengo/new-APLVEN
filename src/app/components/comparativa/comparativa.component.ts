@@ -129,7 +129,7 @@ export class ComparativaComponent implements OnInit {
     this.setObjects("right");
   }
 
-  dimensionSelectedSinDimension(i){
+  dimensionSelectedSinDimension(i, event){
     if(i==0){
       this.dimensionSel=this.dimensions[i];
       this._ComunService.dimensionGlobal = this.dimensions[i];
@@ -142,6 +142,13 @@ export class ComparativaComponent implements OnInit {
 
       this.setObjects("left");
       this.setObjects("right");
+    }else{
+      if(event.target.classList.contains("disabled-button")){
+        return;
+      }
+      this.options = this._ComunService.selectors[i];
+      this.dimensionSelected(i);
+      this.setLevel(this.options[0]);
     }
   }
 

@@ -10,6 +10,12 @@ export class CanActivateAppLoad implements CanActivate {
 
     async canActivate() {
         
+        let qlikAppId = document.getElementById("qlikAppId") as HTMLInputElement;  
+        let appID= qlikAppId.value;
+        if(appID){
+            localStorage.setItem('appId', appID); 
+        }
+
         if (localStorage.getItem('appId')) {
             if(this._QlikConnection.inicio){//Cuando pasa por la pantalla de inicio
                 return true;
@@ -21,6 +27,7 @@ export class CanActivateAppLoad implements CanActivate {
         }else{
             this.router.navigate(['/']);
             return false;
+            
         }
     }
 }

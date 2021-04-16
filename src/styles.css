@@ -111,7 +111,7 @@
 
 
 .dimensiones{
-    padding: 8px 0 0 30px;
+    padding: 8px 0 0 15px;
 }
 .btnDimension{
     font-weight: bold;
@@ -138,13 +138,12 @@
 }
 .segundaLineaBtns{
     padding-top: 12px;
-    padding-left: 15px;
 }
 
 .btnSegundaLinea{
     min-width: 100px;
     font-weight: bold;
-    height: 30px;
+    height: 40px;
     font-size: 13px;
     color: black;
     background-color: rgb(240, 240, 240);
@@ -187,6 +186,9 @@
 
 }
 
+.form-check-label, .form-check-input{
+    cursor: pointer;
+}
 /* Dropdown menu dimensiones */
 .dimensiones .dropdown .dropdown-menu{ display: none; }
 .dimensiones .dropdown:hover .dropdown-menu{ display: block; margin-top: 15px;}
@@ -383,6 +385,9 @@ select:checked, option::selection{
 .border{
     border:none !important
   }
+.qv-object-wrapper.ng-scope.ng-isolate-scope{
+    z-index: 1;
+}
 /* Estilo para el icono calendar del filtro calendar */
 i.fa.fa-calendar{
     font-family: 'Font Awesome 5 Free' !important;

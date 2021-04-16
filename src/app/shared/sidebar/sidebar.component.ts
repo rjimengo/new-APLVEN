@@ -48,6 +48,7 @@ export class SidebarComponent implements OnInit {
     if( document.getElementById("menu").style.marginLeft == "50px"){
       //abrir sidebar
       element.classList.remove("active");
+      element.style.marginRight="0";
       document.getElementById("menu").style.marginLeft = "225px";
       document.getElementById("pestanya").style.marginLeft="225px";
       document.getElementById("sidebar").style.width = "225px";
@@ -66,6 +67,7 @@ export class SidebarComponent implements OnInit {
     }else{
       //cerrar sidebar
       element.classList.add("active");
+      element.style.marginRight="8px";
       document.getElementById("menu").style.marginLeft = "50px";
       document.getElementById("pestanya").style.marginLeft="50px";
       document.getElementById("sidebar").style.width = "50px";

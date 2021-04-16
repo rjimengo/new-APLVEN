@@ -28,12 +28,12 @@ let qlikAppId = document.getElementById("qlikAppId") as HTMLInputElement;
     //webIntegrationId: 'web-integration-id-here' //only needed in SaaS editions and QSEoK
   };
 
-  export var appIDs = {
+/*   export var appIDs = {
     global : "6d9683bf-5a03-422e-b5cb-291b38fc5448",
     territorial : "ec59e7f5-ca20-4971-96bb-685daf21d8f7",
     vidacaixa : "fca15b2e-40df-4a18-ac70-2eab1c39e6bb",
     segurcaixa : "0bd70671-4efa-4a86-a4f9-133e24e81853",
-  }  
+  } */
 
   let urlAyudaValue = document.getElementById("urlAyuda") as HTMLInputElement;  
   export var urlAyuda = urlAyudaValue.value;

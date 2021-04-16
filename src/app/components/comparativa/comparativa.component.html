@@ -184,7 +184,7 @@
             <div class="dimensiones col-md-10">
                 <ng-container *ngFor="let dimension of dimensions; let i = index">
                     <span class="dropdown">
-                        <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Centros'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i, $event)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Centros'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                             {{dimension}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0" [ngClass]="{'disabled-dropdown' : dimension == 'Centros'}">

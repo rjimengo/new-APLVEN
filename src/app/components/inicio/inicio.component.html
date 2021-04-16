@@ -16,8 +16,8 @@
             <div class="col-3"></div>
 
             <!-- LOCAL -->
-<!--             <div class="col-9 text-left">
-                <select #aplicacion id="navigation" size="5" value="ventas" required>
+<!--              <div class="col-9 text-left">
+                <select #aplicacion id="navigation" size="4" value="ventas" (click)="colorFirstOption()" required>
                     <option id="global" value="ventas">
                     Ventas acceso global 
                     </option>
@@ -31,9 +31,9 @@
                         Ventas SegurCaixa
                     </option>
                 </select>
-            </div> -->
-            <div class="col-9 text-left">
-                <select #aplicacion id="navigation" size="{{size}}" value="ventas" required>
+            </div>  -->
+             <div class="col-9 text-left">
+                <select #aplicacion id="navigation" size="{{size}}" value="ventas" (click)="colorFirstOption()" required>
                     <option id="global" value="ventas" *ngIf="isAdministrador || isBiuser">
                         Ventas acceso global 
                     </option>
@@ -47,7 +47,7 @@
                         Ventas SegurCaixa
                     </option>
                 </select>
-            </div> 
+            </div>
 
 
         </div>

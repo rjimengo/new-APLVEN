@@ -95,7 +95,7 @@ export class CanalesComponent implements OnInit {
     this.setObjects_2();
   }
 
-  dimensionSelectedSinDimension(i){
+  dimensionSelectedSinDimension(i, event){
     if(i==0){
       this.dimensionSel=this.dimensions[i];
       this._ComunService.dimensionGlobal = this.dimensions[i];
@@ -108,6 +108,13 @@ export class CanalesComponent implements OnInit {
       
       this.setObjects_1();
       this.setObjects_2();
+    }else{
+      if(event.target.classList.contains("disabled-button")){
+        return;
+      }
+      this.options = this._ComunService.selectors[i];
+      this.dimensionSelected(i);
+      this.setLevel(this.options[0]);
     }
   }
 

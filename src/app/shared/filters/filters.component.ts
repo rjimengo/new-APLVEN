@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { appIDs, configQlik, urlAyuda } from 'src/config/config';
+import { configQlik, urlAyuda } from 'src/config/config';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 
@@ -210,7 +210,7 @@ async openApp(aplicacion){
   let IDapp;
   localStorage.setItem('app', aplicacion);  
 
-  switch(aplicacion){
+/*   switch(aplicacion){
     case "ventas":
       IDapp = appIDs.global;
     break;
@@ -225,7 +225,7 @@ async openApp(aplicacion){
     break;
     default:
       IDapp = appIDs.global;
-  }
+  } */
 
   let url = window.location.pathname.split("/");
   let pestanya;
