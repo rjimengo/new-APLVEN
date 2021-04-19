@@ -12,7 +12,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 export class ResumenComponent implements OnInit {
   
-  metric:string = "";
+  metric:string = "Número";
   vistaVentas:boolean = false;
   vistaCancelaciones:boolean = false;
   vistaNeto:boolean = false;
@@ -29,8 +29,9 @@ export class ResumenComponent implements OnInit {
   
   async ngOnInit() {
     this.cargarDatos();
-    this._ComunService.radioButtons(null, null, null, null);   
-    this.metric = localStorage.getItem("metric");
+    this._ComunService.radioButtons(null, null, null, null); 
+    if(localStorage.getItem("metric"))  
+      this.metric = localStorage.getItem("metric");
     
   }
 

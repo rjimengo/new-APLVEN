@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit {
     let warn = document.getElementById("warn") as HTMLInputElement;
     if(warn)
       warn.style.display="none";
-    this.router.navigate([ '/']);
+    window.location.href = "/";
   }
 
 }

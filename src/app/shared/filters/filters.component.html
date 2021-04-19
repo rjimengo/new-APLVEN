@@ -1,4 +1,4 @@
-<i class="fa fa-filter" (click)="openFiltersView()"></i>
+<i class="fa fa-filter" (click)="openFiltersView()" title="Abrir Panel de Selecciones"></i>
 <i class="fa fa-reply" (click)="backFilter()" title="Retroceder filtro" [ngClass]="{'disabled': backDisabled,'': !backDisabled}"></i>
 <i class="fa fa-share" (click)="forwardFilter()" title="Avanzar filtro" [ngClass]="{'disabled': forwardDisabled,'': !forwardDisabled}"></i>
 <i class="fa" (click)="openQlikApp()" title="Ir a la aplicación de Ventas en QlikSense" *ngIf="autoserviceEnabled()"> <img src="static/app/images/logo_qlik.png" style="width:20px; height:20px;"> </i>
@@ -19,7 +19,7 @@
       <form>
         <div class="form-row">
           <div class="col-9">
-            <input #nameNewBookmark class="form-control" placeholder="Nombre..." type="search" autocomplete="off" >
+            <input #nameNewBookmark id="nameNewBookmarkId" class="form-control" placeholder="Nombre..." type="search" autocomplete="off" >
           </div>
           <div class="col-3">
             <i class="fas fa-check-square" title="Añadir Marcador" (click)="createBookmark(nameNewBookmark.value)"></i>
@@ -43,8 +43,8 @@
 
 
 
-<div class="dropdown">
-    <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="getPage()"></i>
+<div class="dropdown" *ngIf="size > 1">
+    <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="getPage()" title="Abrir aplicación de..."></i>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" (click)="openApp('ventas')" *ngIf="page!='ventas'">Global</a>
       <a class="dropdown-item" (click)="openApp('territorial')" *ngIf="page!='territorial'">Territorial</a>

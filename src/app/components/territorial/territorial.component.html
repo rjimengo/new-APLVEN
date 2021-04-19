@@ -113,7 +113,7 @@
 			</button>
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-right">
             <label class="switch">
                 <input id="percen" #percentage type="checkbox" [disabled]="dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee"  (click)="percentageSelected(percentage.checked)">
                 <span class="slider round" [style]="{'cursor' : ((dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee) ? 'not-allowed' : 'pointer') }"></span>

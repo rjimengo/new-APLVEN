@@ -20,6 +20,8 @@ export class FiltersComponent implements OnInit {
 
   page;
 
+  size;
+
   constructor( private _QlikConnection: ConnectionQlikService, private router:Router) { }
 
   ngOnInit() {
@@ -36,6 +38,11 @@ export class FiltersComponent implements OnInit {
       if(this._QlikConnection.qApp)
         this.disabled();
     }, 1000);
+
+    //variable para comprobar si mostrar el icono de cambiar app, solo se mostrara si el usuario tiene mas de 1 rol
+    let sizeId = document.getElementById("size") as HTMLInputElement;
+    if(sizeId)
+      this.size = sizeId.value;
   }
 
   backFilter(){
@@ -111,6 +118,8 @@ createBookmark(name) {
           
       });
   } 
+  let inputNuevoBookmark = document.getElementById("nameNewBookmarkId") as HTMLInputElement;  
+  inputNuevoBookmark.value = "";
   this.updateBookmarkData();
 }
 

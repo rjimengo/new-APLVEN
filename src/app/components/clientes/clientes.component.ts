@@ -11,7 +11,7 @@ import { indicadoresVCN, clientes, cargo } from 'src/config/ventasGlobalIDs';
 export class ClientesComponent implements OnInit {
 
   metric:string = "";
-  option:string = "";
+  option:string = "Ventas";
   topBottomOpt;
   topBottom;
 
@@ -67,7 +67,8 @@ export class ClientesComponent implements OnInit {
     this._ComunService.radioButtons(null, this.option, this.dimensionSel, this.employee);   
     this._ComunService.radioButtons2(null, this.metric, this.dimensionSel, this.employee);   
     this.metric = localStorage.getItem("metric");
-    this.option = localStorage.getItem("optionValue2");
+    if(localStorage.getItem("optionValue2"))
+      this.option = localStorage.getItem("optionValue2");
   }
 
   cargarDatos(){
