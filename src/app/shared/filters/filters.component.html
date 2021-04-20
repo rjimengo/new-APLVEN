@@ -11,37 +11,17 @@
 
     <ul>
       <li class="li-sheets" *ngFor="let sheet of personalSheets; let i = index">
-        <p class="sheets-names" *ngIf="isPersonalSheets" (click)="openQlikSheet(sheet.id)"> {{sheet.name}}</p>
+        <i class="far fa-file-alt"></i> <p class="sheets-names" *ngIf="isPersonalSheets" (click)="openQlikSheet(sheet.id)">{{sheet.name}}</p>
       </li>
-      <li class="sheets-names"(click)="openQlikApp()">
-          <i class="far fa-file"></i>Nueva hoja
+      <div class="dropdown-divider"></div>
+      <li class="li-sheets" (click)="openQlikApp()">
+        <i class="far fa-file"></i> <p class="sheets-names">Nueva hoja</p>
       </li>
     </ul>
 
   </div>
 
 </div>
-
-<!-- <div id="sheets-container" class="icon" style="width: 35px;" ng-click="openSheetsContainer($event)" ng-mouseenter="onMouseEnterSheets($event)" ng-mouseleave="onMouseLeaveSheets($event)" ng-if="autoserviceEnabled()">
-  <a id="sheets-toggle" title="Abrir Mis Hojas en QlikSense">
-      <i class="fa fa-files-o icon"></i>
-  </a>
-  <ul class="dropdown-menu" style="top: 70px; right: 3em;">
-      <li ng-repeat="sheet in getPersonalSheets()" ng-show="isPersonalSheetsPopulated()" ng-click="openQlikSheet(sheet.id)">
-          <a style="margin-right: 15px; color: #5f5f5f; margin: 0; padding-right: 0px; width: 25px; overflow: hidden; text-overflow: unset;">
-              <i class="fa fa-file-text-o" style="cursor: pointer;"></i>
-          </a>
-          <a>{{sheet.name}}</a>
-      </li>
-      <li ng-click="openQlikApp()">
-          <a style="margin-right: 15px; color: #5f5f5f; margin: 0; padding-right: 0px; width: 25px; overflow: hidden; text-overflow: unset;">
-              <i class="fa fa-file-o" style="cursor: pointer;"></i>
-          </a>
-          <a>Nueva hoja</a>
-      </li>
-  </ul>
-</div> -->
-
 
 
 <i class="fa fa-question-circle" title="Abrir Manual de Ayuda" (click)="openHelp()"></i>

@@ -105,7 +105,8 @@ i:hover{
 
 .sheets-names{
     display: inline;
-    font-size: 16px;
+    font-size: 13px;
+    color: grey;
     margin-left: 4px;
 }
 .sheets-names:hover{
@@ -113,4 +114,8 @@ i:hover{
 }
 .li-sheets{
     list-style: none;
+}
+
+.li-sheets i:hover, .li-sheets i{
+    color: black;
 }

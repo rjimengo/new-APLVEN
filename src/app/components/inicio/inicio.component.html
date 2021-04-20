@@ -15,35 +15,19 @@
         <div class="row">
             <div class="col-3"></div>
 
-            <!-- LOCAL -->
-<!--               <div class="col-9 text-left">
-                <select #aplicacion id="navigation" size="4" value="ventas" (click)="colorFirstOption()" required>
-                    <option id="global" value="ventas">
-                    Ventas acceso global 
-                    </option>
-                    <option id="territorial" value="territorial" >
-                        Ventas territorial
-                    </option>
-                    <option id="vidacaixa" value="vidacaixa" >
-                        Ventas VidaCaixa
-                    </option>
-                    <option id="segurcaixa" value="segurcaixa">
-                        Ventas SegurCaixa
-                    </option>
-                </select>
-            </div>  --> 
-              <div class="col-9 text-left">
+            <div class="col-9 text-left">
                 <select #aplicacion id="navigation" size="{{size}}" value="ventas" (click)="colorFirstOption()" required>
-                    <option id="global" value="ventas" *ngIf="isAdministrador || isBiuser">
-                        Ventas acceso global 
+                    
+                    <option id="global" value="ventas" *ngIf="isAdministrador == 'true' || isBiuser == 'true'">
+                        Ventas acceso global
                     </option>
-                    <option id="territorial" value="territorial" *ngIf="isAdministrador || isJerarquico">
+                    <option id="territorial" value="territorial" *ngIf="isAdministrador == 'true' || isJerarquico == 'true'">
                         Ventas territorial
                     </option>
-                    <option id="vidacaixa" value="vidacaixa" *ngIf="isAdministrador || isVidacaixa">
+                    <option id="vidacaixa" value="vidacaixa" *ngIf="isAdministrador == 'true' || isVidacaixa == 'true'">
                         Ventas VidaCaixa
                     </option>
-                    <option id="segurcaixa" value="segurcaixa" *ngIf="isAdministrador || isSegurcaixa">
+                    <option id="segurcaixa" value="segurcaixa" *ngIf="isAdministrador == 'true' || isSegurcaixa == 'true'">
                         Ventas SegurCaixa
                     </option>
                 </select>
@@ -55,9 +39,9 @@
          <br>
 
         <button type="button" class="btn btn-app" (click)="openApp(aplicacion.value)"> <span> Acceder a la aplicación</span></button>
-        <div class="aler" *ngIf="selApp">
+<!--         <div class="aler" *ngIf="selApp">
             Debe seleccionar una aplicación
-          </div>
+          </div> -->
 
         
     </div>

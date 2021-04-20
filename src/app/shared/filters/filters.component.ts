@@ -224,32 +224,18 @@ export class FiltersComponent implements OnInit {
     let IDapp;
     localStorage.setItem('app', aplicacion);  
 
-  /*   switch(aplicacion){
-      case "ventas":
-        IDapp = appIDs.global;
-      break;
-      case "territorial":
-        IDapp = appIDs.territorial;
-      break;
-      case "vidacaixa":
-        IDapp = appIDs.vidacaixa;
-      break;
-      case "segurcaixa":
-        IDapp = appIDs.segurcaixa;
-      break;
-      default:
-        IDapp = appIDs.global;
-    } */
 
     let url = window.location.pathname.split("/");
     let pestanya;
     if(url[url.length-1] != ""){
       pestanya=url[url.length-1];
     }
-    if(await this._QlikConnection.qlikConnection(IDapp)){
+/*     if(await this._QlikConnection.qlikConnection(IDapp)){
       localStorage.setItem('appId', IDapp); 
       this.router.navigate([aplicacion + '/' + pestanya]);      
-    } 
+    }  */
+    window.location.href = "/" + aplicacion + "/" + pestanya;
+
   }
 
 

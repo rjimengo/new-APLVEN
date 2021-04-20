@@ -20,7 +20,7 @@ let qlikAppId = document.getElementById("qlikAppId") as HTMLInputElement;
   }  */
 
   //configuracion para produccion
-  export var configQlik = {
+     export var configQlik = {
     host: qlikHost.value, //the address of your Qlik Engine Instance
     prefix: qlikPrefix.value, //or the virtual proxy to be used. for example "/anonymous/"
     port: qlikPort.value, //or the port to be used if different from the default port  

@@ -376,6 +376,7 @@ select:checked, option::selection{
 #calendario_barra{
     height: 5em; 
     width: 87%;
+    max-width: 680px;
     box-shadow: none !important;
 }
 #calendario_escoger{

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 
 @Component({
@@ -18,8 +17,7 @@ export class InicioComponent implements OnInit {
   isSegurcaixa;
 
   constructor(
-    private _QlikConnection: ConnectionQlikService,
-    private router:Router
+    private _QlikConnection: ConnectionQlikService
   ) { }
 
   ngOnInit() {
