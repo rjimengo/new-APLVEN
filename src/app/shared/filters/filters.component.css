@@ -89,6 +89,9 @@ i:hover{
     color: grey;
     margin-left: 4px;
 }
+.bookmark-names:hover{
+    cursor: pointer;
+}
 .fa-trash-alt, .fa-save{
     float: right;
     font-size: 12px;
@@ -99,6 +102,15 @@ i:hover{
     margin-top: 3px;
     margin-bottom: 3px;
 }
-.bookmark-names:hover{
+
+.sheets-names{
+    display: inline;
+    font-size: 16px;
+    margin-left: 4px;
+}
+.sheets-names:hover{
     cursor: pointer;
+}
+.li-sheets{
+    list-style: none;
 }

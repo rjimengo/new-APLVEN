@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { configQlik } from 'src/config/config';
 import {sales, cancelaciones, netos, nivelesApp, resumen, clientes, comparativa} from '../../config/ventasGlobalIDs';
 import { ConnectionQlikService } from './connection-qlik.service';
 
@@ -36,6 +37,10 @@ export class ComunesService {
   topBottomGlobal;
   dimensionGlobal;
   optionGlobal;
+
+  // Declare Sheet variables
+  personalSheets = [];
+  personalSheetsLoaded = false;
 
   setLoader(display){
     let loaderHTML = document.getElementById("loader") as HTMLInputElement;  
@@ -533,6 +538,13 @@ setOperacion (operation) {
       let percen = document.getElementById("percen") as HTMLInputElement;
       if(percen)
         percen.checked = false;
+    }else{
+      setTimeout(() => {
+        let percen = document.getElementById("percen") as HTMLInputElement;
+        if(percen)
+          percen.checked = true;
+        
+      }, );
     }
     
     return pct;
@@ -581,5 +593,81 @@ setOperacion (operation) {
       page=url[url.length-1];
     }
     return page;
+  }
+
+  initializePersonalSheets() {
+    console.log("initializePersonalSheets");
+
+    let loaded = ((typeof this.personalSheetsLoaded == 'undefined' || !this.personalSheetsLoaded) ? true : this.personalSheetsLoaded);
+
+    if (loaded) {
+        this.personalSheetsLoaded = true;
+        var qlikGlobal = this._QlikConnection.globals.qlik.getGlobal(configQlik);
+
+        var promise = new Promise((resolve, reject) => {
+            qlikGlobal.getAuthenticatedUser(function(reply) {
+              var userName = reply.qReturn.substr(reply.qReturn.toLowerCase().lastIndexOf('userid=') + 7, reply.qReturn.length);
+              var userDirectory = reply.qReturn.substr(reply.qReturn.toLowerCase().lastIndexOf('UserDirectory=') + 15, reply.qReturn.toLowerCase().indexOf(';') + 1 - 15);
+              resolve(userName);
+          });
+        }); 
+    }
+
+    if(promise)
+      return promise;
+  }
+
+  loadPersonalSheets() {
+    let promise = this.initializePersonalSheets();
+
+    promise.then((userName) => {
+
+      
+      var app = this._QlikConnection.globals.qlik.currApp();
+
+      var sheetsPromise = new Promise((resolve, reject) => {
+
+        app.getList('sheet', function(data) {
+            var sheets = [];
+            var sortBy = ('title' || 'rank');
+            if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
+                var sortedData = data.qAppObjectList.qItems.sort(function(a, b) {
+                    return a.qData[sortBy] - b.qData[sortBy];
+                });
+                sortedData.forEach(function(item) {
+                    var ItemOwnerId = (item.qMeta.hasOwnProperty('owner')) ? item.qMeta.owner.userId : "";
+                    if ((!item.qMeta.hasOwnProperty('owner')) || (ItemOwnerId !== "" && ItemOwnerId === userName)) {
+                        sheets.push({
+                            id: item.qInfo.qId,
+                            name: item.qMeta.title
+                        });
+                    }
+                });
+                resolve(sheets);
+            }
+          });
+      }); 
+
+      sheetsPromise.then((sheets:any) => {
+        this.personalSheets = sheets;
+        console.log("this.personalSheets");
+        console.log(this.personalSheets);
+      })
+
+
+    }) 
+    .catch((error) => { 
+      console.log(error)
+    });
+
+  }
+
+
+  getPersonalSheets(){
+    return this.personalSheets;
+  }
+
+  isPersonalSheetsPopulated() {
+    return (this.personalSheets && this.personalSheets.length > 0);
   }
 }

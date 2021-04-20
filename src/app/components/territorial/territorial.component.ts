@@ -52,8 +52,8 @@ export class TerritorialComponent implements OnInit {
     this.employee = this._ComunService.initEmployee(this._ComunService.employeeGlobal, this.percentage, false, true);
 
     //Inicializar porcentaje
-    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, true);
-
+    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, false);
+    
     //Inicializar TopBottom
     this.topBottom = this._ComunService.initTopBottom(this.topBottom == null, this._ComunService.topBottomGlobal);
 

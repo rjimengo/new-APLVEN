@@ -39,6 +39,15 @@ const loadCapabilityApis = async (config) => {
     document.head.appendChild(capabilityApisCSS);
     capabilityApisCSS.loaded = new Promise((resolve) => {
       capabilityApisCSS.onload = () => { resolve(); };
+      capabilityApisCSS.onerror = () => { 
+        console.log("Error al cargar archivos");
+        var titulo = "Se ha producido un error al intentar conectar con Qlik.";
+        var secundario = "Por favor, recargue la aplicación.";
+        
+        $("#tituloId").val(titulo);
+        $("#secundarioId").val(secundario);
+        $('#alertModal').modal('show');
+     };
     });
 
     capabilityApisPromise = Promise.all([capabilityApisJS.loaded, capabilityApisCSS.loaded]);
