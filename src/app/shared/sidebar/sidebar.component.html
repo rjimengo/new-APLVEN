@@ -18,13 +18,11 @@
         <div id="selecciones">
           <ul class="text-light ulsidebar" *ngIf="selecciones.length > 0">
             <li *ngFor="let seleccion of selecciones;" > 
-              <div class="row">
-                <div class="col-8 pr-0"><div id="sel{{seleccion.fieldName | lowercase}}" style="width: 150px !important; height: 20px;" ></div></div>
+              <div class="row" *ngIf="seleccion.fieldName.slice(-3) != ' C2' && seleccion.fieldName.slice(-3) != ' C1' ">
+                <div class="col-8 pr-0"><div id="sel{{seleccion.fieldName | lowercase}}" style="width: 150px !important; height: 20px;" >{{seleccion.fieldName | lowercase}}</div></div>
                 <div class="col-3 p-0">{{seleccion.selectedCount}} de {{seleccion.totalCount}}</div>
                 <div class="col-1 pl-0" (click)="removeFilter(seleccion.fieldName)"><i class="fas fa-times" ></i></div>
               </div>
-              
-              
               
             </li>
           </ul>

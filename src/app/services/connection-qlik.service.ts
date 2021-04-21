@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, Observable, of, Subject } from 'rxjs';
 import { filtros } from 'src/config/ventasGlobalIDs';
 import {configQlik} from '../../config/config';
-import { FiltersComponent } from '../shared/filters/filters.component';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +60,23 @@ setAppLoaded(newValue): void {
               });  
             }  
           });
+
+          //Para Comparativa
+          var monthOrDate = false;
+          var filterSelected = false;
+
+          ConnectionQlikService.globals.selState.selections.forEach(sel => {
+            if (sel.fieldName === '_FECHA C2' || sel.fieldName === '_MES C2') {
+              monthOrDate = true;
+              console.log("sel: " , sel);
+              
+            } else if (sel.fieldName.slice(-3) === ' C2') {
+                filterSelected = true;
+                console.log("filterSelected: " , filterSelected);
+
+            }
+          });
+
     };
 
     
@@ -150,7 +166,8 @@ setAppLoaded(newValue): void {
       } else if(!error.message.includes("ProxyError.OnSessionTimedOut")) { //Otros errores, como que un objeto no cargue bien
         console.log(error.code + ' - ' + error.message);
         let warn = document.getElementById("warn") as HTMLInputElement;
-        warn.style.display="block";
+        if(warn)
+          warn.style.display="block";
 
       }
     });

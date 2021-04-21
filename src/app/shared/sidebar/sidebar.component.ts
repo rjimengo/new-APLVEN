@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
 import { filtros } from 'src/config/ventasGlobalIDs';
 
@@ -15,8 +14,7 @@ export class SidebarComponent implements OnInit {
   selecciones=[];
   appLoaded=false;
 
-  constructor( private _QlikConnection: ConnectionQlikService,
-    private _ComunService: ComunesService) { }
+  constructor( private _QlikConnection: ConnectionQlikService) { }
 
   async ngOnInit(){
 
@@ -28,7 +26,7 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    setInterval(() => {
+    setInterval(() => {      
     }, 200);
 
   }

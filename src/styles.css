@@ -395,6 +395,18 @@ i.fa.fa-calendar{
     font-family: 'Font Awesome 5 Free' !important;
 }
 
+
+
+.noRight{
+    color: #1c82a8;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 1.5em;
+    border-top: 1px solid rgb(194, 194, 194);
+}
+.noRightBottom{
+    height: 610px;
+}
 /* styles para nuevo styles-qlik */
 @media only screen and (min-device-width: 1025px){
 

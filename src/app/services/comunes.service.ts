@@ -596,8 +596,6 @@ setOperacion (operation) {
   }
 
   initializePersonalSheets() {
-    console.log("initializePersonalSheets");
-
     let loaded = ((typeof this.personalSheetsLoaded == 'undefined' || !this.personalSheetsLoaded) ? true : this.personalSheetsLoaded);
 
     if (loaded) {
@@ -650,10 +648,7 @@ setOperacion (operation) {
 
       sheetsPromise.then((sheets:any) => {
         this.personalSheets = sheets;
-        console.log("this.personalSheets");
-        console.log(this.personalSheets);
       })
-
 
     }) 
     .catch((error) => { 

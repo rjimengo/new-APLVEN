@@ -39,7 +39,7 @@ export class ComparativaComponent implements OnInit {
   promises=[];
 
   comparativeFilters:boolean = false;
-  isRightCondition:boolean = true;
+  isRightCondition:boolean = false;
 
   selecciones;
 
@@ -50,11 +50,12 @@ export class ComparativaComponent implements OnInit {
     //Cuando se termine la conexion con qlik
     this._QlikConnection.getAppLoaded().subscribe((loaded) => {
       if(loaded){
-        this._QlikConnection.selecciones$.subscribe(x =>{
-          this.selecciones=x;
-          this.checkRightCondtion();
-          
+        this._QlikConnection.selecciones$.subscribe(x =>{          
+          this.selecciones=x;          
         });
+        setInterval(() => {
+          this.checkRightCondtion();
+        }, 500);
       }
     });
 
@@ -223,16 +224,31 @@ checkRightCondtion() {
   var monthOrDate = false;
   var filterSelected = false;
   this.selecciones.forEach(sel => {
-    let splitSel=sel.split(" ");
-    console.log(sel);
-    
-      if (sel == '_FECHA C2' || sel == '_MES C2') {
-          monthOrDate = true;
-      } else if (splitSel[splitSel.length-1] == 'C2') {
-          filterSelected = true;
-      }
+    if (sel.fieldName === '_FECHA C2' || sel.fieldName === '_MES C2') {
+      monthOrDate = true;
+    } else if (sel.fieldName.slice(-3) === ' C2') {
+        filterSelected = true;
+    }
   }); 
-  return monthOrDate && filterSelected;
+
+  if(monthOrDate && filterSelected && !this.isRightCondition){
+    this.isRightCondition=true;
+
+    //cargar graficas
+    this.promises=[];
+    for (var i = 0; i < comparativa.right.length; i++) {
+      this.promises.push(this._QlikConnection.getObject(comparativa.right[i].div, comparativa.right[i].id)); 
+    }
+    this._ComunService.loadObjects(this.promises);
+    this.setObjects("left");
+    this.setObjects("right");
+
+
+  }else if(!monthOrDate || !filterSelected){
+    this.isRightCondition=false;
+
+  }
+
 }
 
   maximizar(apartado){
@@ -386,6 +402,5 @@ dateToSerialNumber(intDay, intMonth, intYear) {
 
   return serialNumber + intDay
 }
-
 
 }

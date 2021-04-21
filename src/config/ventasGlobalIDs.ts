@@ -736,15 +736,15 @@ var comp = {
 var left = [{
   "pos": 0,
   "div": "sales-left",
-  "id": "PDWmk"
+  "id": "dc28d560-9790-4a99-aee6-05c0f505328e"
 },{
   "pos": 1,
   "div": "can-left",
-  "id": "sdJTjsc"
+  "id": "7974bafd-30cb-4b25-8604-667fbb9dd1cd"
 },{
   "pos": 2,
   "div": "net-left",
-  "id": "jcTBJVU"
+  "id": "0b0c5f8a-3f04-4e54-af34-0374358686b4"
 },{
   "pos": 3,
   "div": "red-left",

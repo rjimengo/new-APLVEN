@@ -129,9 +129,20 @@ const qApp = async (config, globals, appId, listener) => {
   }
 };
 
+const createListener = ( app, listener) => {
+  console.log("listener: ", listener);
+  console.log("globalsJS: ", globalsJS);
+  console.log("app: ", app);
+  // create an object
+  globalsJS.selState = app.selectionState();
+  //bind the listener
+  globalsJS.selState.OnData.bind( listener );
+};
+
 //qApp();
 const prueba={
   qApp: qApp,
-  q: globalsJS
+  q: globalsJS,
+  createListener: createListener
 };
 export default prueba;
