@@ -206,9 +206,11 @@ setAppLoaded(newValue): void {
           download: false
       };
 
-      table.exportData(exportOpts, function(link) { 
-        window.open(link, '_blank');
-        console.log(link);                     
+      table.exportData(exportOpts, function(link) {         
+        var config = configQlik;
+        var downloadLink = (config.isSecure ? 'https://' : 'http://') + config.host + (config.port ? ':' + config.port : '') + link;
+        console.log('Link de descarga: '+downloadLink);                        
+        window.open(downloadLink, '_blank');
       });
     });
   }

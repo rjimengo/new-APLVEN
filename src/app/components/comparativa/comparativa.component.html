@@ -183,7 +183,7 @@
     
     <div class="row graficas text-center">
         <!-- Dimensiones -->
-            <div class="dimensiones col-md-10">
+            <div class="dimensiones col-md-9">
                 <ng-container *ngFor="let dimension of dimensions; let i = index">
                     <span class="dropdown">
                         <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i, $event)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Centros'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
@@ -196,7 +196,7 @@
                 </ng-container>
             </div>
     
-            <div class="col-md-2">
+            <div class="col-md-3 pt-2">
                 <button class="btnSegundaLinea" *ngFor="let TBopt of topBottomOpt; let i = index" (click)="topBottomSelected(i)" [disabled]="dimensionSel == 'Sin dimensión'" [ngClass]="{'btnactive': TBopt == topBottom}">
                     {{TBopt}}
                 </button>
