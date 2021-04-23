@@ -30,6 +30,7 @@ export class ConnectionQlikService {
   date;
   inicio:boolean = false;
 
+  error:boolean = false;
  constructor() { 
   this.loaded = new BehaviorSubject<boolean>(false);
 
@@ -101,6 +102,7 @@ setAppLoaded(newValue): void {
           }​​​​​​​)
           .catch(err =>{
             this.controlarErrors();
+            this.error = true;
 
             console.log("error al cargar: " + err);
             
@@ -131,6 +133,7 @@ setAppLoaded(newValue): void {
       document.getElementById("openModalButton").click();
     });
     this.qApp.on("error", (error)=> {
+      this.error = true;
       console.log(error.code + ' - ' + error.message);
       if (error.code == 16) {
         var titulo = "Se ha cerrado la conexión con el servidor de Qlik.";

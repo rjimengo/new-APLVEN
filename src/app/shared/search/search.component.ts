@@ -15,8 +15,10 @@ export class SearchComponent implements OnInit {
 
   onSearchInputFocus(buscador){    
     let qso_CurrentSelections = document.getElementById("qso_CurrentSelections") as HTMLInputElement;
-
+    let pestanya = document.getElementById("bodyId") as HTMLInputElement;
+    
     if(qso_CurrentSelections.style.display != "block" || buscador.value!=""){//Si esta oculto, se pone visible
+      pestanya.style.overflowY = "hidden";
       qso_CurrentSelections.style.display = "block";
       var searchIcon = document.getElementsByClassName('lui-icon--selection-search')[0] as HTMLInputElement;
       if(searchIcon){//Se clicka en el vootn de buscar del objeto de qlik
@@ -44,6 +46,7 @@ export class SearchComponent implements OnInit {
             setTimeout(() => {
               buscador.value="";
               qso_CurrentSelections.style.display = "none";
+              pestanya.style.overflowY = "scroll";
             }, 200);
           }
   
@@ -56,6 +59,7 @@ export class SearchComponent implements OnInit {
             //searchIcon.click(); si quisieramos poner el buscador
             buscador.value="";
             qso_CurrentSelections.style.display = "none";
+            pestanya.style.overflowY = "scroll";
           }else{
             //Ajustar el estilo del panel de selecciones dependiendo si el sidebar esta abierto o no
             if(document.getElementsByClassName("qv-global-selections-enabled")[0]){
