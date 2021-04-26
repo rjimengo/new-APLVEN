@@ -296,6 +296,7 @@ input:checked+.slider:before {
   }
   
   .modal-content{
+    margin-left: -5em;
     width: 45em;
     background-color: white !important;
   }

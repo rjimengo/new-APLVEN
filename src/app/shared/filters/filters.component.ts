@@ -22,6 +22,11 @@ export class FiltersComponent implements OnInit {
   page;
 
   size;
+  isAdministrador;
+  isBiuser;
+  isJerarquico;
+  isVidacaixa;
+  isSegurcaixa;
 
   personalSheets;
   isPersonalSheets;
@@ -48,6 +53,26 @@ export class FiltersComponent implements OnInit {
     let sizeId = document.getElementById("size") as HTMLInputElement;
     if(sizeId)
       this.size = sizeId.value;
+
+    let isAdministradorId = document.getElementById("isAdministrador") as HTMLInputElement; 
+    if(isAdministradorId)
+      this.isAdministrador = isAdministradorId.value;
+    
+    let isBiuserId = document.getElementById("isBiuser") as HTMLInputElement;  
+    if(isBiuserId)
+      this.isBiuser = isBiuserId.value;
+
+    let isJerarquicoId = document.getElementById("isJerarquico") as HTMLInputElement;  
+    if(isJerarquicoId)
+      this.isJerarquico = isJerarquicoId.value;
+
+    let isVidacaixaId = document.getElementById("isVidacaixa") as HTMLInputElement;  
+    if(isVidacaixaId)
+      this.isVidacaixa = isVidacaixaId.value;
+
+    let isSegurcaixaId = document.getElementById("isSegurcaixa") as HTMLInputElement;  
+    if(isSegurcaixaId)
+      this.isSegurcaixa = isSegurcaixaId.value;
   }
 
   backFilter(){

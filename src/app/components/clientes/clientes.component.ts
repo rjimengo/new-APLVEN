@@ -113,6 +113,7 @@ export class ClientesComponent implements OnInit {
       //this.topBottom = this._ComunService.setTopBottom(null, null);
       this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, null, true);
 
+      this.setLevel(this.optionSel);
       //Se pasan todas las tablas a graficas
       this.vistaEdad = true;
       this.vistaProducServ = true;
