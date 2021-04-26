@@ -11,7 +11,7 @@ let qlikAppId = document.getElementById("qlikAppId") as HTMLInputElement;
     port: 80, //or the port to be used if different from the default port  
     isSecure: false, //should be true if connecting over HTTPS
     //webIntegrationId: 'web-integration-id-here' //only needed in SaaS editions and QSEoK
-  };  */ 
+  }; */  
 /*  export var appIDs = {
     global : "b310a657-9d26-431b-80df-ffe687e80a6d",
     territorial : "b310A657-9d26-431b-80df-ffe687e80a6d",

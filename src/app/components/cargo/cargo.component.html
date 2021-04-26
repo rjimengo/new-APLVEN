@@ -88,7 +88,7 @@
                     <button class="btn btnDimension" (click)="dimensionSelectedSinDimension(i, $event)" (mouseenter)="dimPreSel(i)" [ngClass]="{'btnactive': dimension == dimensionSel, 'disabled-button' : dimension == 'Cargo'}" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                         {{dimension}}
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0" [ngClass]="{'disabled-dropdown' : dimension == 'Cargo'}">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="i != 0 && i != 6 && i != 7" [ngClass]="{'disabled-dropdown' : dimension == 'Cargo'}">
                         <a class="dropdown-item" *ngFor="let option of options; let y = index" (click)="dimensionSelected(i)" (click)="setLevel(option, y)" [ngClass]="{'btnactive': option == optionSel}">{{option}}</a>
                     </div>
                 </span>

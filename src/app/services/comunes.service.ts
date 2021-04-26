@@ -88,19 +88,21 @@ export class ComunesService {
 
     let count=0;
     promises.forEach(promesa => {
-      promesa.then( (model)=>{
-        count++;
-        if(count==promises.length){
+      if(promesa){
+        promesa.then( (model)=>{
+          count++;
+          if(count==promises.length){
+            this.spinner.hide();
+            console.log("FINISH promesas");
+            this.setLoader("none"); 
+          }
+        }).catch((err)=>{
           this.spinner.hide();
-          console.log("FINISH promesas");
-          this.setLoader("none"); 
-        }
-      }).catch((err)=>{
-        this.spinner.hide();
-        console.log("Se ha producido un error al cargar el objeto ", err);
-        this.setLoader("none");
-
-      });
+          console.log("Se ha producido un error al cargar el objeto ", err);
+          this.setLoader("none");
+  
+        });
+      }
     });
   }
 
