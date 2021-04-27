@@ -29,6 +29,7 @@ i:hover{
 .dropdown-bookmark{
     width: 270px;
     padding-top: 5px;
+    left: -260px;
 }
 .dropdown-bookmark input{
     height: 30px;
@@ -85,7 +86,7 @@ i:hover{
 
 .bookmark-names{
     display: inline;
-    font-size: 12px;
+    font-size: 13px;
     color: grey;
     margin-left: 4px;
 }
@@ -118,4 +119,13 @@ i:hover{
 
 .li-sheets i:hover, .li-sheets i{
     color: black;
+}
+
+.appNames{
+    font-size: 13px;
+    color: grey;
+}
+.appNames:hover{
+    cursor: pointer;
+    background-color: white;
 }

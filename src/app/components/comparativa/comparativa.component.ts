@@ -96,8 +96,6 @@ export class ComparativaComponent implements OnInit {
 
     /* Get Seleccionados (left) objects */
     for (var i = 0; i < comparativa.left.length; i++) {
-      console.log("objeto: " + comparativa.left[i].div, comparativa.left[i].id);
-      
       this.promises.push(this._QlikConnection.getObject(comparativa.left[i].div, comparativa.left[i].id)); 
     }
 

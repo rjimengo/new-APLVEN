@@ -67,9 +67,9 @@
 <div class="dropdown" *ngIf="size > 1">
     <i class="fas fa-caret-square-down" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="getPage()" title="Abrir aplicación de..."></i>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" (click)="openApp('ventas')" *ngIf="page!='ventas' && (isAdministrador == 'true' || isBiuser == 'true')">Global</a>
-      <a class="dropdown-item" (click)="openApp('territorial')" *ngIf="page!='territorial' && (isAdministrador == 'true' || isJerarquico == 'true')">Territorial</a>
-      <a class="dropdown-item" (click)="openApp('vidacaixa')" *ngIf="page!='vidacaixa' && (isAdministrador == 'true' || isVidacaixa == 'true')">VidaCaixa</a>
-      <a class="dropdown-item" (click)="openApp('segurcaixa')" *ngIf="page!='segurcaixa' && (isAdministrador == 'true' || isSegurcaixa == 'true')">SegurCaixa</a>
+      <a class="dropdown-item appNames" (click)="openApp('ventas')" *ngIf="page!='ventas' && (isAdministrador == 'true' || isBiuser == 'true')">Global</a>
+      <a class="dropdown-item appNames" (click)="openApp('territorial')" *ngIf="page!='territorial' && (isAdministrador == 'true' || isJerarquico == 'true')">Territorial</a>
+      <a class="dropdown-item appNames" (click)="openApp('vidacaixa')" *ngIf="page!='vidacaixa' && (isAdministrador == 'true' || isVidacaixa == 'true')">VidaCaixa</a>
+      <a class="dropdown-item appNames" (click)="openApp('segurcaixa')" *ngIf="page!='segurcaixa' && (isAdministrador == 'true' || isSegurcaixa == 'true')">SegurCaixa</a>
     </div>
   </div>

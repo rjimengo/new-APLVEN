@@ -23,13 +23,22 @@ export class MenuComponent implements OnInit {
       this.page=url[url.length-1];
     }
     this.app = localStorage.getItem('app'); 
-
+    
     if(this.page == this.app){
       this.page = "resumen";
       this.router.navigate([this.app + '/resumen']);
     }else if(this.app == null){
       this.router.navigate(['/']);
       
+    }else if(this.page == "ventas" || (this.page == "territorial" && url[url.length-2] == "") || this.page == "vidacaixa" || this.page == "segurcaixa"){
+      localStorage.setItem('app', this.page); 
+      this.app = localStorage.getItem('app'); 
+      this.page = "resumen";
+      this.router.navigate([this.app + '/resumen']);
+    }else{
+      localStorage.setItem('app', url[url.length-2]); 
+      this.app = localStorage.getItem('app'); 
+      this.page =url[url.length-1];
     }
     
 

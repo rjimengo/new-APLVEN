@@ -17,7 +17,7 @@ export class QlikLoaderComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.myHTML ='<div class="qv-loader-text qv-loader-huge qv-fade-in">Abriendo aplicación...</div>';
+      this.myHTML ='<div class="text-center qv-loader-text qv-loader-huge qv-fade-in">Abriendo aplicación...</div>';
     }, 500);
 
     let interval =  setInterval(() => {
@@ -27,22 +27,21 @@ export class QlikLoaderComponent implements OnInit {
         if(this.porcentaje>100){
           this.porcentaje=100;
         }
-        this.myHTML ='<div class="qv-loader-text qv-loader-huge qv-fade-in"> Cargando ' + this.porcentaje + '%</div>';
+        this.myHTML ='<div class="text-center qv-loader-text qv-loader-huge qv-fade-in"> Cargando ' + this.porcentaje + '%</div>';
       }else if(this.porcentaje>=100 && this.porcentaje <200){
-        this.myHTML ='<div class="qv-loader-text qv-loader-huge qv-fade-in"> Terminando de abrir aplicación... </div>';
+        this.myHTML ='<div class="text-center qv-loader-text qv-loader-huge qv-fade-in"> Terminando de abrir aplicación... </div>';
         clearInterval(interval);
       }else{
         return;
       }
 
       if(this._QlikConnection.error){
-        this.myHTML ='<div class="qv-loader-text qv-loader-huge qv-fade-in">Se ha producido un error </div>';
+        this.myHTML ='<div class="text-center qv-loader-text qv-loader-huge qv-fade-in">Se ha producido un error </div>';
         clearInterval(interval);
       }
       let errorModal = document.getElementById("alertModal") as HTMLInputElement;
       if(errorModal && errorModal.style.display == "block"){
-        console.log("errorModal.style.display: " + errorModal.style.display);
-        this.myHTML ='<div class="qv-loader-text qv-loader-huge qv-fade-in">Se ha producido un error </div>';
+        this.myHTML ='<div class="text-center qv-loader-text qv-loader-huge qv-fade-in">Se ha producido un error </div>';
         clearInterval(interval);
       }
 

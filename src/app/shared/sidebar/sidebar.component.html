@@ -17,7 +17,7 @@
       <p class="seleccionesLabel m-3"> <i class="far fa-check-square m-1"></i>Selecciones<i class="fa fa-eraser" (click)="clearSelections()" title="Borrar todos los filtros"></i></p> 
         <div id="selecciones">
           <ul class="text-light ulsidebar" *ngIf="selecciones.length > 0">
-            <li *ngFor="let seleccion of selecciones;" > 
+            <li class="liSeleccion" *ngFor="let seleccion of selecciones;" > 
               <div class="row" *ngIf="seleccion.fieldName.slice(-3) != ' C2' && seleccion.fieldName.slice(-3) != ' C1' ">
                 <div class="col-8 pr-0"><div id="sel{{seleccion.fieldName | lowercase}}" style="width: 150px !important; height: 20px;" >{{seleccion.fieldName | lowercase}}</div></div>
                 <div class="col-3 p-0">{{seleccion.selectedCount}} de {{seleccion.totalCount}}</div>
