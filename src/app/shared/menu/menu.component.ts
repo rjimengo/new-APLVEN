@@ -27,20 +27,23 @@ export class MenuComponent implements OnInit {
     if(this.page == this.app){
       this.page = "resumen";
       this.router.navigate([this.app + '/resumen']);
-    }else if(this.app == null){
-      this.router.navigate(['/']);
-      
     }else if(this.page == "ventas" || (this.page == "territorial" && url[url.length-2] == "") || this.page == "vidacaixa" || this.page == "segurcaixa"){
       localStorage.setItem('app', this.page); 
       this.app = localStorage.getItem('app'); 
       this.page = "resumen";
       this.router.navigate([this.app + '/resumen']);
+    }else if(url[url.length-1].split(";").length > 1){
+      let ruta = url[url.length-1].split(";");
+      localStorage.setItem('app', ruta[ruta.length-2]); 
+      this.app = localStorage.getItem('app'); 
+      this.page = "resumen";
+      this.router.navigate([ruta[ruta.length-2] + '/resumen']);
     }else{
       localStorage.setItem('app', url[url.length-2]); 
       this.app = localStorage.getItem('app'); 
       this.page =url[url.length-1];
-    }
-    
+    }    
+
 
     this._QlikConnection.getAppLoaded().subscribe((loaded) => {
       if(loaded){//Si la conexion de la appQlik esta cargada

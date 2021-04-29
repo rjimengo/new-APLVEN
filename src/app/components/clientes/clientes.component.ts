@@ -56,7 +56,7 @@ export class ClientesComponent implements OnInit {
     this.employee = this._ComunService.initEmployee(null, this.percentage, true, false);
 
     //Inicializar porcentaje
-    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, false);
+    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, true);
 
     //Inicializar TopBottom
     this._ComunService.topBottomGlobal = null;
