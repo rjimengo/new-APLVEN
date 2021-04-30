@@ -189,7 +189,7 @@ setObjects_2() {
   }
   
   exportExcell(grafica){
-    let graf = grafica as HTMLInputElement;
+    let graf = grafica as HTMLInputElement;    
     this._QlikConnection.exportExcell(graf.getAttribute('qlikid'));
   }
 }

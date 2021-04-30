@@ -182,17 +182,24 @@ setAppLoaded(newValue): void {
     loaderHTML.style.display=display; 
   }
   
-  getObject(id, value){
+  getObject(id, value){    
     let promesa = this.qApp.getObject(id, value);
-    
-    let elem = document.getElementById(id) as HTMLInputElement;   
+
+    let elem = document.getElementById(id) as HTMLInputElement;    
     if(elem){
       elem.innerHTML=`<div class="spinner-grow spinner-grow-sm text-secondary" role="status">
                       <span class="sr-only">Loading...</span>
-                  </div>`;      
-      elem.setAttribute("qlikid", value);    
-        
-    } 
+                  </div>`;    
+          
+          elem.setAttribute("qlikid", value);    
+    }else{
+      setTimeout(() => {
+        let elem = document.getElementById(id) as HTMLInputElement; 
+        if(elem)
+          elem.setAttribute("qlikid", value);    
+      }, 200);
+    }
+
     return promesa;   
   }
   setNumValue(value, id){
@@ -201,7 +208,7 @@ setAppLoaded(newValue): void {
   setStringValue(value, id){
     this.qApp.variable.setStringValue(value, id);
   }
-  exportExcell(qlikid){
+  exportExcell(qlikid){    
     this.qApp.getObjectProperties(qlikid).then(function(model) {
       var table = ConnectionQlikService.globals.qlik.table(model);
 

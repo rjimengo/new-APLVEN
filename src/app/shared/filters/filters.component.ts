@@ -310,15 +310,11 @@ export class FiltersComponent implements OnInit {
 
   }
   getPersonalSheets(){
-    console.log("getPersonalSheets");
-    
     this.personalSheets = this._ComunesService.getPersonalSheets();
     this.isPersonalSheetsPopulated();
     return this.personalSheets;
   }
   isPersonalSheetsPopulated(){
-    console.log("isPersonalSheetsPopulated");
-
     this.isPersonalSheets = this._ComunesService.isPersonalSheetsPopulated();
     return this.isPersonalSheets;
   }

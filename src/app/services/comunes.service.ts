@@ -436,7 +436,7 @@ setOperacion (operation) {
       }
 
       if(page == "ranking"){ //En caso de ranking
-        var object = 'chart2';
+        var object = vista ? 'table2' : 'chart2';
         var dim = dimensionSel == 'Sin dimensión' ? object + '_sinDim' : object + '_Dim';
         var id;
         switch (topBottom) {

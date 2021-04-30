@@ -286,7 +286,23 @@ checkRightCondtion() {
   }
   
   exportExcell(grafica){
-    let graf = grafica as HTMLInputElement;
+    let graf;
+
+    switch (grafica) {
+      case "graficaTopLeft":
+        graf = document.getElementById("chart-left") as HTMLInputElement; 
+      break;
+      case "graficaTopRight":
+        graf = document.getElementById("chart-right") as HTMLInputElement; 
+      break;
+      case "graficaBottomLeft":
+        graf = document.getElementById("chart2-left") as HTMLInputElement; 
+      break;
+      case "graficaBottomRight":
+        graf = document.getElementById("chart2-right") as HTMLInputElement; 
+      break;
+    }
+
     this._QlikConnection.exportExcell(graf.getAttribute('qlikid'));
   }
 

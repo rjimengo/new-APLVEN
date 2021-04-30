@@ -103,7 +103,7 @@
                         <span></span>
                     </div>
                     <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
-                        <i class="fa fa-download p-2" (click)="exportExcell(graficaTopLeft)"></i>
+                        <i class="fa fa-download p-2" (click)="exportExcell('graficaTopLeft')"></i>
                         <i [ngClass]="{'fa-table': !vistaTopLeft,'fa-chart-pie': vistaTopLeft}" class="fa p-2" (click)="changeView('TL')"></i>
                         <i [ngClass]="{'fa-window-maximize': !maxGraficaTL,'fa-window-restore': maxGraficaTL}" class="far p-2" (click)="maximizar('TL')"></i>
                     </div>
@@ -167,14 +167,14 @@
                         <span></span>
                     </div>
                     <div *ngIf="isRightCondition" class="col-md-6 mt-2 mb-2 text-right icons-graf">
-                        <i class="fa fa-download p-2" (click)="exportExcell(graficaTopRight)"></i>
+                        <i class="fa fa-download p-2" (click)="exportExcell('graficaTopRight')"></i>
                         <i [ngClass]="{'fa-table': !vistaTopRight,'fa-chart-pie': vistaTopRight}" class="fa p-2" (click)="changeView('TR')"></i>
                         <i [ngClass]="{'fa-window-maximize': !maxGraficaTR,'fa-window-restore': maxGraficaTR}" class="far p-2" (click)="maximizar('TR')"></i>
                     </div>
                 </div>
                 <!-- grafica top derecha -->
                 <div *ngIf="isRightCondition" #graficaTopRight id="chart-right" class="grafica"></div>
-                <div *ngIf="!isRightCondition" class="noRight">Seleccione un periodo temporal y un centro para poder comparar.  </div>
+                <div *ngIf="!isRightCondition" class="noRight">Seleccione un periodo temporal y un centro para poder comparar. </div>
             </div>
         </div>
     </div>
@@ -202,14 +202,14 @@
                 </button>
             </div>
         
-        <div class="col-md-6" [ngClass]="{'panel': !maxGraficaBL,'panel-xl': maxGraficaBL}">
+        <div class="col-md-6 graficas" [ngClass]="{'panel': !maxGraficaBL,'panel-xl col-md-12': maxGraficaBL}">
             <!-- grafica bottom izquierda -->
             <div class="row">
                 <div class="col-md-6 mt-2 mb-2 p-0">
                     <span></span>
                 </div>
                 <div *ngIf="dimensionSel != dimensions[0]" class="col-md-6 mt-2 mb-2 text-right icons-graf">
-                    <i class="fa fa-download p-2" (click)="exportExcell(graficaBottomLeft)"></i>
+                    <i class="fa fa-download p-2" (click)="exportExcell('graficaBottomLeft')"></i>
                     <i [ngClass]="{'fa-table': !vistaBottomLeft,'fa-chart-pie': vistaBottomLeft}" class="fa p-2" (click)="changeView('BL')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaBL,'fa-window-restore': maxGraficaBL}" class="far p-2" (click)="maximizar('BL')"></i>
                 </div>
@@ -219,14 +219,14 @@
             <div *ngIf="dimensionSel == dimensions[0]" class="noRight noRightBottom">Seleccione una dimensión.</div>
         </div>
 
-        <div class="col-md-6" [ngClass]="{'panel': !maxGraficaBR,'panel-xl': maxGraficaBR}">
+        <div class="col-md-6 graficas" [ngClass]="{'panel': !maxGraficaBR,'panel-xl col-md-12': maxGraficaBR}">
             <!-- grafica bottom derecha -->
             <div class="row">
                 <div class="col-md-6 mt-2 mb-2 p-0">
                     <span></span>
                 </div>
                 <div *ngIf="dimensionSel != dimensions[0] && isRightCondition" class="col-md-6 mt-2 mb-2 text-right icons-graf">
-                    <i class="fa fa-download p-2" (click)="exportExcell(graficaBottomRight)"></i>
+                    <i class="fa fa-download p-2" (click)="exportExcell('graficaBottomRight')"></i>
                     <i [ngClass]="{'fa-table': !vistaBottomRight,'fa-chart-pie': vistaBottomRight}" class="fa p-2" (click)="changeView('BR')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaBR,'fa-window-restore': maxGraficaBR}" class="far p-2" (click)="maximizar('BR')"></i>
                 </div>
