@@ -100,8 +100,8 @@
         <div class="col-md-1"></div>
         <div class="col-md-3 text-right">
             <label class="switch">
-                <input id="percen" #percentage type="checkbox" [disabled]="true"  (click)="percentageSelected(percentage.checked)">
-                <span class="slider round" [style]="{'cursor' : 'not-allowed' }"></span>
+                <input id="percen" #percentage type="checkbox" [disabled]="dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee" (click)="percentageSelected(percentage.checked)">
+                <span class="slider round" [style]="{'cursor' : ((dimensionSel == 'Sin dimensión' || option === 'Neto' || metric === 'Margen' || employee) ? 'not-allowed' : 'pointer') }"></span>
               </label>
               <span class="porcentajeLabel">%</span>
         </div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
                     <i class="fa fa-download p-2" (click)="exportExcell(graficaEdad)"></i>
-                    <i [ngClass]="{'fa-table': !vistaEdad,'fa-chart-pie': vistaEdad}"  [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('edad')"></i>
+                    <i [ngClass]="{'fa-table': !vistaEdad,'fa-chart-pie': vistaEdad}" class="fa p-2" (click)="changeView('edad')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaEdad,'fa-window-restore': maxGraficaEdad}" class="far p-2" (click)="maximizar('edad')"></i>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
                     <i class="fa fa-download p-2" (click)="exportExcell(graficaProducServ)"></i>
-                    <i [ngClass]="{'fa-table': !vistaProducServ,'fa-chart-pie': vistaProducServ}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('producServ')"></i>
+                    <i [ngClass]="{'fa-table': !vistaProducServ,'fa-chart-pie': vistaProducServ}" class="fa p-2" (click)="changeView('producServ')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaProducServ,'fa-window-restore': maxGraficaProducServ}" class="far p-2" (click)="maximizar('producServ')"></i>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
                     <i class="fa fa-download p-2" (click)="exportExcell(graficaNegocio)"></i>
-                    <i [ngClass]="{'fa-table': !vistaNegocio,'fa-chart-pie': vistaNegocio}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('negocio')"></i>
+                    <i [ngClass]="{'fa-table': !vistaNegocio,'fa-chart-pie': vistaNegocio}" class="fa p-2" (click)="changeView('negocio')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaNegocio,'fa-window-restore': maxGraficaNegocio}" class="far p-2" (click)="maximizar('negocio')"></i>
                 </div>
             </div>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="col-md-6 mt-2 mb-2 text-right icons-graf">
                     <i class="fa fa-download p-2" (click)="exportExcell(graficaSaldo)"></i>
-                    <i [ngClass]="{'fa-table': !vistaSaldo,'fa-chart-pie': vistaSaldo}" [style]="{'cursor' : (dimensionSel != 'Sin dimensión' ? 'pointer' : 'default') }" class="fa p-2" (click)="changeView('saldo')"></i>
+                    <i [ngClass]="{'fa-table': !vistaSaldo,'fa-chart-pie': vistaSaldo}" class="fa p-2" (click)="changeView('saldo')"></i>
                     <i [ngClass]="{'fa-window-maximize': !maxGraficaSaldo,'fa-window-restore': maxGraficaSaldo}" class="far p-2" (click)="maximizar('saldo')"></i>
                 </div>
             </div>

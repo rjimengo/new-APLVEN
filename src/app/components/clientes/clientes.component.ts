@@ -56,7 +56,7 @@ export class ClientesComponent implements OnInit {
     this.employee = this._ComunService.initEmployee(null, this.percentage, true, false);
 
     //Inicializar porcentaje
-    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, true);
+    this.percentage = this._ComunService.initPercentage(this.metric, this.option, this.dimensionSel, this.employee, this._ComunService.percentageGlobal, false);
 
     //Inicializar TopBottom
     this._ComunService.topBottomGlobal = null;
@@ -190,27 +190,15 @@ export class ClientesComponent implements OnInit {
   changeView(apartado){
     switch(apartado){
       case "edad":
-        if(this.dimensionSel=="Sin dimensión" && !this.vistaEdad){
-          return;
-        }
         this.vistaEdad = this._ComunService.changeView(apartado, this.vistaEdad, 0, 1);
       break;
       case "producServ":
-        if(this.dimensionSel=="Sin dimensión" && !this.vistaProducServ){
-          return;
-        }
         this.vistaProducServ = this._ComunService.changeView(apartado, this.vistaProducServ, 2, 3);
       break;
       case "negocio":
-        if(this.dimensionSel=="Sin dimensión" && !this.vistaNegocio){
-          return;
-        }
         this.vistaNegocio = this._ComunService.changeView(apartado, this.vistaNegocio, 4, 5);
       break;
       case "saldo":
-        if(this.dimensionSel=="Sin dimensión" && !this.vistaSaldo){
-          return;
-        }
         this.vistaSaldo = this._ComunService.changeView(apartado, this.vistaSaldo, 6, 7);
       break;
     }

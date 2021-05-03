@@ -136,6 +136,8 @@ export class FiltersComponent implements OnInit {
     });
     setTimeout(() => {
       this.bookmarkData = FiltersComponent.bookmarkDataAux;
+      if(this.bookmarkData)
+        this.bookmarkData.sort((a,b) => a.name.localeCompare(b.name));      
     }, 400);
 
   }

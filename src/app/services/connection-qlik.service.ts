@@ -236,7 +236,7 @@ setAppLoaded(newValue): void {
         if (reply && reply.qContent && reply.qContent.qString) {
             var newDate = new Date((reply.qContent.qString - (25567 + 2)) * 86400 * 1000);
             var year = newDate.getFullYear();
-            //this.qApp.field('MES').selectMatch("*'" + year.toString().substr(2, 4));
+            ConnectionQlikService.qApp.field('MES').selectMatch("*'" + year.toString().substr(2, 4)); //aplicar filtro de los meses de este anyo
             resolve(newDate);
         }
       });
