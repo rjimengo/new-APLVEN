@@ -20,7 +20,6 @@ import { SearchComponent } from './shared/search/search.component';
 import { CanActivateAppLoad } from './services/guards/apploaded.guard';
 import { ventasGuard } from './services/guards/ventasGuard.guard';
 import { QlikLoaderComponent } from './shared/qlik-loader/qlik-loader.component';
-import { LoaderComponent } from './shared/loader/loader.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -44,7 +43,6 @@ import { ModalComponent } from './shared/modal/modal.component';
     FiltersComponent,
     SearchComponent,
     QlikLoaderComponent,
-    LoaderComponent,
     ModalComponent,
   ],
   imports: [

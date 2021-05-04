@@ -376,8 +376,7 @@ select:checked, option::selection{
 /* Estilo para los filtros calendario y meses */
 #calendario_barra{
     height: 5em; 
-    width: 87%;
-    max-width: 680px;
+    max-width: 840px;
     box-shadow: none !important;
 }
 #calendario_escoger{

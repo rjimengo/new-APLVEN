@@ -106,8 +106,8 @@ export class ComparativaComponent implements OnInit {
 
     /* Charts initialization */    
     if (this.dimensionSel != this.dimensions[0]) {
-      this.promises.push(this.setObjects("left")); 
-      this.promises.push(this.setObjects("right")); 
+      this.setObjects("left"); 
+      this.setObjects("right"); 
     }
 
     //Cuando todos los objetos se hayan cargado  
