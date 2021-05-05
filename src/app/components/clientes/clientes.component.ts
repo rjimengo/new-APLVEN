@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { indicadoresVCN, clientes, cargo } from 'src/config/ventasGlobalIDs';
 
 @Component({
   selector: 'app-clientes',
@@ -71,17 +70,20 @@ export class ClientesComponent implements OnInit {
       this.option = localStorage.getItem("optionValue2");
   }
 
-  cargarDatos(){
+  async cargarDatos(){
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
     this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
     
+    //Obtener los objetos de la pestanya
+    this.objetos = await this._ComunService.getObjetsIDs();
+    let indicadoresVCN = this.objetos.indicadoresVCN;
+    this.objetos = this.objetos.clientes;
+
     /* Get KPIs Ventas, Cancelaciones y Netos  */
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.ventas[0], indicadoresVCN.ventas[1]));
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.cancelaciones[0], indicadoresVCN.cancelaciones[1]));
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.neto[0], indicadoresVCN.neto[1])); 
 
-    //Obtener los objetos de la pestanya
-    this.objetos = clientes;
 
     /* Obtener las 4 graficas de la pestanya Clientes */
     for (var i = 0; i < this.objetos.length; i+=2) {
@@ -190,16 +192,32 @@ export class ClientesComponent implements OnInit {
   changeView(apartado){
     switch(apartado){
       case "edad":
-        this.vistaEdad = this._ComunService.changeView(apartado, this.vistaEdad, 0, 1);
+        if(this.dimensionSel == "Sin dimensión" && !this.vistaEdad){
+          this.vistaEdad = this._ComunService.changeView(apartado, this.vistaEdad, 0, 8);
+        }else{
+          this.vistaEdad = this._ComunService.changeView(apartado, this.vistaEdad, 0, 1);
+        }
       break;
       case "producServ":
-        this.vistaProducServ = this._ComunService.changeView(apartado, this.vistaProducServ, 2, 3);
+        if(this.dimensionSel == "Sin dimensión" && !this.vistaProducServ){
+          this.vistaProducServ = this._ComunService.changeView(apartado, this.vistaProducServ, 2, 9);
+        }else{
+          this.vistaProducServ = this._ComunService.changeView(apartado, this.vistaProducServ, 2, 3);
+        }
       break;
       case "negocio":
-        this.vistaNegocio = this._ComunService.changeView(apartado, this.vistaNegocio, 4, 5);
+        if(this.dimensionSel == "Sin dimensión" && !this.vistaNegocio){
+          this.vistaNegocio = this._ComunService.changeView(apartado, this.vistaNegocio, 4, 10);
+        }else{
+          this.vistaNegocio = this._ComunService.changeView(apartado, this.vistaNegocio, 4, 5);
+        }
       break;
       case "saldo":
-        this.vistaSaldo = this._ComunService.changeView(apartado, this.vistaSaldo, 6, 7);
+        if(this.dimensionSel == "Sin dimensión" && !this.vistaSaldo){
+          this.vistaSaldo = this._ComunService.changeView(apartado, this.vistaSaldo, 6, 11);
+        }else{
+          this.vistaSaldo = this._ComunService.changeView(apartado, this.vistaSaldo, 6, 7);
+        }
       break;
     }
   }

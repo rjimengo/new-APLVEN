@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { indicadoresVCN, cargo } from 'src/config/ventasGlobalIDs';
 
 @Component({
   selector: 'app-cargo',
@@ -65,17 +64,20 @@ export class CargoComponent implements OnInit {
     this.option = localStorage.getItem("optionValue2");
   }
 
-  cargarDatos(){
+  async cargarDatos(){
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
     this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
     
+    //Obtener los objetos de la pestanya
+    this.objetos = await this._ComunService.getObjetsIDs();
+    let indicadoresVCN = this.objetos.indicadoresVCN;
+    this.objetos = this.objetos.cargo;
+
     /* Get KPIs Ventas, Cancelaciones y Netos  */
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.ventas[0], indicadoresVCN.ventas[1]));
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.cancelaciones[0], indicadoresVCN.cancelaciones[1]));
     this.promises.push(this._QlikConnection.getObject(indicadoresVCN.neto[0], indicadoresVCN.neto[1])); 
 
-    //Obtener los objetos de la pestanya
-    this.objetos = cargo;
 
     this.setObjects_1();
     this.setObjects_2();

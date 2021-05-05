@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { indicadoresVCN, comparativa } from 'src/config/ventasGlobalIDs';
+
 @Component({
   selector: 'app-comparativa',
   templateUrl: './comparativa.component.html',
@@ -40,6 +40,8 @@ export class ComparativaComponent implements OnInit {
 
   comparativeFilters:boolean = false;
   isRightCondition:boolean = false;
+
+  comparativa;
 
   selecciones;
 
@@ -90,18 +92,22 @@ export class ComparativaComponent implements OnInit {
     this.option = localStorage.getItem("optionValue2");
   }
 
-  cargarDatos(){
+  async cargarDatos(){
 
-    this.objetos = comparativa.comp;
+    //Obtener los objetos de la pestanya
+    this.objetos = await this._ComunService.getObjetsIDs();
+    this.comparativa = this.objetos.comparativa;
+    this.objetos = this.objetos.comparativa.comp;
+    
 
     /* Get Seleccionados (left) objects */
-    for (var i = 0; i < comparativa.left.length; i++) {
-      this.promises.push(this._QlikConnection.getObject(comparativa.left[i].div, comparativa.left[i].id)); 
+    for (var i = 0; i < this.comparativa.left.length; i++) {
+      this.promises.push(this._QlikConnection.getObject(this.comparativa.left[i].div, this.comparativa.left[i].id)); 
     }
 
     /* Get Comparar con... (right) objects */
-    for (var i = 0; i < comparativa.right.length; i++) {
-      this.promises.push(this._QlikConnection.getObject(comparativa.right[i].div, comparativa.right[i].id)); 
+    for (var i = 0; i < this.comparativa.right.length; i++) {
+      this.promises.push(this._QlikConnection.getObject(this.comparativa.right[i].div, this.comparativa.right[i].id)); 
     }
 
     /* Charts initialization */    
@@ -234,8 +240,8 @@ checkRightCondtion() {
 
     //cargar graficas
     this.promises=[];
-    for (var i = 0; i < comparativa.right.length; i++) {
-      this.promises.push(this._QlikConnection.getObject(comparativa.right[i].div, comparativa.right[i].id)); 
+    for (var i = 0; i < this.comparativa.right.length; i++) {
+      this.promises.push(this._QlikConnection.getObject(this.comparativa.right[i].div, this.comparativa.right[i].id)); 
     }
     this._ComunService.loadObjects(this.promises);
     this.setObjects("left");

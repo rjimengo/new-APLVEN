@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { configQlik } from 'src/config/config';
-import {sales, cancelaciones, netos, nivelesApp, resumen, clientes, comparativa} from '../../config/ventasGlobalIDs';
+import { nivelesApp } from '../../config/ventasGlobalIDs';
 import { ConnectionQlikService } from './connection-qlik.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComunesService {
+
+  sales;
+  cancelaciones;
+  netos;
+  clientes;
+  comparativa;
 
   selecciones = [];
   constructor(private _QlikConnection: ConnectionQlikService, private spinner: NgxSpinnerService) { }
@@ -104,6 +110,87 @@ export class ComunesService {
         });
       }
     });
+  }
+
+  getObjetsIDs(){
+    let app = localStorage.getItem("app");
+    let objectsIDs;
+    
+    switch (app) {
+      case "ventas":
+        return new Promise((resolve) => {
+          import("../../config/ventasGlobalIDs").then(file => {
+            objectsIDs = file;
+            this.sales = objectsIDs.sales;
+            this.cancelaciones = objectsIDs.cancelaciones;
+            this.netos = objectsIDs.netos;
+            this.clientes = objectsIDs.clientes;
+            this.comparativa = objectsIDs.comparativa;
+            this.niveles = objectsIDs.nivelesApp;
+            resolve(objectsIDs);
+          });
+        }); 
+      break;
+
+      case "territorial":
+        return new Promise((resolve) => {
+          import("../../config/territorialIds").then(file => {
+            objectsIDs = file;
+            this.sales = objectsIDs.sales;
+            this.cancelaciones = objectsIDs.cancelaciones;
+            this.netos = objectsIDs.netos;
+            this.clientes = objectsIDs.clientes;
+            this.comparativa = objectsIDs.comparativa;
+            this.niveles = objectsIDs.nivelesApp;
+            resolve(objectsIDs);
+          });
+        });
+      break;
+      case "vidacaixa":
+        return new Promise((resolve) => {
+          import("../../config/vidacaixaIds").then(file => {
+            objectsIDs = file;
+            this.sales = objectsIDs.sales;
+            this.cancelaciones = objectsIDs.cancelaciones;
+            this.netos = objectsIDs.netos;
+            this.clientes = objectsIDs.clientes;
+            this.comparativa = objectsIDs.comparativa;
+            this.niveles = objectsIDs.nivelesApp;
+            resolve(objectsIDs);
+          });
+        });
+      break;
+
+      case "segurcaixa":
+        return new Promise((resolve) => {
+          import("../../config/segurcaixaIds").then(file => {
+            objectsIDs = file;
+            this.sales = objectsIDs.sales;
+            this.cancelaciones = objectsIDs.cancelaciones;
+            this.netos = objectsIDs.netos;
+            this.clientes = objectsIDs.clientes;
+            this.comparativa = objectsIDs.comparativa;
+            this.niveles = objectsIDs.nivelesApp;
+            resolve(objectsIDs);
+          });
+        });
+      break;
+    
+      default:
+        return new Promise((resolve) => {
+          import("../../config/ventasGlobalIDs").then(file => {
+            objectsIDs = file;
+            this.sales = objectsIDs.sales;
+            this.cancelaciones = objectsIDs.cancelaciones;
+            this.netos = objectsIDs.netos;
+            this.clientes = objectsIDs.clientes;
+            this.comparativa = objectsIDs.comparativa;
+            this.niveles = objectsIDs.nivelesApp;
+            resolve(objectsIDs);
+          });
+        });
+      break;
+    }
   }
 
   radioButtons(value, operation, dimension, employee){
@@ -237,91 +324,91 @@ setOperacion (operation) {
       case "ventas":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(sales[chart].div, sales[chart].id);
+          this._QlikConnection.getObject(this.sales[chart].div, this.sales[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(sales[chart].div, sales[table].id);
+          this._QlikConnection.getObject(this.sales[chart].div, this.sales[table].id);
         }
       break;
       case "cancelaciones":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(cancelaciones[chart].div, cancelaciones[chart].id);
+          this._QlikConnection.getObject(this.cancelaciones[chart].div, this.cancelaciones[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(cancelaciones[chart].div, cancelaciones[table].id);
+          this._QlikConnection.getObject(this.cancelaciones[chart].div, this.cancelaciones[table].id);
         }
       break;
       case "neto":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(netos[chart].div, netos[chart].id);
+          this._QlikConnection.getObject(this.netos[chart].div, this.netos[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(netos[chart].div, netos[table].id);
+          this._QlikConnection.getObject(this.netos[chart].div, this.netos[table].id);
         }
       break;
       case "edad"://Para la pestanya clientes: edad, producServ, negocio y saldo
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[table].id);
         }
       break;
       case "producServ":        
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[table].id);
         }
       break;
       case "negocio":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[table].id);
         }
       break;
       case "saldo":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[chart].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(clientes[chart].div, clientes[table].id);
+          this._QlikConnection.getObject(this.clientes[chart].div, this.clientes[table].id);
         }
       break;
       case "TL": //Para comparativa graficas Top
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(comparativa.left[chart].div, comparativa.left[chart].id);
+          this._QlikConnection.getObject(this.comparativa.left[chart].div, this.comparativa.left[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(comparativa.left[chart].div, comparativa.left[table].id);
+          this._QlikConnection.getObject(this.comparativa.left[chart].div, this.comparativa.left[table].id);
         }
       break;
       case "TR":
         if(vista){
           vista=false;
-          this._QlikConnection.getObject(comparativa.right[chart].div, comparativa.right[chart].id);
+          this._QlikConnection.getObject(this.comparativa.right[chart].div, this.comparativa.right[chart].id);
         }
         else{
           vista=true;
-          this._QlikConnection.getObject(comparativa.right[chart].div, comparativa.right[table].id);
+          this._QlikConnection.getObject(this.comparativa.right[chart].div, this.comparativa.right[table].id);
         }
       break;
     }

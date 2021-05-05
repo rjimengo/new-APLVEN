@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { filtros } from 'src/config/ventasGlobalIDs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,20 +9,27 @@ import { filtros } from 'src/config/ventasGlobalIDs';
 })
 export class SidebarComponent implements OnInit {
 
-  filtrosOpen=filtros.fecha;
+  filtrosOpen;
   filter="";
   selecciones=[];
   appLoaded=false;
 
-  constructor( private _QlikConnection: ConnectionQlikService) { }
+  filtros;
+
+  constructor( private _QlikConnection: ConnectionQlikService, private _ComunService: ComunesService) { }
 
   async ngOnInit(){
 
     //Cuando se termine la conexion con qlik
-    this._QlikConnection.getAppLoaded().subscribe((loaded) => {
+    this._QlikConnection.getAppLoaded().subscribe(async (loaded) => {
       if(loaded){
         this.appLoaded=true;
         this._QlikConnection.selecciones$.subscribe(x => this.selecciones=x);
+
+        //Obtener los filtros de la app correspondiente
+        this.filtros = await this._ComunService.getObjetsIDs();
+        this.filtros = this.filtros.filtros;
+        this.filtrosOpen = this.filtros.fecha;
       }
     });
 
@@ -102,47 +109,47 @@ export class SidebarComponent implements OnInit {
       let icon;
       switch(filtro){
         case "fecha":
-          this.filtrosOpen=filtros.fecha;
+          this.filtrosOpen=this.filtros.fecha;
           icon = icons[0] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
         case "ventas":
-          this.filtrosOpen=filtros.ventas;
+          this.filtrosOpen=this.filtros.ventas;
           icon = icons[1] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
         case "centros":
-          this.filtrosOpen=filtros.centros;
+          this.filtrosOpen=this.filtros.centros;
           icon = icons[2] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
        case "productos":
-          this.filtrosOpen=filtros.productos;
+          this.filtrosOpen=this.filtros.productos;
           icon = icons[3] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
         case "clientesdb":
-          this.filtrosOpen=filtros.clientesdb;
+          this.filtrosOpen=this.filtros.clientesdb;
           icon = icons[4] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
           case "clientesms":
-          this.filtrosOpen=filtros.clientesms;
+          this.filtrosOpen=this.filtros.clientesms;
           icon = icons[5] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
         case "clientesn":
-          this.filtrosOpen=filtros.clientesn;
+          this.filtrosOpen=this.filtros.clientesn;
           icon = icons[6] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break;
         case "clientess":
-          this.filtrosOpen=filtros.clientess;
+          this.filtrosOpen=this.filtros.clientess;
           icon = icons[7] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break; 
         case "empleados":
-          this.filtrosOpen=filtros.empleados;
+          this.filtrosOpen=this.filtros.empleados;
           icon = icons[8] as HTMLInputElement;
           icon.style.transform = "rotate(90deg)";
         break; 

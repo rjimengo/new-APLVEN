@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunesService } from 'src/app/services/comunes.service';
 import { ConnectionQlikService } from 'src/app/services/connection-qlik.service';
-import { sales, cancelaciones, netos } from '../../../config/ventasGlobalIDs';
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-resumen',
@@ -35,11 +33,18 @@ export class ResumenComponent implements OnInit {
     
   }
 
-  cargarDatos(){     
+  async cargarDatos(){     
 
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
     this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
     
+    //Obtener los objetos de la pestanya
+    let objetos:any = await this._ComunService.getObjetsIDs();
+    let sales = objetos.sales;
+    let cancelaciones = objetos.cancelaciones;
+    let netos = objetos.netos;
+
+
     /* Get Ventas objects */
     for (var i = 0; i < sales.length; i++) {
       this.promises.push(this._QlikConnection.getObject(sales[i].div, sales[i].id));
