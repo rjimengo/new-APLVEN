@@ -9,9 +9,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
+import { TablaDinamicaComponent } from './components/tabla-dinamica/tabla-dinamica.component';
 import { TerritorialComponent } from './components/territorial/territorial.component';
 import {CanActivateAppLoad} from './services/guards/apploaded.guard';
-import { ventasGuard } from './services/guards/ventasGuard.guard';
 
 const rutasHijas = [
   { path: 'resumen', component: ResumenComponent, canActivate: [CanActivateAppLoad]},
@@ -23,6 +23,7 @@ const rutasHijas = [
   { path: 'ranking', component: RankingComponent, canActivate: [CanActivateAppLoad]},
   { path: 'clientes', component: ClientesComponent, canActivate: [CanActivateAppLoad]},
   { path: 'comparativa', component: ComparativaComponent, canActivate: [CanActivateAppLoad]},
+  { path: 'tabla-dinamica', component: TablaDinamicaComponent, canActivate: [CanActivateAppLoad]},
 
 ];
 

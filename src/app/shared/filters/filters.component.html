@@ -5,17 +5,21 @@
 
 <!-- Sheets -->
 <div class="dropdown">
-  <i class="far fa-copy" title="Abrir Mis Hojas en QlikSense" *ngIf="autoserviceEnabled()" (click)="openCloseSheets()"  (click)="getPersonalSheets()"></i>
+  <i class="far fa-copy" title="Abrir Mis Hojas en QlikSense" *ngIf="autoserviceEnabled()" (click)="getPersonalSheets()" id="dropdownSheets" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 
-  <div class="dropdown-menu dropdown-sheets" (mouseleave)="onSheetsContainerLeave()">
+  <div class="dropdown-menu dropdown-sheets" aria-labelledby="dropdownSheets">
 
     <ul>
-      <li class="li-sheets" *ngFor="let sheet of personalSheets; let i = index">
-        <i class="far fa-file-alt"></i> <p class="sheets-names" *ngIf="isPersonalSheets" (click)="openQlikSheet(sheet.id)">{{sheet.name}}</p>
+      <li class="li-sheets" (click)="navigate('tabla-dinamica')">
+        <i class="fas fa-table"></i> <p class="sheets-names">Tabla dinámica</p>
       </li>
       <div class="dropdown-divider"></div>
       <li class="li-sheets" (click)="openQlikApp()">
         <i class="far fa-file"></i> <p class="sheets-names">Nueva hoja</p>
+      </li>
+      <div class="dropdown-divider"></div>
+      <li class="li-sheets" *ngFor="let sheet of personalSheets; let i = index">
+        <i class="far fa-file-alt"></i> <p class="sheets-names" *ngIf="isPersonalSheets" (click)="openQlikSheet(sheet.id)">{{sheet.name}}</p>
       </li>
     </ul>
 

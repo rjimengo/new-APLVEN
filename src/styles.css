@@ -407,6 +407,11 @@ i.fa.fa-calendar{
 .noRightBottom{
     height: 610px;
 }
+
+/* Tabla dinamica */
+.tablaDinamica{
+    height: calc(100vh - 224px);
+}
 /* styles para nuevo styles-qlik */
 @media only screen and (min-device-width: 1025px){
 

@@ -24,6 +24,7 @@ import { QlikLoaderComponent } from './shared/qlik-loader/qlik-loader.component'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ModalComponent } from './shared/modal/modal.component';
+import { TablaDinamicaComponent } from './components/tabla-dinamica/tabla-dinamica.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     SearchComponent,
     QlikLoaderComponent,
     ModalComponent,
+    TablaDinamicaComponent,
   ],
   imports: [
     BrowserModule,

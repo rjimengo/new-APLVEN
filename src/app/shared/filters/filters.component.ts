@@ -294,25 +294,10 @@ export class FiltersComponent implements OnInit {
     return (autoservice == 'enabled');
   }
 
-  openCloseSheets(){  
-    var element = document.getElementsByClassName("dropdown-sheets")[0] as HTMLElement;
 
-    if(element.classList.contains("show")){
-      element.classList.remove("show");
-    }else{
-      element.classList.add("show");
-    }
-
-  }
-
-  onSheetsContainerLeave(){
-    setTimeout(() => {
-      this.openCloseSheets();
-    }, 1000);
-
-  }
   getPersonalSheets(){
     this.personalSheets = this._ComunesService.getPersonalSheets();
+    this.personalSheets.sort((a,b) => a.name.localeCompare(b.name));      
     this.isPersonalSheetsPopulated();
     return this.personalSheets;
   }
@@ -331,6 +316,16 @@ export class FiltersComponent implements OnInit {
         prefix + 'sense/app/' + localStorage.getItem("appId") + '/sheet/' + sheetId;
 
     window.open(sheetUrl, '_blank');
+  }
+
+  navigate(ruta){
+    let app = localStorage.getItem('app'); 
+    this.page = ruta;
+    this.router.navigate([app + '/' + ruta]);
+
+    var navLink = document.getElementsByClassName("nav-link active")[0] as HTMLElement;
+    if(navLink)
+      navLink.classList.remove("active");
   }
 
 }
