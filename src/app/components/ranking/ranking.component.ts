@@ -65,7 +65,7 @@ export class RankingComponent implements OnInit {
 
   async cargarDatos(){
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
-    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
+    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'aPX'));
     
     //Obtener los objetos de la pestanya
     this.objetos = await this._ComunService.getObjetsIDs();

@@ -375,8 +375,8 @@ select:checked, option::selection{
 
 /* Estilo para los filtros calendario y meses */
 #calendario_barra{
-    height: 5em; 
-    max-width: 840px;
+    height: 6.5em; 
+    max-width: 500px;
     box-shadow: none !important;
 }
 #calendario_escoger{
@@ -410,8 +410,12 @@ i.fa.fa-calendar{
 
 /* Tabla dinamica */
 .tablaDinamica{
-    height: calc(100vh - 224px);
+    height: calc(100vh - 324px);
 }
+.logo-climber{
+    display: none;
+}
+
 /* styles para nuevo styles-qlik */
 @media only screen and (min-device-width: 1025px){
 

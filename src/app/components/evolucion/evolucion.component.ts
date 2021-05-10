@@ -67,7 +67,7 @@ export class EvolucionComponent implements OnInit {
 
   async cargarDatos(){
     this.promises.push(this._QlikConnection.getObject('calendario_escoger', 'VrCpHn'));
-    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'jvJpb'));
+    this.promises.push(this._QlikConnection.getObject('calendario_barra', 'aPX'));
     
     this.objetos = await this._ComunService.getObjetsIDs();
     let indicadoresVCN = this.objetos.indicadoresVCN;

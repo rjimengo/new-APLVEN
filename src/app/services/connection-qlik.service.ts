@@ -145,7 +145,7 @@ setAppLoaded(newValue): void {
         inputSecundario.value = secundario;
         document.getElementById("openModalButton").click();
 
-      } else if (error.code == 403) {   
+      } else if (error.code == 403  || error.code == 5 || error.code == 401) {   
         var titulo = "Acceso denegado.";
         var secundario = "No tiene acceso a la aplicación de Ventas, contacte con el administrador.";
         
@@ -208,7 +208,7 @@ setAppLoaded(newValue): void {
   setStringValue(value, id){
     this.qApp.variable.setStringValue(value, id);
   }
-  exportExcell(qlikid){    
+  exportExcell(qlikid){
     this.qApp.getObjectProperties(qlikid).then(function(model) {
       var table = ConnectionQlikService.globals.qlik.table(model);
 
